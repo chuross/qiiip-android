@@ -24,6 +24,7 @@ android {
 }
 
 dependencies {
+    compile 'org.apache.commons:commons-lang3:3.4'
     compile 'io.reactivex:rxjava:1.0.15'
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-1103'

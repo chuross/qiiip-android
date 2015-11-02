@@ -1,6 +1,7 @@
 package com.github.chuross.qiiip.infrastructure.qiita.resource
 
 import java.util.*
+import java.util.List
 
 data class Item(
         var id: String?,
