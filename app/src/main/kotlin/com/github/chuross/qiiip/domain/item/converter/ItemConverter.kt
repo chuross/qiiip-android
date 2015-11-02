@@ -9,10 +9,14 @@ class ItemConverter {
     private constructor()
 
     companion object {
-        fun convertToModel(resource: com.github.chuross.qiiip.infrastructure.qiita.resource.Item): Item {
+        fun convertToModel(resource: ResourceItem): Item {
             val item = Item(ItemIdentity(resource.id!!))
             item.metaInfo = ItemMetaConverter.convertToModel(resource)
             return item
+        }
+
+        fun convertToModels(resources: java.util.List<ResourceItem>): List<Item> {
+            return resources.map { resource -> ItemConverter.convertToModel(resource) }
         }
     }
 
