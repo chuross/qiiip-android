@@ -9,7 +9,7 @@ abstract class AbstractIdentity<V>(value: V) : Identity<V> {
 
     override fun getValue(): V = value
 
-    override fun equals(that: Any?): Boolean = EqualsBuilder.reflectionEquals(this, that)
+    override fun equals(other: Any?): Boolean = EqualsBuilder.reflectionEquals(this, other)
 
     override fun hashCode(): Int = HashCodeBuilder.reflectionHashCode(this)
 }
