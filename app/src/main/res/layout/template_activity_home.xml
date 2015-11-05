@@ -3,4 +3,11 @@
     android:id="@+id/layout_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/container_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <include layout="@layout/drawer" />
 </android.support.v4.widget.DrawerLayout>

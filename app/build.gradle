@@ -4,7 +4,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.0"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "com.github.chuross.qiiip"
@@ -22,6 +22,10 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+    }
 }
 
 kapt {
@@ -33,7 +37,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'io.reactivex:rxjava:1.0.15'
     compile 'io.reactivex:rxandroid:1.0.1'
-    compile 'org.jetbrains.kotlin:kotlin-stdlib:1.0.0-beta-1103'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     compile 'com.github.chuross:mvpframework:1.0.1-SNAPSHOT'
 
     // http client
@@ -44,5 +48,10 @@ dependencies {
     // di
     compile 'com.google.dagger:dagger:2.0.1'
     kapt 'com.google.dagger:dagger-compiler:2.0.1'
-    provided "javax.annotation:javax.annotation-api:1.2"
+    compile 'javax.annotation:javax.annotation-api:1.2'
+
+    // android view
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
+    compile "com.android.support:design:$supportLibraryVersion"
 }

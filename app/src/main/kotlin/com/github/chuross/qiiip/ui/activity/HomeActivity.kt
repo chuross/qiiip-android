@@ -7,6 +7,7 @@ import com.github.chuross.qiiip.ui.activity.template.HomeActivityTemplate
 
 class HomeActivity : PresentationActivity<HomeActivityPresenter>() {
 
+
     override fun createPresenter(): HomeActivityPresenter = HomeActivityPresenter(this, HomeActivityTemplate(this))
 
     override fun onCreate(savedInstanceState: Bundle?) {
