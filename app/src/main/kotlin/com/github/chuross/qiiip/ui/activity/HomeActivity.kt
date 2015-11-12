@@ -12,5 +12,9 @@ class HomeActivity : PresentationActivity<HomeActivityPresenter>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        presenter.template.getNavigationView().setNavigationItemSelectedListener {
+            true
+        }
     }
 }
