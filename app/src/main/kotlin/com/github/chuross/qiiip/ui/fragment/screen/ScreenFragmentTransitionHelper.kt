@@ -1,12 +1,13 @@
 package com.github.chuross.qiiip.ui.fragment.screen
 
-import android.app.Fragment
-import android.app.FragmentManager
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+
 
 class ScreenFragmentTransitionHelper(containerId: Int, manager: FragmentManager) {
 
-    val containerId = containerId
-    val manager = manager
+    private val containerId = containerId
+    private val manager = manager
 
     fun launchScreen(screenFragment: ScreenFragment) {
         screenFragment as Fragment
@@ -18,6 +19,11 @@ class ScreenFragmentTransitionHelper(containerId: Int, manager: FragmentManager)
             return
         }
 
+        val currentScreenFragment = manager.findFragmentById(containerId) as ScreenFragment;
+        if (currentScreenFragment.getScreenIdentity().equals(screenFragment.getScreenIdentity())) {
+            return;
+        }
+
         val transaction = manager.beginTransaction()
 
         when (screenFragment.getScreenExitAction()) {
@@ -26,7 +32,7 @@ class ScreenFragmentTransitionHelper(containerId: Int, manager: FragmentManager)
         }
 
         transaction.add(containerId, screenFragment, screenFragment.getScreenIdentity())
-        transaction.addToBackStack(screenFragment.getScreen().getName())
+        transaction.addToBackStack(screenFragment.getScreen().toString())
         transaction.commitAllowingStateLoss()
     }
 
@@ -39,7 +45,7 @@ class ScreenFragmentTransitionHelper(containerId: Int, manager: FragmentManager)
             currentFragment as ScreenFragment
 
             currentFragment.getScreen().getParent()?.let { parent ->
-                manager.popBackStack(parent.getName(), 0)
+                manager.popBackStack(parent.toString(), 0)
             } ?: manager.popBackStack()
         }
     }
