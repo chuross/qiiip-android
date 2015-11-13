@@ -7,10 +7,10 @@ import com.github.chuross.library.mvp.view.template.NonApplyTemplate
 import kotlinx.android.synthetic.template_activity_home.view.layout_drawer
 import kotlinx.android.synthetic.template_activity_home.view.navigation
 
-class HomeActivityTemplate(context: Context) : NonApplyTemplate(context, R.layout.template_activity_home) {
+class ScreenActivityTemplate(context: Context) : NonApplyTemplate(context, R.layout.template_activity_screen) {
 
-    fun getDrawerLayout() = view.layout_drawer
+    val drawerLayout by lazy { view.layout_drawer }
 
-    fun getNavigationView() = view.navigation
+    val navigation by lazy { view.navigation }
 
 }
