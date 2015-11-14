@@ -12,5 +12,4 @@ class ScreenActivityTemplate(context: Context) : NonApplyTemplate(context, R.lay
     val drawerLayout by lazy { view.layout_drawer }
 
     val navigation by lazy { view.navigation }
-
 }
