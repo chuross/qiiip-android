@@ -1,10 +1,10 @@
 package com.github.chuross.qiiip.ui.fragment.screen
 
 import android.os.Bundle
-import android.view.View
 import android.view.ViewGroup
 import com.github.chuross.chuross.qiiip.R
 import com.github.chuross.qiiip.ui.fragment.BaseFragment
+import com.github.chuross.qiiip.ui.fragment.FragmentTitlePagerAdapter
 import com.github.chuross.qiiip.ui.fragment.presenter.HomeScreenFragmentPresenter
 import com.github.chuross.qiiip.ui.fragment.template.HomeScreenFragmentTemplate
 import com.github.chuross.qiiip.application.Screen as AppScreen
@@ -21,13 +21,13 @@ class HomeScreenFragment : BaseFragment<HomeScreenFragmentPresenter, HomeScreenF
 
     override fun createTemplate(p0: ViewGroup?, p1: Bundle?): HomeScreenFragmentTemplate = HomeScreenFragmentTemplate(activity.applicationContext)
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(template: HomeScreenFragmentTemplate, savedInstanceState: Bundle?) {
+        super.onViewCreated(template, savedInstanceState)
 
-        val toolbar = presenter.template.toolbar
+        val toolbar = template.toolbar
         toolbar.title = getString(R.string.app_name)
 
-        val viewPager = presenter.template.viewPager
-        //viewPager.adapter = FragmentTitlePagerAdapter(childFragmentManager, presenter.viewPagerList)
+        val viewPager = template.viewPager
+        viewPager.adapter = FragmentTitlePagerAdapter(childFragmentManager, presenter.viewPagerList)
     }
 }
