@@ -7,8 +7,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$rootProject.ext.kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$rootProject.ext.kotlinVersion"
     }
 }
 
@@ -44,11 +44,15 @@ kapt {
 
 dependencies {
     // common
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlinVersion"
     compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'com.github.chuross:mvpframework:1.0.2'
+
+    // rx
     compile 'io.reactivex:rxjava:1.0.15'
     compile 'io.reactivex:rxandroid:1.0.1'
-    compile 'com.github.chuross:mvpframework:1.0.2'
+    compile 'com.trello:rxlifecycle:0.3.0'
+    compile 'com.trello:rxlifecycle-components:0.3.0'
 
     // http client
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
@@ -61,7 +65,7 @@ dependencies {
     compile 'javax.annotation:javax.annotation-api:1.2'
 
     // android view
-    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
-    compile "com.android.support:appcompat-v7:$supportLibraryVersion"
-    compile "com.android.support:design:$supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+    compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
 }

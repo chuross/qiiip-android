@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 
-class ErrorView : FrameLayout {
+class MessageView : FrameLayout {
 
     var retryCallback: (view: View) -> Unit? = {}
 
