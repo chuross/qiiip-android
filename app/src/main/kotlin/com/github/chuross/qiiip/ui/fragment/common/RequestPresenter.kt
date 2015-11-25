@@ -10,4 +10,5 @@ abstract class RequestFragmentPresenter<FRAGMENT : Fragment, TEMPLATE : Template
     abstract fun getRequestOptions(): RequestOptions
 
     fun request(): Observable<R> = Observable.empty()
+
 }

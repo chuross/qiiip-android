@@ -10,6 +10,8 @@ import com.trello.rxlifecycle.FragmentEvent
 import com.trello.rxlifecycle.RxLifecycle
 import com.trello.rxlifecycle.components.FragmentLifecycleProvider
 import rx.Observable
+import rx.Scheduler
+import rx.android.schedulers.AndroidSchedulers
 import rx.subjects.BehaviorSubject
 
 /**
@@ -76,5 +78,11 @@ abstract class BaseFragment<PRESENTER : SupportFragmentPresenter<*, TEMPLATE>, T
     override fun onDetach() {
         lifecycle.onNext(FragmentEvent.DETACH)
         super.onDetach()
+    }
+
+    fun <R> processObservable(scheduler: Scheduler, observable: Observable<R>): Observable<R> {
+        return observable.compose(bindToLifecycle<R>())
+                .subscribeOn(scheduler)
+                .observeOn(AndroidSchedulers.mainThread())
     }
 }
