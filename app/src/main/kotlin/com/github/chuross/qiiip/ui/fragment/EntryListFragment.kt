@@ -9,7 +9,6 @@ import android.view.ViewGroup
 class EntryListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        container?.setBackgroundResource(android.R.color.holo_blue_dark)
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 }

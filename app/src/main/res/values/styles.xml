@@ -2,12 +2,17 @@
 
     <!-- Base application theme. -->
     <style name="QiipTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:colorPrimary">@color/primary</item>
+        <item name="colorPrimary">@color/primary</item>
     </style>
 
     <style name="Toolbar">
         <item name="android:background">@color/primary</item>
         <item name="android:elevation">8dp</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="NoElevationToolbar" parent="Toolbar">
+        <item name="android:elevation">0dp</item>
     </style>
 
 </resources>
