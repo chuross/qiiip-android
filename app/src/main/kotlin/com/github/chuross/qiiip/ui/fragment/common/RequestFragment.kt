@@ -2,6 +2,8 @@ package com.github.chuross.qiiip.ui.fragment.common
 
 import android.os.AsyncTask
 import android.os.Bundle
+import com.github.chuross.qiiip.ui.fragment.presenter.RequestFragmentPresenter
+import com.github.chuross.qiiip.ui.fragment.template.RequestTemplate
 import rx.schedulers.Schedulers
 
 abstract class RequestFragment<PRESENTER : RequestFragmentPresenter<*, TEMPLATE, R>, TEMPLATE : RequestTemplate, R> : BaseFragment<PRESENTER, TEMPLATE>() {
@@ -20,7 +22,7 @@ abstract class RequestFragment<PRESENTER : RequestFragmentPresenter<*, TEMPLATE,
         request()
     }
 
-    private fun request() {
+    protected fun request() {
         processObservable(Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR), presenter.request())
                 .subscribe({ result ->
                     onRequestSuccess(result)

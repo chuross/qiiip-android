@@ -5,9 +5,10 @@ import com.github.chuross.qiiip.ui.fragment.screen.Screen
 enum class Screen : com.github.chuross.qiiip.ui.fragment.screen.Screen {
 
     HOME {
-        override fun getParent(): Screen? = null
+        override val parent: Screen? = null
     },
     ENTRY_DETAIL {
-        override fun getParent(): Screen? = HOME
+        override val parent: Screen? = HOME
+
     }
 }

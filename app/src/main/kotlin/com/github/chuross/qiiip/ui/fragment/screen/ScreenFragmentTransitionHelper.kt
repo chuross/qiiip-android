@@ -14,25 +14,25 @@ class ScreenFragmentTransitionHelper(containerId: Int, manager: FragmentManager)
 
         if (manager.backStackEntryCount == 0) {
             manager.beginTransaction()
-                    .replace(containerId, screenFragment, screenFragment.getScreenIdentity())
+                    .replace(containerId, screenFragment, screenFragment.screenIdentity)
                     .commitAllowingStateLoss()
             return
         }
 
         val currentScreenFragment = manager.findFragmentById(containerId) as ScreenFragment;
-        if (currentScreenFragment.getScreenIdentity().equals(screenFragment.getScreenIdentity())) {
+        if (currentScreenFragment.screenIdentity.equals(screenFragment.screenIdentity)) {
             return;
         }
 
         val transaction = manager.beginTransaction()
 
-        when (screenFragment.getScreenExitAction()) {
+        when (screenFragment.screenExitAction) {
             ScreenExitAction.HIDE -> transaction.hide(screenFragment)
             ScreenExitAction.DETACH -> transaction.detach(screenFragment)
         }
 
-        transaction.add(containerId, screenFragment, screenFragment.getScreenIdentity())
-        transaction.addToBackStack(screenFragment.getScreen().toString())
+        transaction.add(containerId, screenFragment, screenFragment.screenIdentity)
+        transaction.addToBackStack(screenFragment.screen.toString())
         transaction.commitAllowingStateLoss()
     }
 
@@ -44,7 +44,7 @@ class ScreenFragmentTransitionHelper(containerId: Int, manager: FragmentManager)
         manager.findFragmentById(containerId)?.let { currentFragment ->
             currentFragment as ScreenFragment
 
-            currentFragment.getScreen().getParent()?.let { parent ->
+            currentFragment.screen.parent?.let { parent ->
                 manager.popBackStack(parent.toString(), 0)
             } ?: manager.popBackStack()
         }

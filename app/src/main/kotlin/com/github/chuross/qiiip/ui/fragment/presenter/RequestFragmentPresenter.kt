@@ -1,4 +1,4 @@
-package com.github.chuross.qiiip.ui.fragment.common
+package com.github.chuross.qiiip.ui.fragment.presenter
 
 import android.support.v4.app.Fragment
 import com.github.chuross.library.mvp.presenter.SupportFragmentPresenter

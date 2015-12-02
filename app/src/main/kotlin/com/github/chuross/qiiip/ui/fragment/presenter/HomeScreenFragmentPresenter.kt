@@ -8,7 +8,7 @@ import com.github.chuross.qiiip.ui.fragment.template.HomeScreenFragmentTemplate
 
 class HomeScreenFragmentPresenter(fragment: HomeScreenFragment) : SupportFragmentPresenter<HomeScreenFragment, HomeScreenFragmentTemplate>(fragment) {
 
-    val viewPagerList: List<Pair<String, () -> Fragment>> = listOf(
+    val pagerItems: List<Pair<String, () -> Fragment>> = listOf(
             Pair("すべての記事", { EntryListFragment() })
     )
 

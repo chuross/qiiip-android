@@ -9,7 +9,6 @@ open class Application : android.app.Application() {
     val component: ApplicationComponent
 
     companion object {
-
         fun from(activity: Activity): Application = activity.application as Application
     }
 

@@ -2,9 +2,9 @@ package com.github.chuross.qiiip.ui.fragment.screen
 
 interface ScreenFragment {
 
-    fun getScreen(): Screen
+    val screen: Screen
 
-    fun getScreenExitAction(): ScreenExitAction
+    val screenExitAction: ScreenExitAction
 
-    fun getScreenIdentity(): String
+    val screenIdentity: String
 }
