@@ -7,8 +7,8 @@ import rx.Observable
 
 abstract class RequestFragmentPresenter<FRAGMENT : Fragment, TEMPLATE : Template, R>(fragment: FRAGMENT) : SupportFragmentPresenter<FRAGMENT, TEMPLATE>(fragment) {
 
-    abstract fun getRequestOptions(): RequestOptions
+    abstract val requestOptions: RequestOptions
 
-    fun request(): Observable<R> = Observable.empty()
+    abstract fun request(): Observable<R>
 
 }

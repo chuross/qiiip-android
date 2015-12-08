@@ -10,7 +10,8 @@ abstract class RequestFragment<PRESENTER : RequestFragmentPresenter<*, TEMPLATE,
 
     abstract fun onRequestSuccess(result: R)
 
-    abstract fun onRequestFailed(error: Throwable)
+    open fun onRequestFailed(error: Throwable) {
+    }
 
     override fun onViewCreated(template: TEMPLATE, savedInstanceState: Bundle?) {
         super.onViewCreated(template, savedInstanceState)
@@ -18,17 +19,15 @@ abstract class RequestFragment<PRESENTER : RequestFragmentPresenter<*, TEMPLATE,
         template.messageView.retryCallback = {
             request()
         }
-
         request()
     }
 
     protected fun request() {
-        processObservable(Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR), presenter.request())
-                .subscribe({ result ->
-                    onRequestSuccess(result)
-                }, { error ->
-                    onRequestFailed(error)
-                    presenter.template.messageView.showErrorMessage(error)
-                })
+        presenter.request().compose(complement<R>(Schedulers.from(AsyncTask.SERIAL_EXECUTOR))).subscribe({ result ->
+            onRequestSuccess(result)
+        }, { error ->
+            onRequestFailed(error)
+            presenter.template.messageView.showErrorMessage(error)
+        }, {})
     }
 }

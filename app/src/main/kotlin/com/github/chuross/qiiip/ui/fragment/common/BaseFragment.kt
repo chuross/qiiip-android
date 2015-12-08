@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.github.chuross.library.mvp.presenter.SupportFragmentPresenter
 import com.github.chuross.library.mvp.view.fragment.SupportPresentationFragment
 import com.github.chuross.library.mvp.view.template.Template
+import com.github.chuross.qiiip.application.Application
 import com.github.chuross.qiiip.ui.activity.ScreenActivity
 import com.trello.rxlifecycle.FragmentEvent
 import com.trello.rxlifecycle.RxLifecycle
@@ -21,6 +22,7 @@ import rx.subjects.BehaviorSubject
 abstract class BaseFragment<PRESENTER : SupportFragmentPresenter<*, TEMPLATE>, TEMPLATE : Template> : SupportPresentationFragment<PRESENTER, TEMPLATE>(), FragmentLifecycleProvider {
 
     val screenActivity by lazy { activity as ScreenActivity }
+    val application by lazy { Application.from(activity) }
 
     private val lifecycle = BehaviorSubject.create<FragmentEvent>()
 
@@ -29,6 +31,14 @@ abstract class BaseFragment<PRESENTER : SupportFragmentPresenter<*, TEMPLATE>, T
     override fun <T : Any?> bindUntilEvent(event: FragmentEvent?): Observable.Transformer<T, T>? = RxLifecycle.bindUntilFragmentEvent(lifecycle, event)
 
     override fun <T : Any?> bindToLifecycle(): Observable.Transformer<T, T>? = RxLifecycle.bindFragment(lifecycle)
+
+    protected fun <T : Any?> complement(scheduler: Scheduler): Observable.Transformer<T, T> = object : Observable.Transformer<T, T> {
+        override fun call(source: Observable<T>): Observable<T> {
+            return source.compose(bindToLifecycle<T>())
+                    .subscribeOn(scheduler)
+                    .observeOn(AndroidSchedulers.mainThread())
+        }
+    }
 
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
@@ -78,11 +88,5 @@ abstract class BaseFragment<PRESENTER : SupportFragmentPresenter<*, TEMPLATE>, T
     override fun onDetach() {
         lifecycle.onNext(FragmentEvent.DETACH)
         super.onDetach()
-    }
-
-    fun <R> processObservable(scheduler: Scheduler, observable: Observable<R>): Observable<R> {
-        return observable.compose(bindToLifecycle<R>())
-                .subscribeOn(scheduler)
-                .observeOn(AndroidSchedulers.mainThread())
     }
 }
