@@ -1,8 +1,8 @@
-package com.github.chuross.qiiip.application
+package com.github.chuross.qiiip.ui
 
 import com.github.chuross.qiiip.ui.fragment.screen.Screen
 
-enum class Screen : com.github.chuross.qiiip.ui.fragment.screen.Screen {
+enum class Screen : Screen {
 
     HOME {
         override val parent: Screen? = null

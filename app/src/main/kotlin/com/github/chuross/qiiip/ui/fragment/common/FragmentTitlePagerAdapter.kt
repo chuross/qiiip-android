@@ -9,7 +9,7 @@ class FragmentTitlePagerAdapter(manager: FragmentManager, items: List<Pair<Strin
 
     val items: List<Pair<String, () -> Fragment>> = items
 
-    override fun getCount(): Int = items.count()
+    override fun getCount(): Int = items.size
 
     override fun getItem(position: Int): Fragment? = items[position].second.invoke()
 

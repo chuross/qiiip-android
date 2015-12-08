@@ -8,11 +8,11 @@ import com.github.chuross.qiiip.ui.fragment.common.BaseFragment
 import com.github.chuross.qiiip.ui.fragment.common.FragmentTitlePagerAdapter
 import com.github.chuross.qiiip.ui.fragment.presenter.HomeScreenFragmentPresenter
 import com.github.chuross.qiiip.ui.fragment.template.HomeScreenFragmentTemplate
-import com.github.chuross.qiiip.application.Screen as AppScreen
+import com.github.chuross.qiiip.ui.Screen as AppScreen
 
 class HomeScreenFragment : BaseFragment<HomeScreenFragmentPresenter, HomeScreenFragmentTemplate>(), ScreenFragment {
 
-    override val screen: Screen = com.github.chuross.qiiip.application.Screen.HOME
+    override val screen: Screen = com.github.chuross.qiiip.ui.Screen.HOME
 
     override val screenExitAction: ScreenExitAction = ScreenExitAction.HIDE
 

@@ -12,8 +12,8 @@ class ItemListTemplate : NonApplyTemplate, ListTemplate {
 
     constructor(context: Context) : super(context, R.layout.template_item_list)
 
-    override val list: RecyclerView = view.list
+    override val list: RecyclerView by lazy { view.list }
 
-    override val messageView: MessageView = view.status
+    override val messageView: MessageView by lazy { view.status }
 
 }

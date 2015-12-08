@@ -9,9 +9,9 @@ import kotlinx.android.synthetic.template_fragment_home_screen.view.viewpager
 
 class HomeScreenFragmentTemplate(context: Context) : NonApplyTemplate(context, R.layout.template_fragment_home_screen) {
 
-    val toolbar by lazy { view.toolbar }
+    val toolbar = view.toolbar
 
-    val tabLayout by lazy { view.layout_tab }
+    val tabLayout = view.layout_tab
 
-    val viewPager by lazy { view.viewpager }
+    val viewPager = view.viewpager
 }
