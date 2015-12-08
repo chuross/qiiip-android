@@ -10,7 +10,6 @@ class ItemConverter {
 
     companion object {
         fun convertToModel(resource: ResourceItem): Item {
-            System.err.println(resource.id!!)
             val item = Item(ItemIdentity(resource.id!!))
             item.metaInfo = ItemMetaConverter.convertToModel(resource)
             return item

@@ -27,9 +27,4 @@ class RecentUpdatedItemListFragment : ListFragment<ItemListFragmentPresenter<Rec
         (adapter as ItemArrayAdapter).addAll(result)
     }
 
-    override fun onRequestFailed(error: Throwable) {
-        super.onRequestFailed(error)
-
-        error.printStackTrace()
-    }
 }
