@@ -4,14 +4,14 @@ import android.content.Context
 import android.view.ViewGroup
 import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.ui.fragment.template.ItemRowTemplate
-import com.github.chuross.qiiip.ui.widget.viewholder.TemplateViewHolder
+import com.github.chuross.qiiip.ui.widget.viewholder.TemplateRecyclerViewHolder
 
 class ItemArrayAdapter : TemplateArrayAdapter<Item> {
 
     constructor(context: Context) : super(context)
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TemplateViewHolder<Item> = TemplateViewHolder(ItemRowTemplate(context))
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TemplateRecyclerViewHolder<Item> = TemplateRecyclerViewHolder(ItemRowTemplate(context))
 
-    override fun onBindViewHolder(holder: TemplateViewHolder<Item>, position: Int) = holder.template.apply(get(position))
+    override fun onBindViewHolder(holder: TemplateRecyclerViewHolder<Item>, position: Int) = holder.template.apply(get(position))
 
 }

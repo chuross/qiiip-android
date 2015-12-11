@@ -1,4 +1,4 @@
-package com.github.chuross.qiiip.domain.core
+package com.github.chuross.qiiip.domain.common
 
 import org.apache.commons.lang3.SerializationUtils
 

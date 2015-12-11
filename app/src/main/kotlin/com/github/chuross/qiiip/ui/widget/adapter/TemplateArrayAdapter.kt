@@ -2,10 +2,10 @@ package com.github.chuross.qiiip.ui.widget.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import com.github.chuross.qiiip.ui.widget.viewholder.TemplateViewHolder
+import com.github.chuross.qiiip.ui.widget.viewholder.TemplateRecyclerViewHolder
 import java.util.*
 
-abstract class TemplateArrayAdapter<T> : RecyclerView.Adapter<TemplateViewHolder<T>> {
+abstract class TemplateArrayAdapter<T> : RecyclerView.Adapter<TemplateRecyclerViewHolder<T>> {
 
     val lock = Object()
     val items: ArrayList<T>
