@@ -2,7 +2,7 @@ package com.github.chuross.qiiip.ui.widget.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import com.github.chuross.qiiip.ui.widget.viewholder.TemplateRecyclerViewHolder
+import com.github.chuross.qiiip.ui.widget.TemplateRecyclerViewHolder
 import java.util.*
 
 abstract class TemplateArrayAdapter<T> : RecyclerView.Adapter<TemplateRecyclerViewHolder<T>> {

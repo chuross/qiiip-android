@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.ViewGroup
 import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.ui.fragment.template.ItemRowTemplate
-import com.github.chuross.qiiip.ui.widget.viewholder.TemplateRecyclerViewHolder
+import com.github.chuross.qiiip.ui.widget.TemplateRecyclerViewHolder
 
 class ItemArrayAdapter : TemplateArrayAdapter<Item> {
 

@@ -1,4 +1,4 @@
-package com.github.chuross.qiiip.ui.widget.viewholder
+package com.github.chuross.qiiip.ui.widget
 
 import android.support.v7.widget.RecyclerView
 import com.github.chuross.library.mvp.view.template.SourceTemplate
