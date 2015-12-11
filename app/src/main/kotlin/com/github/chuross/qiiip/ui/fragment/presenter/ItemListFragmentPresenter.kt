@@ -6,5 +6,4 @@ import com.github.chuross.qiiip.ui.fragment.template.ItemListTemplate
 
 abstract class ItemListFragmentPresenter<FRAGMENT : Fragment>(fragment: FRAGMENT) : RequestFragmentPresenter<FRAGMENT, ItemListTemplate, List<Item>>(fragment) {
 
-    override val requestOptions: RequestOptions = RequestOptions(true)
 }

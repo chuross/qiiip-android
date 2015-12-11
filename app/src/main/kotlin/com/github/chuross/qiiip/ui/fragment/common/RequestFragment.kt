@@ -19,15 +19,16 @@ abstract class RequestFragment<PRESENTER : RequestFragmentPresenter<*, TEMPLATE,
         template.messageView.retryCallback = {
             request()
         }
+
         request()
     }
 
     protected fun request() {
-        presenter.request().compose(complement<R>(Schedulers.from(AsyncTask.SERIAL_EXECUTOR))).subscribe({ result ->
+        presenter.request().compose(complement<R>(Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR))).subscribe({ result ->
             onRequestSuccess(result)
         }, { error ->
             onRequestFailed(error)
             presenter.template.messageView.showErrorMessage(error)
-        }, {})
+        })
     }
 }

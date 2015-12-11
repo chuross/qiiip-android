@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import com.github.chuross.chuross.qiiip.R
 import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.ui.fragment.common.ListFragment
 import com.github.chuross.qiiip.ui.fragment.presenter.ItemListFragmentPresenter
@@ -20,7 +21,7 @@ class RecentUpdatedItemListFragment : ListFragment<ItemListFragmentPresenter<Rec
     override fun createTemplate(p0: ViewGroup?, p1: Bundle?): ItemListTemplate = ItemListTemplate(activity)
 
     override fun createPresenter(): ItemListFragmentPresenter<RecentUpdatedItemListFragment> = object : ItemListFragmentPresenter<RecentUpdatedItemListFragment>(this) {
-        override fun request(): Observable<List<Item>> = application.getItemRepository().findAllByKeyword("android", 1, 20)
+        override fun request(): Observable<List<Item>> = application.getItemRepository().findAll(1, resources.getInteger(R.integer.per_page))
     }
 
     override fun onRequestSuccess(result: List<Item>) {
