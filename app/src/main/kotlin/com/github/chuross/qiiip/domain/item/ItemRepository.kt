@@ -16,6 +16,11 @@ class ItemRepository {
                 .map { result -> ItemConverter.convertToModel(result) }
     }
 
+    fun findAll(page: Int, perPage: Int): Observable<List<Item>> {
+        return api.getItems(page, perPage)
+                .map { result -> ItemConverter.convertToModels(result) }
+    }
+
     fun findAllByKeyword(query: String, page: Int, perPage: Int): Observable<List<Item>> {
         return api.getItemsByKeyword(query, page, perPage)
                 .map { result -> ItemConverter.convertToModels(result) }

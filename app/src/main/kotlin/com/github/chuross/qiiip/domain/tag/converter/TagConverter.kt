@@ -16,7 +16,7 @@ class TagConverter {
             return tag
         }
 
-        fun convertToModels(resources: MutableList<ResourceTag>): List<Tag> {
+        fun convertToModels(resources: Collection<ResourceTag>): List<Tag> {
             return resources.map { resource -> convertToModel(resource) }
         }
     }

@@ -15,7 +15,7 @@ class ItemConverter {
             return item
         }
 
-        fun convertToModels(resources: MutableList<ResourceItem>): List<Item> {
+        fun convertToModels(resources: Collection<ResourceItem>): List<Item> {
             return resources.map { resource -> ItemConverter.convertToModel(resource) }
         }
     }
