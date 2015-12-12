@@ -18,5 +18,4 @@ abstract class ListFragment<PRESENTER : RequestFragmentPresenter<*, TEMPLATE, R>
         template.list.layoutManager = layoutManager
         template.list.setHasFixedSize(true)
     }
-
 }

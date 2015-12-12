@@ -6,8 +6,8 @@ import com.github.chuross.library.mvp.view.template.AbstractTemplate
 import com.github.chuross.library.mvp.view.template.SourceTemplate
 import com.github.chuross.qiiip.domain.item.Item
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.template_item_row.view.img_thumbnail
-import kotlinx.android.synthetic.template_item_row.view.txt_title
+import kotlinx.android.synthetic.template_list_row.view.img_thumbnail
+import kotlinx.android.synthetic.template_list_row.view.txt_title
 
 class ItemRowTemplate : AbstractTemplate, SourceTemplate<Item> {
 
