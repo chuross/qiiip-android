@@ -6,13 +6,18 @@ import rx.Observable
 
 abstract class PagerListFragmentPresenter<F : Fragment, T : Template, R>(fragment: F) : RequestFragmentPresenter<F, T, R>(fragment) {
 
-    var currentPage = 0
+    var currentPage = DEFAULT_PAGE
+
+    companion object {
+        private val DEFAULT_PAGE = 1
+    }
 
     abstract fun request(page: Int, initialize: Boolean): Observable<R>
 
     override fun request(initialize: Boolean): Observable<R> {
-        currentPage = if (!initialize) currentPage.inc() else 1
-        return request(currentPage, initialize)
+        return request(if (!initialize) currentPage else DEFAULT_PAGE, initialize).doOnNext {
+            currentPage = currentPage.inc()
+        }
     }
 
 }
