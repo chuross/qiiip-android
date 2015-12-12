@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.view.ViewGroup
 import com.github.chuross.chuross.qiiip.R
-import com.github.chuross.qiiip.ui.fragment.common.BaseFragment
+import com.github.chuross.qiiip.ui.fragment.BaseFragment
 import com.github.chuross.qiiip.ui.fragment.common.FragmentTitlePagerAdapter
 import com.github.chuross.qiiip.ui.fragment.presenter.HomeScreenFragmentPresenter
 import com.github.chuross.qiiip.ui.fragment.template.HomeScreenFragmentTemplate

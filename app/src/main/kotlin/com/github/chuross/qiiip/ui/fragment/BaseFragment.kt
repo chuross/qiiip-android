@@ -1,4 +1,4 @@
-package com.github.chuross.qiiip.ui.fragment.common
+package com.github.chuross.qiiip.ui.fragment
 
 import android.app.Activity
 import android.os.Bundle

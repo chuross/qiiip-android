@@ -7,6 +7,6 @@ import rx.Observable
 
 abstract class RequestFragmentPresenter<FRAGMENT : Fragment, TEMPLATE : Template, R>(fragment: FRAGMENT) : SupportFragmentPresenter<FRAGMENT, TEMPLATE>(fragment) {
 
-    abstract fun request(): Observable<R>
+    abstract fun request(initialize: Boolean): Observable<R>
 
 }

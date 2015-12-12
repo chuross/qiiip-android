@@ -1,4 +1,4 @@
-package com.github.chuross.qiiip.ui.fragment.common
+package com.github.chuross.qiiip.ui.fragment
 
 import android.os.AsyncTask
 import android.os.Bundle
@@ -8,26 +8,26 @@ import rx.schedulers.Schedulers
 
 abstract class RequestFragment<PRESENTER : RequestFragmentPresenter<*, TEMPLATE, R>, TEMPLATE : RequestTemplate, R> : BaseFragment<PRESENTER, TEMPLATE>() {
 
-    abstract fun onRequestSuccess(result: R)
+    abstract fun onRequestSuccess(result: R, initialize: Boolean)
 
-    open fun onRequestFailed(error: Throwable) {
+    open fun onRequestFailed(error: Throwable, initialize: Boolean) {
     }
 
     override fun onViewCreated(template: TEMPLATE, savedInstanceState: Bundle?) {
         super.onViewCreated(template, savedInstanceState)
 
         template.messageView.retryCallback = {
-            request()
+            request(false)
         }
 
-        request()
+        request(true)
     }
 
-    protected fun request() {
-        presenter.request().compose(complement<R>(Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR))).subscribe({ result ->
-            onRequestSuccess(result)
+    protected fun request(initialize: Boolean) {
+        presenter.request(initialize).compose(complement<R>(Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR))).subscribe({ result ->
+            onRequestSuccess(result, initialize)
         }, { error ->
-            onRequestFailed(error)
+            onRequestFailed(error, initialize)
             presenter.template.messageView.showErrorMessage(error)
         })
     }
