@@ -9,10 +9,12 @@ import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.ui.fragment.presenter.ItemListFragmentPresenter
 import com.github.chuross.qiiip.ui.fragment.template.ItemListTemplate
 import com.github.chuross.qiiip.ui.widget.adapter.ItemArrayAdapter
+import com.github.chuross.qiiip.ui.widget.adapter.RecyclerViewCollectionAdapter
 import rx.Observable
 
 class RecentUpdatedItemListFragment : PagerListFragment<ItemListFragmentPresenter<RecentUpdatedItemListFragment>, ItemListTemplate, List<Item>>() {
-    override val adapter: RecyclerView.Adapter<*> by lazy { ItemArrayAdapter(activity) }
+
+    override val adapter: RecyclerViewCollectionAdapter<*, *> by lazy { ItemArrayAdapter(activity) }
 
     override val layoutManager: RecyclerView.LayoutManager by lazy { LinearLayoutManager(activity) }
 
@@ -23,7 +25,7 @@ class RecentUpdatedItemListFragment : PagerListFragment<ItemListFragmentPresente
     }
 
     override fun onRequestSuccess(result: List<Item>, initialize: Boolean) {
-        throw UnsupportedOperationException()
+        adapter.addAll(result)
     }
 
 }

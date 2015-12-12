@@ -1,11 +1,10 @@
 package com.github.chuross.qiiip.ui.widget.adapter
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import com.github.chuross.qiiip.ui.widget.TemplateRecyclerViewHolder
 import java.util.*
 
-abstract class TemplateArrayAdapter<T> : RecyclerView.Adapter<TemplateRecyclerViewHolder<T>> {
+abstract class TemplateArrayAdapter<T> : RecyclerViewCollectionAdapter<T, TemplateRecyclerViewHolder<T>> {
 
     val lock = Object()
     val items: ArrayList<T>
@@ -22,35 +21,42 @@ abstract class TemplateArrayAdapter<T> : RecyclerView.Adapter<TemplateRecyclerVi
 
     fun get(position: Int) = items[position]
 
-    fun add(item: T) {
+    override fun add(item: T) {
         synchronized(lock, {
             items.add(item)
         })
         notifyDataSetChanged()
     }
 
-    fun add(position: Int, item: T) {
+    override fun add(position: Int, item: T) {
         synchronized(lock, {
             items.add(position, item)
         })
         notifyDataSetChanged()
     }
 
-    fun addAll(items: List<T>) {
+    override fun addAll(items: List<T>) {
         synchronized(lock, {
             this.items.addAll(items)
         })
         notifyDataSetChanged()
     }
 
-    fun remove(position: Int) {
+    override fun remove(item: T) {
+        synchronized(lock, {
+            this.items.remove(item)
+        })
+        notifyDataSetChanged()
+    }
+
+    override fun removeAt(position: Int) {
         synchronized(lock, {
             items.removeAt(position)
         })
         notifyDataSetChanged()
     }
 
-    fun clear() {
+    override fun clear() {
         synchronized(lock, {
             items.clear()
         })
