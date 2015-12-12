@@ -5,9 +5,9 @@ import com.github.chuross.qiiip.ui.fragment.presenter.PagerListFragmentPresenter
 import com.github.chuross.qiiip.ui.fragment.template.ListTemplate
 import com.jakewharton.rxbinding.support.v7.widget.RxRecyclerView
 
-abstract class PagerListFragment<PRESENTER : PagerListFragmentPresenter<*, TEMPLATE, R>, TEMPLATE : ListTemplate, R> : ListFragment<PRESENTER, TEMPLATE, R>() {
+abstract class PagerListFragment<P : PagerListFragmentPresenter<*, T, R>, T : ListTemplate, R> : ListFragment<P, T, R>() {
 
-    override fun onViewCreated(template: TEMPLATE, savedInstanceState: Bundle?) {
+    override fun onViewCreated(template: T, savedInstanceState: Bundle?) {
         super.onViewCreated(template, savedInstanceState)
 
         RxRecyclerView.scrollEvents(template.list)

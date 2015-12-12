@@ -19,7 +19,7 @@ import rx.subjects.BehaviorSubject
  * @see
  * https://github.com/trello/RxLifecycle/blob/master/rxlifecycle-components/src/main/java/com/trello/rxlifecycle/components/support/RxFragment.java
  */
-abstract class BaseFragment<PRESENTER : SupportFragmentPresenter<*, TEMPLATE>, TEMPLATE : Template> : SupportPresentationFragment<PRESENTER, TEMPLATE>(), FragmentLifecycleProvider {
+abstract class BaseFragment<P : SupportFragmentPresenter<*, T>, T : Template> : SupportPresentationFragment<P, T>(), FragmentLifecycleProvider {
 
     val screenActivity by lazy { activity as ScreenActivity }
     val application by lazy { Application.from(activity) }
@@ -50,7 +50,7 @@ abstract class BaseFragment<PRESENTER : SupportFragmentPresenter<*, TEMPLATE>, T
         lifecycle.onNext(FragmentEvent.CREATE)
     }
 
-    override fun onViewCreated(template: TEMPLATE, savedInstanceState: Bundle?) {
+    override fun onViewCreated(template: T, savedInstanceState: Bundle?) {
         super.onViewCreated(template, savedInstanceState)
         lifecycle.onNext(FragmentEvent.CREATE_VIEW)
     }

@@ -5,13 +5,13 @@ import android.support.v7.widget.RecyclerView
 import com.github.chuross.qiiip.ui.fragment.presenter.RequestFragmentPresenter
 import com.github.chuross.qiiip.ui.fragment.template.ListTemplate
 
-abstract class ListFragment<PRESENTER : RequestFragmentPresenter<*, TEMPLATE, R>, TEMPLATE : ListTemplate, R> : RequestFragment<PRESENTER, TEMPLATE, R>() {
+abstract class ListFragment<P : RequestFragmentPresenter<*, T, R>, T : ListTemplate, R> : RequestFragment<P, T, R>() {
 
     abstract val adapter: RecyclerView.Adapter<*>
 
     abstract val layoutManager: RecyclerView.LayoutManager
 
-    override fun onViewCreated(template: TEMPLATE, savedInstanceState: Bundle?) {
+    override fun onViewCreated(template: T, savedInstanceState: Bundle?) {
         super.onViewCreated(template, savedInstanceState)
 
         template.list.adapter = adapter

@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment
 import com.github.chuross.library.mvp.view.template.Template
 import rx.Observable
 
-abstract class PagerListFragmentPresenter<FRAGMENT : Fragment, TEMPLATE : Template, R>(fragment: FRAGMENT) : RequestFragmentPresenter<FRAGMENT, TEMPLATE, R>(fragment) {
+abstract class PagerListFragmentPresenter<F : Fragment, T : Template, R>(fragment: F) : RequestFragmentPresenter<F, T, R>(fragment) {
 
     var currentPage = 0
 
