@@ -1,4 +1,4 @@
-package com.github.chuross.qiiip.ui.fragment.common
+package com.github.chuross.qiiip.ui.fragment.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager

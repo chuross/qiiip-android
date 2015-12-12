@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.template_item_list.view.status
 
 class ItemListTemplate : NonApplyTemplate, ListTemplate {
 
-    constructor(context: Context) : super(context, R.layout.template_item_list)
+    constructor(context: Context) : super(context, R.layout.template_list)
 
     override val list: RecyclerView by lazy { view.list }
 

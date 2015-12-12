@@ -11,8 +11,7 @@ import com.github.chuross.qiiip.ui.fragment.template.ItemListTemplate
 import com.github.chuross.qiiip.ui.widget.adapter.ItemArrayAdapter
 import rx.Observable
 
-class RecentUpdatedItemListFragment : ListFragment<ItemListFragmentPresenter<RecentUpdatedItemListFragment>, ItemListTemplate, List<Item>>() {
-
+class RecentUpdatedItemListFragment : PagerListFragment<ItemListFragmentPresenter<RecentUpdatedItemListFragment>, ItemListTemplate, List<Item>>() {
     override val adapter: RecyclerView.Adapter<*> by lazy { ItemArrayAdapter(activity) }
 
     override val layoutManager: RecyclerView.LayoutManager by lazy { LinearLayoutManager(activity) }
@@ -20,11 +19,11 @@ class RecentUpdatedItemListFragment : ListFragment<ItemListFragmentPresenter<Rec
     override fun createTemplate(p0: ViewGroup?, p1: Bundle?): ItemListTemplate = ItemListTemplate(activity)
 
     override fun createPresenter(): ItemListFragmentPresenter<RecentUpdatedItemListFragment> = object : ItemListFragmentPresenter<RecentUpdatedItemListFragment>(this) {
-        override fun request(initialize: Boolean): Observable<List<Item>> = application.getItemRepository().findAll(1, resources.getInteger(R.integer.per_page))
+        override fun request(page: Int, initialize: Boolean): Observable<List<Item>> = application.getItemRepository().findAll(page, resources.getInteger(R.integer.per_page))
     }
 
     override fun onRequestSuccess(result: List<Item>, initialize: Boolean) {
-        (adapter as ItemArrayAdapter).addAll(result)
+        throw UnsupportedOperationException()
     }
 
 }

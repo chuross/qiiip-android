@@ -13,6 +13,7 @@ abstract class ListFragment<PRESENTER : RequestFragmentPresenter<*, TEMPLATE, R>
 
     override fun onViewCreated(template: TEMPLATE, savedInstanceState: Bundle?) {
         super.onViewCreated(template, savedInstanceState)
+
         template.list.adapter = adapter
         template.list.layoutManager = layoutManager
         template.list.setHasFixedSize(true)

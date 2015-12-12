@@ -14,7 +14,7 @@ class ItemRowTemplate : AbstractTemplate, SourceTemplate<Item> {
     val thumbnailImage = view.img_thumbnail
     val titleText = view.txt_title
 
-    constructor(context: Context) : super(context, R.layout.template_item_row)
+    constructor(context: Context) : super(context, R.layout.template_list_row)
 
     override fun apply() {
     }
