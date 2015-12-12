@@ -8,6 +8,11 @@ import rx.schedulers.Schedulers
 
 abstract class RequestFragment<P : RequestFragmentPresenter<*, T, R>, T : RequestTemplate, R> : BaseFragment<P, T>() {
 
+    abstract fun onRequestSuccess(result: R, initialize: Boolean)
+
+    open fun onRequestFailed(error: Throwable, initialize: Boolean) {
+    }
+
     override fun onViewCreated(template: T, savedInstanceState: Bundle?) {
         super.onViewCreated(template, savedInstanceState)
 
@@ -20,9 +25,9 @@ abstract class RequestFragment<P : RequestFragmentPresenter<*, T, R>, T : Reques
 
     protected fun request(initialize: Boolean) {
         presenter.request(initialize).compose(complement<R>(Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR))).subscribe({ result ->
-            //            onRequestSuccess(result, initialize)
+            onRequestSuccess(result, initialize)
         }, { error ->
-            //            onRequestFailed(error, initialize)
+            onRequestFailed(error, initialize)
             presenter.template.messageView.showErrorMessage(error)
         })
     }
