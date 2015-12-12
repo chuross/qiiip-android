@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.template_activity_screen.view.navigation
 
 class ScreenActivityTemplate(context: Context) : NonApplyTemplate(context, R.layout.template_activity_screen) {
 
-    val drawerLayout by lazy { view.layout_drawer }
+    val drawerLayout = view.layout_drawer
 
-    val navigation by lazy { view.navigation }
+    val navigation = view.navigation
 }

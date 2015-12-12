@@ -9,6 +9,5 @@ enum class Screen : Screen {
     },
     ENTRY_DETAIL {
         override val parent: Screen? = HOME
-
     }
 }
