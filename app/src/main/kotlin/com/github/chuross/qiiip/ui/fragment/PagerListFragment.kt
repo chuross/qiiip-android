@@ -11,7 +11,7 @@ abstract class PagerListFragment<P : PagerListFragmentPresenter<*, T, R>, T : Li
         super.onViewCreated(template, savedInstanceState)
 
         RxRecyclerView.scrollEvents(template.list)
-                .filter { event -> adapter.itemCount > 0 && !event.view().canScrollVertically(1) }
+                .filter { event -> !adapter.isEmpty() && !event.view().canScrollVertically(1) }
                 .subscribe({
                     request(false)
                 })

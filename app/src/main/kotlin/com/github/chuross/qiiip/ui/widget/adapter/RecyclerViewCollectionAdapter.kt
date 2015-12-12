@@ -15,4 +15,6 @@ abstract class RecyclerViewCollectionAdapter<E, VH : RecyclerView.ViewHolder> : 
     abstract fun removeAt(position: Int)
 
     abstract fun clear()
+
+    abstract fun isEmpty(): Boolean
 }

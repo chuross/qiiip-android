@@ -63,4 +63,6 @@ abstract class TemplateArrayAdapter<T> : RecyclerViewCollectionAdapter<T, Templa
         notifyDataSetChanged()
     }
 
+    override fun isEmpty(): Boolean = items.isEmpty()
+
 }
