@@ -8,7 +8,8 @@ import rx.schedulers.Schedulers
 
 abstract class RequestFragment<P : RequestFragmentPresenter<*, T, R>, T : RequestTemplate, R> : BaseFragment<P, T>() {
 
-    abstract fun onRequestSuccess(result: R, initialize: Boolean)
+    open fun onRequestSuccess(result: R, initialize: Boolean) {
+    }
 
     open fun onRequestFailed(error: Throwable, initialize: Boolean) {
     }

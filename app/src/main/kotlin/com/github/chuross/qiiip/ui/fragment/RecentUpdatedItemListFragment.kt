@@ -24,11 +24,4 @@ class RecentUpdatedItemListFragment : PagerListFragment<ItemListFragmentPresente
         override fun request(page: Int, initialize: Boolean): Observable<List<Item>> = application.getItemRepository().findAll(page, resources.getInteger(R.integer.per_page))
     }
 
-    override fun onRequestSuccess(result: List<Item>, initialize: Boolean) {
-        if (initialize) {
-            adapter.clear()
-        }
-        adapter.addAll(result)
-    }
-
 }
