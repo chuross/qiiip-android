@@ -25,6 +25,9 @@ class RecentUpdatedItemListFragment : PagerListFragment<ItemListFragmentPresente
     }
 
     override fun onRequestSuccess(result: List<Item>, initialize: Boolean) {
+        if (initialize) {
+            adapter.clear()
+        }
         adapter.addAll(result)
     }
 
