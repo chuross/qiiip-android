@@ -21,7 +21,7 @@
         <item name="atg_horizontalSpacing">1dp</item>
         <item name="atg_backgroundColor">#ffffff</item>
         <item name="atg_pressedBackgroundColor">#ffffff</item>
-        <item name="atg_textSize">10dp</item>
+        <item name="atg_textSize">8dp</item>
     </style>
 
 </resources>

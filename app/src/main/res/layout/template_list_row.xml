@@ -20,8 +20,10 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/img_thumbnail"
         android:layout_marginBottom="4dp"
+        android:textSize="14sp"
         android:textColor="@android:color/black"
-        android:maxLines="2" />
+        android:maxLines="2"
+        android:ellipsize="end" />
 
     <me.gujun.android.taggroup.TagGroup
         android:id="@+id/tag_group"
