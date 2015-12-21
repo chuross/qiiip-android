@@ -15,4 +15,13 @@
         <item name="android:elevation">0dp</item>
     </style>
 
+    <style name="QiipTagGroup" parent="TagGroup.Small">
+        <item name="atg_textColor">#999999</item>
+        <item name="atg_borderColor">#999999</item>
+        <item name="atg_horizontalSpacing">1dp</item>
+        <item name="atg_backgroundColor">#ffffff</item>
+        <item name="atg_pressedBackgroundColor">#ffffff</item>
+        <item name="atg_textSize">10dp</item>
+    </style>
+
 </resources>
