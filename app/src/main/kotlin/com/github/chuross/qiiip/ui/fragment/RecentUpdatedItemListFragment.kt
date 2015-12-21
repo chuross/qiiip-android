@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.github.chuross.chuross.qiiip.R
 import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.ui.fragment.presenter.ItemListFragmentPresenter
+import com.github.chuross.qiiip.ui.fragment.screen.ItemDetailScreenFragment
 import com.github.chuross.qiiip.ui.fragment.template.ListFragmentTemplate
 import com.github.chuross.qiiip.ui.widget.adapter.ItemArrayAdapter
 import com.github.chuross.qiiip.ui.widget.adapter.RecyclerViewCollectionAdapter
@@ -24,4 +25,10 @@ class RecentUpdatedItemListFragment : PagerListFragment<ItemListFragmentPresente
         override fun request(page: Int, initialize: Boolean): Observable<List<Item>> = application.getItemRepository().findAll(page, resources.getInteger(R.integer.per_page))
     }
 
+    override fun onViewCreated(template: ListFragmentTemplate, savedInstanceState: Bundle?) {
+        super.onViewCreated(template, savedInstanceState)
+        (adapter as ItemArrayAdapter).clickListener = { view, item ->
+            screenActivity.launchScreen(ItemDetailScreenFragment.create(item))
+        }
+    }
 }

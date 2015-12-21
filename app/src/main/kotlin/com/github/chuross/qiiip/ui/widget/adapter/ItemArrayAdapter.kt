@@ -1,17 +1,25 @@
 package com.github.chuross.qiiip.ui.widget.adapter
 
 import android.content.Context
+import android.view.View
 import android.view.ViewGroup
 import com.github.chuross.qiiip.domain.item.Item
-import com.github.chuross.qiiip.ui.widget.template.ItemRowTemplate
 import com.github.chuross.qiiip.ui.widget.TemplateRecyclerViewHolder
+import com.github.chuross.qiiip.ui.widget.template.ItemRowTemplate
 
 class ItemArrayAdapter : TemplateArrayAdapter<Item> {
+
+    var clickListener: ((view: View, item: Item) -> Unit)? = null
 
     constructor(context: Context) : super(context)
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TemplateRecyclerViewHolder<Item> = TemplateRecyclerViewHolder(ItemRowTemplate(context))
 
-    override fun onBindViewHolder(holder: TemplateRecyclerViewHolder<Item>, position: Int) = holder.template.apply(get(position))
+    override fun onBindViewHolder(holder: TemplateRecyclerViewHolder<Item>, position: Int) {
+        holder.template.apply(get(position))
+        holder.template.view.setOnClickListener({ view ->
+            clickListener?.invoke(view, get(holder.adapterPosition))
+        })
+    }
 
 }

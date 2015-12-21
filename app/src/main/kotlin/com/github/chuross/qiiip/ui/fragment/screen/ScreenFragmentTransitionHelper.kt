@@ -12,14 +12,16 @@ class ScreenFragmentTransitionHelper(containerId: Int, manager: FragmentManager)
     fun launchScreen(screenFragment: ScreenFragment) {
         screenFragment as Fragment
 
-        if (manager.backStackEntryCount == 0) {
+        if (manager.findFragmentById(containerId) == null) {
             manager.beginTransaction()
                     .replace(containerId, screenFragment, screenFragment.screenIdentity)
-                    .commitAllowingStateLoss()
+                    .commit()
             return
         }
 
-        val currentScreenFragment = manager.findFragmentById(containerId) as ScreenFragment;
+        val currentScreenFragment = manager.findFragmentById(containerId);
+        currentScreenFragment as ScreenFragment
+
         if (currentScreenFragment.screenIdentity.equals(screenFragment.screenIdentity)) {
             return;
         }
@@ -27,17 +29,21 @@ class ScreenFragmentTransitionHelper(containerId: Int, manager: FragmentManager)
         val transaction = manager.beginTransaction()
 
         when (screenFragment.screenExitAction) {
-            ScreenExitAction.HIDE -> transaction.hide(screenFragment)
-            ScreenExitAction.DETACH -> transaction.detach(screenFragment)
+            ScreenExitAction.HIDE -> transaction.hide(currentScreenFragment)
+            ScreenExitAction.DETACH -> transaction.detach(currentScreenFragment)
         }
 
         transaction.add(containerId, screenFragment, screenFragment.screenIdentity)
         transaction.addToBackStack(screenFragment.screen.toString())
-        transaction.commitAllowingStateLoss()
+        transaction.commit()
     }
 
-    fun popBackStack() {
-        manager.popBackStack()
+    fun popBackStack(): Boolean {
+        if (manager.backStackEntryCount > 0) {
+            manager.popBackStack()
+            return true
+        }
+        return false
     }
 
     fun homeAsUp() {

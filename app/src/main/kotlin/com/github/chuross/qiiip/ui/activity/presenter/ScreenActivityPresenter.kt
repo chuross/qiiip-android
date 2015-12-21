@@ -17,12 +17,11 @@ class ScreenActivityPresenter(activity: ScreenActivity, template: ScreenActivity
             template.drawerLayout.closeDrawer(Gravity.START)
             return true
         }
+        return transitionHelper.popBackStack() || super.backPress()
+    }
 
-        if (view.fragmentManager.backStackEntryCount > 0) {
-            transitionHelper.popBackStack()
-            return true
-        }
-        return super.backPress()
+    fun homeAsUp() {
+        transitionHelper.homeAsUp()
     }
 
     fun launchScreen(screenFragment: ScreenFragment) {
