@@ -20,13 +20,27 @@
                 android:layout_height="wrap_content"
                 style="@style/NoElevationToolbar" />
 
-            <TextView
-                android:id="@+id/txt_title"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                android:textSize="25sp"
-                android:textColor="@android:color/white" />
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txt_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:textSize="25sp"
+                    android:textColor="@android:color/white" />
+
+                <me.gujun.android.taggroup.TagGroup
+                    android:id="@+id/tag_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    style="@style/TagGroup.Large" />
+            </LinearLayout>
         </android.support.design.widget.AppBarLayout>
 
     </RelativeLayout>
