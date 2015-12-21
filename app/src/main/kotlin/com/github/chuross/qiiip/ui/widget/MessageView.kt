@@ -8,9 +8,9 @@ import android.widget.FrameLayout
 
 class MessageView : FrameLayout {
 
-    var retryCallback: (view: View) -> Unit? = {}
-
     var fragmentManager: FragmentManager? = null
+
+    var retryCallback: (view: View) -> Unit? = {}
 
     constructor(context: Context?) : super(context)
 
@@ -19,6 +19,9 @@ class MessageView : FrameLayout {
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
+
+    fun showLoading() {
+    }
 
     fun showErrorMessage(error: Throwable) {
     }

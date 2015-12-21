@@ -5,7 +5,7 @@ import com.github.chuross.qiiip.ui.fragment.presenter.PagerListFragmentPresenter
 import com.github.chuross.qiiip.ui.fragment.template.ListTemplate
 import com.jakewharton.rxbinding.support.v7.widget.RxRecyclerView
 
-abstract class PagerListFragment<P : PagerListFragmentPresenter<*, T, R>, T : ListTemplate, R> : ListFragment<P, T, R>() {
+abstract class PagerListFragment<P : PagerListFragmentPresenter<*, T, List<R>>, T : ListTemplate, R> : ListFragment<P, T, R>() {
 
     override fun onViewCreated(template: T, savedInstanceState: Bundle?) {
         super.onViewCreated(template, savedInstanceState)
