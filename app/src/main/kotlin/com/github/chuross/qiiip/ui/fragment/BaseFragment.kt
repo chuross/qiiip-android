@@ -4,7 +4,6 @@ import android.app.Activity
 import android.os.Bundle
 import com.github.chuross.library.mvp.presenter.SupportFragmentPresenter
 import com.github.chuross.library.mvp.view.fragment.SupportPresentationFragment
-import com.github.chuross.library.mvp.view.template.Template
 import com.github.chuross.qiiip.application.Application
 import com.github.chuross.qiiip.ui.activity.ScreenActivity
 import com.trello.rxlifecycle.FragmentEvent
@@ -19,7 +18,7 @@ import rx.subjects.BehaviorSubject
  * @see
  * https://github.com/trello/RxLifecycle/blob/master/rxlifecycle-components/src/main/java/com/trello/rxlifecycle/components/support/RxFragment.java
  */
-abstract class BaseFragment<P : SupportFragmentPresenter<*, T>, T : Template> : SupportPresentationFragment<P, T>(), FragmentLifecycleProvider {
+abstract class BaseFragment<P : SupportFragmentPresenter<*, *>> : SupportPresentationFragment<P>(), FragmentLifecycleProvider {
 
     val screenActivity by lazy { activity as ScreenActivity }
     val application by lazy { Application.from(activity) }
@@ -50,8 +49,8 @@ abstract class BaseFragment<P : SupportFragmentPresenter<*, T>, T : Template> : 
         lifecycle.onNext(FragmentEvent.CREATE)
     }
 
-    override fun onViewCreated(template: T, savedInstanceState: Bundle?) {
-        super.onViewCreated(template, savedInstanceState)
+    override fun onViewCreated(savedInstanceState: Bundle?) {
+        super.onViewCreated(savedInstanceState)
         lifecycle.onNext(FragmentEvent.CREATE_VIEW)
     }
 

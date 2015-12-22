@@ -2,14 +2,14 @@ package com.github.chuross.qiiip.ui.fragment.template
 
 import android.content.Context
 import com.github.chuross.chuross.qiiip.R
-import com.github.chuross.library.mvp.view.template.NonApplyTemplate
-import com.github.chuross.library.mvp.view.template.SourceTemplate
+import com.github.chuross.library.mvp.view.template.AbstractTemplate
+import com.github.chuross.library.mvp.view.template.ApplicableTemplate
 import com.github.chuross.qiiip.domain.item.Item
 import kotlinx.android.synthetic.template_fragment_item_detail_screen.view.tag_group
 import kotlinx.android.synthetic.template_fragment_item_detail_screen.view.toolbar
 import kotlinx.android.synthetic.template_fragment_item_detail_screen.view.txt_title
 
-class ItemDetailScreenFragmentTemplate(context: Context) : NonApplyTemplate(context, R.layout.template_fragment_item_detail_screen), SourceTemplate<Item> {
+class ItemDetailScreenFragmentTemplate(context: Context) : AbstractTemplate(context, R.layout.template_fragment_item_detail_screen), ApplicableTemplate<Item> {
 
     val toolbar = view.toolbar
     val titleText = view.txt_title

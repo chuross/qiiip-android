@@ -6,18 +6,18 @@ import com.github.chuross.qiiip.ui.fragment.presenter.RequestFragmentPresenter
 import com.github.chuross.qiiip.ui.fragment.template.ListTemplate
 import com.github.chuross.qiiip.ui.widget.adapter.RecyclerViewCollectionAdapter
 
-abstract class ListFragment<P : RequestFragmentPresenter<*, T, List<R>>, T : ListTemplate, R> : RequestFragment<P, T, List<R>>() {
+abstract class ListFragment<P : RequestFragmentPresenter<*, out ListTemplate, List<R>>, R> : RequestFragment<P, List<R>>() {
 
     abstract val adapter: RecyclerViewCollectionAdapter<*, *>
 
     abstract val layoutManager: RecyclerView.LayoutManager
 
-    override fun onViewCreated(template: T, savedInstanceState: Bundle?) {
-        super.onViewCreated(template, savedInstanceState)
+    override fun onViewCreated(savedInstanceState: Bundle?) {
+        super.onViewCreated(savedInstanceState)
 
-        template.list.adapter = adapter
-        template.list.layoutManager = layoutManager
-        template.list.setHasFixedSize(true)
+        presenter.template.list.adapter = adapter
+        presenter.template.list.layoutManager = layoutManager
+        presenter.template.list.setHasFixedSize(true)
     }
 
     override fun onRequestSuccess(result: List<R>, initialize: Boolean) {

@@ -1,13 +1,11 @@
 package com.github.chuross.qiiip.ui.fragment.screen
 
 import android.os.Bundle
-import android.view.ViewGroup
 import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.ui.fragment.BaseFragment
 import com.github.chuross.qiiip.ui.fragment.presenter.ItemDetailScreenFragmentPresenter
-import com.github.chuross.qiiip.ui.fragment.template.ItemDetailScreenFragmentTemplate
 
-class ItemDetailScreenFragment : BaseFragment<ItemDetailScreenFragmentPresenter, ItemDetailScreenFragmentTemplate>(), ScreenFragment {
+class ItemDetailScreenFragment : BaseFragment<ItemDetailScreenFragmentPresenter>(), ScreenFragment {
 
     companion object {
         private val ARGUMENT_KEY_ITEM = "argument_key_item"
@@ -25,16 +23,15 @@ class ItemDetailScreenFragment : BaseFragment<ItemDetailScreenFragmentPresenter,
     override val screenExitAction: ScreenExitAction = ScreenExitAction.HIDE
     override val screenIdentity: String = ItemDetailScreenFragment::class.java.name
 
-    override fun createTemplate(p0: ViewGroup?, p1: Bundle?): ItemDetailScreenFragmentTemplate = ItemDetailScreenFragmentTemplate(activity)
 
     override fun createPresenter(): ItemDetailScreenFragmentPresenter = ItemDetailScreenFragmentPresenter(this)
 
-    override fun onViewCreated(template: ItemDetailScreenFragmentTemplate, savedInstanceState: Bundle?) {
-        super.onViewCreated(template, savedInstanceState)
+    override fun onViewCreated(savedInstanceState: Bundle?) {
+        super.onViewCreated(savedInstanceState)
 
-        screenActivity.setUpToolbar(template.toolbar)
+        screenActivity.setUpToolbar(presenter.template.toolbar)
 
         val item = arguments.getSerializable(ARGUMENT_KEY_ITEM) as Item
-        template.apply(item)
+        presenter.template.apply(item)
     }
 }

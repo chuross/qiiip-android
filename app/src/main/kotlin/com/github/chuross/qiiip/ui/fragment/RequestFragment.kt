@@ -6,7 +6,7 @@ import com.github.chuross.qiiip.ui.fragment.presenter.RequestFragmentPresenter
 import com.github.chuross.qiiip.ui.fragment.template.RequestTemplate
 import rx.schedulers.Schedulers
 
-abstract class RequestFragment<P : RequestFragmentPresenter<*, T, R>, T : RequestTemplate, R> : BaseFragment<P, T>() {
+abstract class RequestFragment<P : RequestFragmentPresenter<*, out RequestTemplate, R>, R> : BaseFragment<P>() {
 
     open fun onRequestSuccess(result: R, initialize: Boolean) {
     }
@@ -14,10 +14,10 @@ abstract class RequestFragment<P : RequestFragmentPresenter<*, T, R>, T : Reques
     open fun onRequestFailed(error: Throwable, initialize: Boolean) {
     }
 
-    override fun onViewCreated(template: T, savedInstanceState: Bundle?) {
-        super.onViewCreated(template, savedInstanceState)
+    override fun onViewCreated(savedInstanceState: Bundle?) {
+        super.onViewCreated(savedInstanceState)
 
-        template.messageView.retryCallback = {
+        presenter.template.messageView.retryCallback = {
             request(false)
         }
 

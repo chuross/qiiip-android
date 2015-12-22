@@ -8,9 +8,11 @@ import com.github.chuross.qiiip.ui.activity.template.ScreenActivityTemplate
 import com.github.chuross.qiiip.ui.fragment.screen.ScreenFragment
 import com.github.chuross.qiiip.ui.fragment.screen.ScreenFragmentTransitionHelper
 
-class ScreenActivityPresenter(activity: ScreenActivity, template: ScreenActivityTemplate) : ActivityPresenter<ScreenActivity, ScreenActivityTemplate>(activity, template) {
+class ScreenActivityPresenter(activity: ScreenActivity) : ActivityPresenter<ScreenActivity, ScreenActivityTemplate>(activity) {
 
     private val transitionHelper by lazy { ScreenFragmentTransitionHelper(R.id.container_main, view.supportFragmentManager) }
+
+    override fun createTemplate(activity: ScreenActivity): ScreenActivityTemplate = ScreenActivityTemplate(activity)
 
     override fun backPress(): Boolean {
         if (template.drawerLayout.isDrawerOpen(Gravity.START)) {
