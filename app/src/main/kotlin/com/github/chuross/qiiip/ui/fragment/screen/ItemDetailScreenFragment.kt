@@ -13,12 +13,11 @@ class ItemDetailScreenFragment : BaseFragment<ItemDetailScreenFragmentPresenter,
         private val ARGUMENT_KEY_ITEM = "argument_key_item"
 
         fun create(item: Item): ItemDetailScreenFragment {
-            val arguments = Bundle()
-            arguments.putSerializable(ARGUMENT_KEY_ITEM, item)
-
-            val fragment = ItemDetailScreenFragment()
-            fragment.arguments = arguments
-            return fragment
+            return ItemDetailScreenFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(ARGUMENT_KEY_ITEM, item)
+                }
+            }
         }
     }
 
