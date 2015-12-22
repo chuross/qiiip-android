@@ -16,7 +16,7 @@ class ItemMetaConverter {
                     resource.title!!,
                     resource.url!!,
                     resource.private ?: true,
-                    resource.body,
+                    resource.renderedBody,
                     UserConverter.convertToModel(resource.user!!),
                     resource.tags?.let { it -> TagConverter.convertToModels(it) }.orEmpty(),
                     resource.createdAt ?: Date(0),

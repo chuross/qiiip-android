@@ -28,9 +28,6 @@ class ItemRowTemplate : AbstractTemplate, ApplicableTemplate<Item> {
         }
 
         titleText.text = item?.metaInfo?.title.orEmpty()
-
-        item?.metaInfo?.tags?.isNotEmpty().run {
-            tagGroup.setTags(item?.metaInfo?.tags?.map { tag -> tag.getIdentity().getValue() })
-        }
+        tagGroup.setTags(item?.metaInfo?.tags?.map { tag -> tag.getIdentity().getValue() })
     }
 }
