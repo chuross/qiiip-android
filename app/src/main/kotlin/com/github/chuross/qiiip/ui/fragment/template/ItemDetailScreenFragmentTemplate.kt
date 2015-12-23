@@ -5,14 +5,12 @@ import com.github.chuross.chuross.qiiip.R
 import com.github.chuross.library.mvp.view.template.AbstractTemplate
 import com.github.chuross.library.mvp.view.template.ApplicableTemplate
 import com.github.chuross.qiiip.domain.item.Item
-import kotlinx.android.synthetic.template_fragment_item_detail_screen.view.tag_group
-import kotlinx.android.synthetic.template_fragment_item_detail_screen.view.toolbar
-import kotlinx.android.synthetic.template_fragment_item_detail_screen.view.txt_title
-import kotlinx.android.synthetic.template_fragment_item_detail_screen.view.webview
+import kotlinx.android.synthetic.template_fragment_item_detail_screen.view.*
 import org.jsoup.Jsoup
 
 class ItemDetailScreenFragmentTemplate(context: Context) : AbstractTemplate(context, R.layout.template_fragment_item_detail_screen), ApplicableTemplate<Item> {
 
+    val collapsingToolbar = view.collapsing_toolbar
     val toolbar = view.toolbar
     val titleText = view.txt_title
     val tagGroup = view.tag_group
@@ -24,6 +22,7 @@ class ItemDetailScreenFragmentTemplate(context: Context) : AbstractTemplate(cont
 
     override fun apply(item: Item) {
         titleText.text = item.metaInfo?.title
+        collapsingToolbar.title = item.metaInfo?.title
         tagGroup.setTags(item.metaInfo?.tags?.map { tag -> tag.getIdentity().getValue() })
 
 

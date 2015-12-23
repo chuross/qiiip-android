@@ -15,6 +15,12 @@
         <item name="android:elevation">0dp</item>
     </style>
 
+    <style name="TransparentToolbar" parent="NoElevationToolbar">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+
+    <!-- widget -->
     <style name="QiipTagGroup" parent="TagGroup.Small">
         <item name="atg_textColor">#999999</item>
         <item name="atg_borderColor">#999999</item>
@@ -22,6 +28,15 @@
         <item name="atg_backgroundColor">#ffffff</item>
         <item name="atg_pressedBackgroundColor">#ffffff</item>
         <item name="atg_textSize">8dp</item>
+    </style>
+
+    <style name="CollapsedItemDetailTitle">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="ExpandedItemDetailTitle">
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:textSize">0dp</item>
     </style>
 
 </resources>
