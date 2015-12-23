@@ -1,6 +1,5 @@
 package com.github.chuross.qiiip.domain.user
 
-import com.github.chuross.qiiip.domain.common.AbstractIdentity
+import com.github.chuross.qiiip.domain.common.Identity
 
-class UserIdentity(value: String) : AbstractIdentity<String>(value) {
-}
+class UserIdentity(override val value: String) : Identity<String>

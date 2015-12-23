@@ -1,7 +1,5 @@
 package com.github.chuross.qiiip.domain.tag
 
-import com.github.chuross.qiiip.domain.common.AbstractIdentity
+import com.github.chuross.qiiip.domain.common.Identity
 
-class TagIdentity(value: String) : AbstractIdentity<String>(value) {
-
-}
+class TagIdentity(override val value: String) : Identity<String>

@@ -12,7 +12,7 @@ class ItemRepository {
     lateinit var api: QiitaV2Api
 
     fun findByIdentity(identity: ItemIdentity): Observable<Item> {
-        return api.getItemById(identity.getValue())
+        return api.getItemById(identity.value)
                 .map { result -> ItemConverter.convertToModel(result) }
     }
 
@@ -27,7 +27,7 @@ class ItemRepository {
     }
 
     fun findAllByTagIdentity(identity: TagIdentity, page: Int, perPage: Int): Observable<List<Item>> {
-        return api.getItemsByTagId(identity.getValue(), page, perPage)
+        return api.getItemsByTagId(identity.value, page, perPage)
                 .map { result -> ItemConverter.convertToModels(result) }
     }
 

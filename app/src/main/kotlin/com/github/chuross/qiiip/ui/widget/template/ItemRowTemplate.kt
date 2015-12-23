@@ -6,6 +6,7 @@ import com.github.chuross.library.mvp.view.template.AbstractTemplate
 import com.github.chuross.library.mvp.view.template.ApplicableTemplate
 import com.github.chuross.qiiip.domain.item.Item
 import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.template_list_row.view.img_thumbnail
 import kotlinx.android.synthetic.template_list_row.view.tag_group
 import kotlinx.android.synthetic.template_list_row.view.txt_title
@@ -24,10 +25,11 @@ class ItemRowTemplate : AbstractTemplate, ApplicableTemplate<Item> {
                     .load(imageUrl)
                     .fit()
                     .centerCrop()
+                    .transform(CropCircleTransformation())
                     .into(thumbnailImage)
         }
 
         titleText.text = item?.metaInfo?.title.orEmpty()
-        tagGroup.setTags(item?.metaInfo?.tags?.map { tag -> tag.getIdentity().getValue() })
+        tagGroup.setTags(item?.metaInfo?.tags?.map { tag -> tag.getIdentity().value })
     }
 }

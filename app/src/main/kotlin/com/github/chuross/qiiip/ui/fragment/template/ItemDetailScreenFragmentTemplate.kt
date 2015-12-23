@@ -23,7 +23,7 @@ class ItemDetailScreenFragmentTemplate(context: Context) : AbstractTemplate(cont
     override fun apply(item: Item) {
         titleText.text = item.metaInfo?.title
         collapsingToolbar.title = item.metaInfo?.title
-        tagGroup.setTags(item.metaInfo?.tags?.map { tag -> tag.getIdentity().getValue() })
+        tagGroup.setTags(item.metaInfo?.tags?.map { tag -> tag.getIdentity().value })
 
 
         webView.loadDataWithBaseURL("file:///android_asset/", view.context.assets.open(HTML_FILE_PATH).reader(Charsets.UTF_8).use { reader ->
