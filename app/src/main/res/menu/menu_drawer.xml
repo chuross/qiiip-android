@@ -4,11 +4,11 @@
         android:id="@+id/menu_main">
         <item
             android:id="@+id/menu_home"
-            android:icon="@android:drawable/ic_menu_gallery"
+            android:icon="@mipmap/ic_home_black_24dp"
             android:title="ホーム" />
         <item
             android:id="@+id/menu_search"
-            android:icon="@android:drawable/ic_menu_agenda"
+            android:icon="@mipmap/ic_search_black_24dp"
             android:title="検索" />
     </group>
     <group
