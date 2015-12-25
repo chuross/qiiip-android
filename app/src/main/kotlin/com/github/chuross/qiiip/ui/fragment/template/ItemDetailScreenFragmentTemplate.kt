@@ -5,6 +5,8 @@ import com.github.chuross.chuross.qiiip.R
 import com.github.chuross.library.mvp.view.template.AbstractTemplate
 import com.github.chuross.library.mvp.view.template.ApplicableTemplate
 import com.github.chuross.qiiip.domain.item.Item
+import com.squareup.picasso.Picasso
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.template_fragment_item_detail_screen.view.*
 import org.jsoup.Jsoup
 
@@ -14,6 +16,8 @@ class ItemDetailScreenFragmentTemplate(context: Context) : AbstractTemplate(cont
     val toolbar = view.toolbar
     val titleText = view.txt_title
     val tagGroup = view.tag_group
+    val userThumbnailImage = view.img_user_thumbnail
+    val userNameText = view.txt_user_name
     val webView = view.webview
 
     companion object {
@@ -23,8 +27,20 @@ class ItemDetailScreenFragmentTemplate(context: Context) : AbstractTemplate(cont
     override fun apply(item: Item) {
         titleText.text = item.metaInfo?.title
         collapsingToolbar.title = item.metaInfo?.title
-        tagGroup.setTags(item.metaInfo?.tags?.map { tag -> tag.getIdentity().value })
+        tagGroup.setTags(item.metaInfo?.tags?.map { tag -> tag.identity.value })
 
+        item.metaInfo?.user?.let { user ->
+            userNameText.text = user.identity.value
+        }
+
+        item.metaInfo?.user?.metaInfo?.let { metaInfo ->
+            Picasso.with(view.context)
+                    .load(metaInfo.profileImageUrl)
+                    .fit()
+                    .centerCrop()
+                    .transform(CropCircleTransformation())
+                    .into(userThumbnailImage)
+        }
 
         webView.loadDataWithBaseURL("file:///android_asset/", view.context.assets.open(HTML_FILE_PATH).reader(Charsets.UTF_8).use { reader ->
             val document = Jsoup.parse(reader.readText())

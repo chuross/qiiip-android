@@ -36,4 +36,19 @@ class ItemDetailScreenFragment : BaseFragment<ItemDetailScreenFragmentPresenter>
         val item = arguments.getSerializable(ARGUMENT_KEY_ITEM) as Item
         presenter.template.apply(item)
     }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.template.webView.onResume()
+    }
+
+    override fun onPause() {
+        presenter.template.webView.onPause()
+        super.onPause()
+    }
+
+    override fun onDestroyView() {
+        presenter.template.webView.destroy()
+        super.onDestroyView()
+    }
 }

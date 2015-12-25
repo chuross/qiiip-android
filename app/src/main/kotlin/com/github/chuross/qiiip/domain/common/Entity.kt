@@ -4,7 +4,7 @@ import java.io.Serializable
 
 interface Entity<I : Identity<*>, E : Entity<I, E>> : Cloneable, Serializable {
 
-    fun getIdentity(): I
+    val identity: I
 
     fun sameIdentity(entity: E): Boolean
 
