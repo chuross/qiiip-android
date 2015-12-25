@@ -3,33 +3,38 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="8dp"
-    android:paddingBottom="8dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
-
-    <ImageView
-        android:id="@+id/img_thumbnail"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginRight="8dp" />
 
     <TextView
         android:id="@+id/txt_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/img_thumbnail"
         android:layout_marginBottom="4dp"
         android:textSize="14sp"
         android:textColor="@android:color/black"
         android:maxLines="2"
         android:ellipsize="end" />
-
-    <me.gujun.android.taggroup.TagGroup
-        android:id="@+id/tag_group"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_title"
-        android:layout_toRightOf="@+id/img_thumbnail"
-        style="@style/QiipTagGroup" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_thumbnail"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp" />
+
+        <me.gujun.android.taggroup.TagGroup
+            android:id="@+id/tag_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/QiipTagGroup" />
+    </LinearLayout>
+
 </RelativeLayout>
