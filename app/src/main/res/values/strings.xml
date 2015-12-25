@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">qiiip</string>
+    <string name="user_screen_follow_on">フォローする</string>
+    <string name="user_screen_follow_off">フォロー解除</string>
 </resources>

@@ -35,6 +35,12 @@ class ItemDetailScreenFragment : BaseFragment<ItemDetailScreenFragmentPresenter>
 
         val item = arguments.getSerializable(ARGUMENT_KEY_ITEM) as Item
         presenter.template.apply(item)
+
+        item.metaInfo?.let { metaInfo ->
+            presenter.template.userLayout.setOnClickListener {
+                screenActivity.launchScreen(UserScreenFragment.create(metaInfo.user))
+            }
+        }
     }
 
     override fun onResume() {

@@ -9,5 +9,8 @@ enum class Screen : Screen {
     },
     ITEM_DETAIL {
         override val parent: Screen? = HOME
+    },
+    USER {
+        override val parent: Screen? = null
     }
 }

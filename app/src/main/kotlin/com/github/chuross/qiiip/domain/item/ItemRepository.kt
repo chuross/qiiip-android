@@ -2,6 +2,7 @@ package com.github.chuross.qiiip.domain.item
 
 import com.github.chuross.qiiip.domain.item.converter.ItemConverter
 import com.github.chuross.qiiip.domain.tag.TagIdentity
+import com.github.chuross.qiiip.domain.user.UserIdentity
 import com.github.chuross.qiiip.infrastructure.qiita.QiitaV2Api
 import rx.Observable
 import javax.inject.Inject
@@ -28,6 +29,11 @@ class ItemRepository {
 
     fun findAllByTagIdentity(identity: TagIdentity, page: Int, perPage: Int): Observable<List<Item>> {
         return api.getItemsByTagId(identity.value, page, perPage)
+                .map { result -> ItemConverter.convertToModels(result) }
+    }
+
+    fun findAllByUserIdentity(identity: UserIdentity, page: Int, perPage: Int): Observable<List<Item>> {
+        return api.getItemsByKeyword("user:${identity.value}", page, perPage)
                 .map { result -> ItemConverter.convertToModels(result) }
     }
 

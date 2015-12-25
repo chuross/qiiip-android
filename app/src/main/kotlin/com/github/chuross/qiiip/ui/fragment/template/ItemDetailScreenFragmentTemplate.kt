@@ -16,6 +16,7 @@ class ItemDetailScreenFragmentTemplate(context: Context) : AbstractTemplate(cont
     val toolbar = view.toolbar
     val titleText = view.txt_title
     val tagGroup = view.tag_group
+    val userLayout = view.layout_user
     val userThumbnailImage = view.img_user_thumbnail
     val userNameText = view.txt_user_name
     val webView = view.webview
