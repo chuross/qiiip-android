@@ -51,7 +51,11 @@ class ScreenFragmentTransitionHelper(containerId: Int, manager: FragmentManager)
             currentFragment as ScreenFragment
 
             currentFragment.screen.parent?.let { parent ->
-                manager.popBackStack(parent.toString(), 0)
+                if (parent.isRoot) {
+                    manager.popBackStack(manager.getBackStackEntryAt(0).id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                } else {
+                    manager.popBackStack(parent.toString(), 0)
+                }
             } ?: manager.popBackStack()
         }
     }
