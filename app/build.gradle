@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'deploygate'
 
 buildscript {
     repositories {
@@ -9,6 +10,7 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$rootProject.ext.kotlinVersion"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$rootProject.ext.kotlinVersion"
+        classpath 'com.deploygate:gradle:1.0.4'
     }
 }
 
@@ -40,6 +42,18 @@ android {
 
 kapt {
     generateStubs = true
+}
+
+deploygate {
+    userName = deploygateUserName
+    token = deploygateApiKey
+
+    apks {
+        debug {
+            distributionKey = "5487db9073b30266c79ccb12b630fdc1f01bc23b"
+            sourceFile = file("${project.rootDir}/app/build/outputs/apk/app-debug.apk")
+        }
+    }
 }
 
 dependencies {
