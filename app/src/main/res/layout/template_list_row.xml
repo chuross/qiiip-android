@@ -20,6 +20,7 @@
         android:textColor="@android:color/black"
         android:maxLines="2"
         android:ellipsize="end" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,11 +34,13 @@
             android:layout_height="24dp"
             android:layout_marginEnd="8dp" />
 
-        <me.gujun.android.taggroup.TagGroup
-            android:id="@+id/tag_group"
+        <TextView
+            android:id="@+id/txt_tags"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/QiipTagGroup" />
+            android:textSize="8dp"
+            android:textColor="#9a9a9a"
+            android:singleLine="true" />
     </LinearLayout>
 
 </RelativeLayout>

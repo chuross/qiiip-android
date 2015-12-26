@@ -8,14 +8,14 @@ import com.github.chuross.qiiip.domain.item.Item
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.template_list_row.view.img_thumbnail
-import kotlinx.android.synthetic.template_list_row.view.tag_group
+import kotlinx.android.synthetic.template_list_row.view.txt_tags
 import kotlinx.android.synthetic.template_list_row.view.txt_title
 
 class ItemRowTemplate : AbstractTemplate, ApplicableTemplate<Item> {
 
     val thumbnailImage = view.img_thumbnail
     val titleText = view.txt_title
-    val tagGroup = view.tag_group
+    val tagsText = view.txt_tags
 
     constructor(context: Context) : super(context, R.layout.template_list_row)
 
@@ -30,6 +30,8 @@ class ItemRowTemplate : AbstractTemplate, ApplicableTemplate<Item> {
         }
 
         titleText.text = item?.metaInfo?.title.orEmpty()
-        tagGroup.setTags(item?.metaInfo?.tags?.map { tag -> tag.identity.value })
+        tagsText.text = item?.metaInfo?.tags?.fold("") { current, tag ->
+            current.plus(", ${tag.identity.value}")
+        }?.substring(2)
     }
 }
