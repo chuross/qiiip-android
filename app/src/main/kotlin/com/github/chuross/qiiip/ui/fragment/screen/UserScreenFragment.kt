@@ -3,6 +3,8 @@ package com.github.chuross.qiiip.ui.fragment.screen
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.WindowManager
+import com.github.chuross.chuross.qiiip.R
 import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.domain.user.User
 import com.github.chuross.qiiip.domain.user.UserIdentity
@@ -46,6 +48,14 @@ class UserScreenFragment : PagerListFragment<UserScreenFragmentPresenter, Item>(
 
         screenActivity.setUpToolbar(presenter.template.toolbar)
         presenter.template.toolbar.title = user.identity.value
+        presenter.template.paletteCallback = { palette ->
+            palette.darkVibrantSwatch?.let { darkVibrantSwatch ->
+                activity.window.apply {
+                    addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                    statusBarColor = darkVibrantSwatch.rgb
+                }
+            }
+        }
         presenter.template.apply(user)
 
         (adapter as ItemArrayAdapter).clickListener = { view, item ->
@@ -53,4 +63,11 @@ class UserScreenFragment : PagerListFragment<UserScreenFragmentPresenter, Item>(
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        activity.window.apply {
+            addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            statusBarColor = resources.getColor(R.color.primary_dark, null)
+        }
+    }
 }

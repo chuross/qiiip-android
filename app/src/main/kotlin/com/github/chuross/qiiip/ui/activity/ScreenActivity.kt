@@ -10,6 +10,7 @@ import com.github.chuross.qiiip.ui.fragment.screen.ScreenFragment
 
 class ScreenActivity : PresentationActivity<ScreenActivityPresenter>() {
 
+
     override fun createPresenter(): ScreenActivityPresenter = ScreenActivityPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {

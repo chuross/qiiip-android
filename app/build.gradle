@@ -78,5 +78,6 @@ dependencies {
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support:design:$rootProject.ext.supportLibraryVersion"
     compile "com.android.support:palette-v7:$rootProject.ext.supportLibraryVersion"
+    compile 'com.github.florent37:picassopalette:1.0.2@aar'
     compile 'me.gujun.android.taggroup:library:1.4@aar'
 }
