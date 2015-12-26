@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.template_fragment_user_screen.view.*
 
 class UserScreenFragmentTemplate(context: Context, parent: ViewGroup) : AbstractTemplate(context, R.layout.template_fragment_user_screen, parent), ListTemplate, ApplicableTemplate<User> {
 
+    val toolbar = view.toolbar
     val userLayout = view.layout_user
     val userNameText = view.txt_user_name
     val userThumbnailImage = view.img_user_thumbnail

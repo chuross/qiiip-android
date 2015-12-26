@@ -44,6 +44,8 @@ class UserScreenFragment : PagerListFragment<UserScreenFragmentPresenter, Item>(
 
         val user = arguments.getSerializable(ARGUMENT_KEY_USER) as User
 
+        screenActivity.setUpToolbar(presenter.template.toolbar)
+        presenter.template.toolbar.title = user.identity.value
         presenter.template.apply(user)
 
         (adapter as ItemArrayAdapter).clickListener = { view, item ->
