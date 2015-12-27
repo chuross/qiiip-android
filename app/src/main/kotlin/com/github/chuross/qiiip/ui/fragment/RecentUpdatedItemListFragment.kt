@@ -18,7 +18,7 @@ class RecentUpdatedItemListFragment : PagerListFragment<ItemListFragmentPresente
     override val layoutManager: RecyclerView.LayoutManager by lazy { LinearLayoutManager(activity) }
 
     override fun createPresenter(): ItemListFragmentPresenter<RecentUpdatedItemListFragment> = object : ItemListFragmentPresenter<RecentUpdatedItemListFragment>(this) {
-        override fun request(page: Int, initialize: Boolean): Observable<List<Item>> = application.getItemRepository().findAll(page, resources.getInteger(R.integer.per_page))
+        override fun request(page: Int, initialize: Boolean): Observable<List<Item>> = application.itemRepository.findAll(page, resources.getInteger(R.integer.per_page))
     }
 
     override fun onViewCreated(savedInstanceState: Bundle?) {

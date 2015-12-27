@@ -24,8 +24,15 @@ android {
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
+        buildConfigField "String", "KEY_STR", "\"$keyStr\""
+        buildConfigField "String", "CLIENT_ID", "\"$clientId\""
+        buildConfigField "String", "CLIENT_SECRET", "\"$clientSecret\""
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -37,6 +44,7 @@ android {
 
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
     }
 }
 
@@ -80,8 +88,14 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.0.1'
     compile 'javax.annotation:javax.annotation-api:1.2'
 
+    // preferences
+    compile 'net.orange-box.storebox:storebox-lib:1.3.0'
+
     // parser
     compile 'org.jsoup:jsoup:1.8.3'
+
+    // encryption
+    compile 'com.scottyab:aes-crypto:0.0.4'
 
     // image
     compile 'com.squareup.picasso:picasso:2.5.2'

@@ -10,10 +10,8 @@ class TagConverter {
 
     companion object {
 
-        fun convertToModel(resource: ResourceTag): Tag {
-            val tag = Tag(TagIdentity(resource.id ?: resource.name.orEmpty()))
-            tag.metaInfo = TagMetaConverter.convertToModel(resource)
-            return tag
+        fun convertToModel(resource: ResourceTag): Tag = Tag(TagIdentity(resource.id ?: resource.name.orEmpty())).apply {
+            metaInfo = TagMetaConverter.convertToModel(resource)
         }
 
         fun convertToModels(resources: Collection<ResourceTag>): List<Tag> {

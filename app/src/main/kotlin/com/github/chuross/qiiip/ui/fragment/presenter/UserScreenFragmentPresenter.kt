@@ -12,6 +12,6 @@ class UserScreenFragmentPresenter(fragment: UserScreenFragment) : PagerListFragm
 
     override fun createTemplate(parent: ViewGroup, p1: Bundle?): UserScreenFragmentTemplate = UserScreenFragmentTemplate(view.activity, parent)
 
-    override fun request(page: Int, initialize: Boolean): Observable<List<Item>> = view.application.getItemRepository().findAllByUserIdentity(view.userIdentity, page, view.resources.getInteger(R.integer.per_page))
+    override fun request(page: Int, initialize: Boolean): Observable<List<Item>> = view.application.itemRepository.findAllByUserIdentity(view.userIdentity, page, view.resources.getInteger(R.integer.per_page))
 
 }

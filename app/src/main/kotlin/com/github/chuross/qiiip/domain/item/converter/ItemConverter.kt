@@ -9,10 +9,8 @@ class ItemConverter {
     private constructor()
 
     companion object {
-        fun convertToModel(resource: ResourceItem): Item {
-            val item = Item(ItemIdentity(resource.id!!))
-            item.metaInfo = ItemMetaConverter.convertToModel(resource)
-            return item
+        fun convertToModel(resource: ResourceItem): Item = Item(ItemIdentity(resource.id!!)).apply {
+            metaInfo = ItemMetaConverter.convertToModel(resource)
         }
 
         fun convertToModels(resources: Collection<ResourceItem>): List<Item> {
