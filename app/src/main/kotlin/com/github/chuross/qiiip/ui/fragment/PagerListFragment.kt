@@ -28,11 +28,11 @@ abstract class PagerListFragment<P : PagerListFragmentPresenter<*, out ListTempl
             request(true)
         }
 
-        RxRecyclerView.scrollEvents(presenter.template.list)
+        subscriptions.add(RxRecyclerView.scrollEvents(presenter.template.list)
                 .filter { event -> !adapter.isEmpty() && !event.view().canScrollVertically(1) }
                 .subscribe({
                     request(false)
-                })
+                }))
     }
 
 }

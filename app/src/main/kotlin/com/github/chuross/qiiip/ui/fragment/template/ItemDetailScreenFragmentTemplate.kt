@@ -45,8 +45,8 @@ class ItemDetailScreenFragmentTemplate(context: Context) : AbstractTemplate(cont
 
         webView.loadDataWithBaseURL("file:///android_asset/", view.context.assets.open(HTML_FILE_PATH).reader(Charsets.UTF_8).use { reader ->
             val document = Jsoup.parse(reader.readText())
-            document.body().let { element ->
-                element?.append(item.metaInfo?.body.orEmpty())
+            document.body()?.let { element ->
+                element.append(item.metaInfo?.body.orEmpty())
             }
             document.html()
         }, "text/html", Charsets.UTF_8.name(), null)

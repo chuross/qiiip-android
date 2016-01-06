@@ -6,4 +6,5 @@ class User(identity: UserIdentity) : AbstractEntity<UserIdentity, User>(identity
 
     var metaInfo: UserMetaInfo? = null
 
+    var authenticationInfo: UserAuthenticationInfo? = null
 }

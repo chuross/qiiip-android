@@ -10,11 +10,17 @@ class UserConverter {
 
     companion object {
 
-        fun convertToModel(resource: ResourceUser): User {
-            val user: User = User(UserIdentity(resource.id!!))
-            user.metaInfo = UserMetaConverter.convertToModel(resource)
-            return user
+        fun convertToModel(resource: ResourceUser): User = User(UserIdentity(resource.id!!)).apply {
+            metaInfo = UserMetaConverter.convertToModel(resource)
         }
+
+        fun convertToResource(model: User): ResourceUser = ResourceUser(
+                model.identity.value,
+                model.metaInfo?.name,
+                model.metaInfo?.description,
+                model.metaInfo?.profileImageUrl,
+                model.metaInfo?.websideUrl
+        )
     }
 
 }

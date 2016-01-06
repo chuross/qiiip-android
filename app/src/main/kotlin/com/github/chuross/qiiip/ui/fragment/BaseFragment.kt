@@ -13,6 +13,7 @@ import rx.Observable
 import rx.Scheduler
 import rx.android.schedulers.AndroidSchedulers
 import rx.subjects.BehaviorSubject
+import rx.subscriptions.CompositeSubscription
 
 /**
  * @see
@@ -22,6 +23,7 @@ abstract class BaseFragment<P : SupportFragmentPresenter<*, *>> : SupportPresent
 
     val screenActivity by lazy { activity as ScreenActivity }
     val application by lazy { Application.from(activity) }
+    val subscriptions = CompositeSubscription()
 
     private val lifecycle = BehaviorSubject.create<FragmentEvent>()
 
@@ -33,7 +35,7 @@ abstract class BaseFragment<P : SupportFragmentPresenter<*, *>> : SupportPresent
 
     protected fun <T : Any?> complement(scheduler: Scheduler): Observable.Transformer<T, T> = object : Observable.Transformer<T, T> {
         override fun call(source: Observable<T>): Observable<T> {
-            return source.compose(bindToLifecycle<T>())
+            return source.compose(bindUntilEvent<T>(FragmentEvent.DESTROY_VIEW))
                     .subscribeOn(scheduler)
                     .observeOn(AndroidSchedulers.mainThread())
         }
@@ -81,6 +83,7 @@ abstract class BaseFragment<P : SupportFragmentPresenter<*, *>> : SupportPresent
 
     override fun onDestroy() {
         lifecycle.onNext(FragmentEvent.DESTROY)
+        subscriptions.unsubscribe()
         super.onDestroy()
     }
 
