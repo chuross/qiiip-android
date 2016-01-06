@@ -1,8 +1,10 @@
 package com.github.chuross.qiiip.application
 
 import android.content.Context
+import com.github.chuross.chuross.qiiip.BuildConfig
 import com.github.chuross.qiiip.domain.user.User
 import com.github.chuross.qiiip.domain.user.UserAuthenticationInfo
+import com.github.chuross.qiiip.infrastructure.encryption.AesCryptUtils
 import net.orange_box.storebox.StoreBox
 import net.orange_box.storebox.enums.PreferencesType
 import rx.subjects.PublishSubject
@@ -44,10 +46,10 @@ class ApplicationPreferences(val context: Context) {
         return authenticated
     }
 
-    fun getAccessToken(): String? = sharedPreferences.getAccessToken()
+    fun getAccessToken(): String? = sharedPreferences.getAccessToken()?.let { AesCryptUtils.decrypt(it, BuildConfig.KEY_STR) }
 
     fun refreshToken(token: String): Boolean {
-        sharedPreferences.setAccessToken(token)
+        sharedPreferences.setAccessToken(AesCryptUtils.encrypt(token, BuildConfig.KEY_STR))
         return sharedPreferences.getAccessToken().equals(token)
     }
 
