@@ -25,11 +25,11 @@ abstract class RequestFragment<P : RequestFragmentPresenter<*, out RequestTempla
     }
 
     protected fun request(initialize: Boolean) {
-        presenter.request(initialize).compose(complement<R>(Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR))).subscribe({ result ->
+        subscriptions.add(presenter.request(initialize).compose(complement<R>(Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR))).subscribe({ result ->
             onRequestSuccess(result, initialize)
         }, { error ->
             onRequestFailed(error, initialize)
             presenter.template.messageView.showErrorMessage(error)
-        })
+        }))
     }
 }
