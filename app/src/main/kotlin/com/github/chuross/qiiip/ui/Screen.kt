@@ -15,5 +15,10 @@ enum class Screen : Screen {
     USER {
         override val isRoot: Boolean = false
         override val parent: Screen? = null
+    },
+    TAG_ITEM_LIST {
+        override val isRoot: Boolean = false
+        override val parent: Screen? = null
+
     }
 }

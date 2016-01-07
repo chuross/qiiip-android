@@ -12,9 +12,7 @@ class ListFragmentTemplate : AbstractTemplate, ListTemplate {
     constructor(context: Context) : super(context, R.layout.template_fragment_list)
 
     override val swipeRefreshLayout = view.layout_swipe_refresh
-
     override val list = view.list
-
     override val messageView = view.status
 
 }

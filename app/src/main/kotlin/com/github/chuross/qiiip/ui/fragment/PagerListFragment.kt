@@ -6,7 +6,7 @@ import com.github.chuross.qiiip.ui.fragment.presenter.PagerListFragmentPresenter
 import com.github.chuross.qiiip.ui.fragment.template.ListTemplate
 import com.jakewharton.rxbinding.support.v7.widget.RxRecyclerView
 
-abstract class PagerListFragment<P : PagerListFragmentPresenter<*, out ListTemplate, List<RESULT>>, RESULT> : ListFragment<P, RESULT>() {
+abstract class PagerListFragment<P : PagerListFragmentPresenter<*, out ListTemplate, RESULT>, RESULT> : ListFragment<P, RESULT>() {
 
     override fun onRequestSuccess(result: List<RESULT>, initialize: Boolean) {
         super.onRequestSuccess(result, initialize)
