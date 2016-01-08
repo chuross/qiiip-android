@@ -38,9 +38,9 @@ class ItemDetailScreenFragment : BaseFragment<ItemDetailScreenFragmentPresenter>
         subscriptions.add(RxExtraView.tagClicks(presenter.template.tagGroup)
                 .map { presenter.getTag(TagIdentity(it)) as Tag }
                 .compose(complement<Tag>(AndroidSchedulers.mainThread()))
-                .subscribe({ tag ->
-                    screenActivity.launchScreen(TagItemListScreenFragment.create(tag))
-                }))
+                .subscribe { tag ->
+                    screenActivity.launchScreen(TagScreenFragment.create(tag))
+                })
 
         presenter.item.metaInfo?.let { metaInfo ->
             subscriptions.add(RxView.clicks(presenter.template.userLayout)

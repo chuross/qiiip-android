@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CounterTextView">
+        <attr name="co_txt_titleText" format="string" />
+        <attr name="co_txt_titleTextColor" format="reference" />
+        <attr name="co_txt_counterText" format="string" />
+        <attr name="co_txt_counterTextColor" format="reference" />
+    </declare-styleable>
+</resources>

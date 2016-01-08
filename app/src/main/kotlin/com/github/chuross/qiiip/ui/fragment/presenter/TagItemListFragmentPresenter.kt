@@ -4,16 +4,17 @@ import android.os.Bundle
 import android.view.ViewGroup
 import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.domain.tag.Tag
-import com.github.chuross.qiiip.ui.fragment.screen.TagItemListScreenFragment
+import com.github.chuross.qiiip.ui.fragment.TagItemListFragment
 import com.github.chuross.qiiip.ui.fragment.template.ListFragmentTemplate
 import rx.Observable
 
-class TagItemListFragmentPresenter(fragment: TagItemListScreenFragment) : PagerListFragmentPresenter<TagItemListScreenFragment, ListFragmentTemplate, Item>(fragment) {
+class TagItemListFragmentPresenter(fragment: TagItemListFragment) : PagerListFragmentPresenter<TagItemListFragment, ListFragmentTemplate, Item>(fragment) {
 
-    val tag: Tag by lazy { view.arguments.getSerializable(TagItemListScreenFragment.ARGUMENT_KEY_TAG) as Tag }
+    val tag by lazy { view.arguments.getSerializable(TagItemListFragment.ARGUMENT_KEY_TAG) as Tag }
+    private val itemRepository by lazy { view.application.itemRepository }
 
-    override fun createTemplate(parent: ViewGroup, arguments: Bundle?): ListFragmentTemplate = ListFragmentTemplate(view.activity)
+    override fun createTemplate(parent: ViewGroup?, savedInstance: Bundle?): ListFragmentTemplate = ListFragmentTemplate(view.activity)
 
-    override fun request(page: Int, initialize: Boolean): Observable<List<Item>> = view.application.itemRepository.findAllByTagIdentity(tag.identity, page, perPage)
+    override fun request(page: Int, initialize: Boolean): Observable<List<Item>> = itemRepository.findAllByTagIdentity(tag.identity, page, perPage)
 
 }
