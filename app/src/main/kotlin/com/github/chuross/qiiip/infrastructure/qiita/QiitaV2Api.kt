@@ -41,6 +41,9 @@ interface QiitaV2Api {
     @GET("api/v2/items")
     fun getItemsByKeyword(@Query("query") query: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Observable<MutableList<Item>>
 
+    @GET("api/v2/users/{user_id}/items")
+    fun getItemsByUserId(@Path("user_id") userId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Observable<MutableList<Item>>
+
     @GET("api/v2/tags/{tag_id}/items")
     fun getItemsByTagId(@Path("tag_id") tagId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Observable<MutableList<Item>>
 

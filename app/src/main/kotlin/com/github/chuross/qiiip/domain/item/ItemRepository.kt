@@ -33,7 +33,7 @@ class ItemRepository {
     }
 
     fun findAllByUserIdentity(identity: UserIdentity, page: Int, perPage: Int): Observable<List<Item>> {
-        return api.getItemsByKeyword("user:${identity.value}", page, perPage)
+        return api.getItemsByUserId(identity.value, page, perPage)
                 .map { result -> ItemConverter.convertToModels(result) }
     }
 
