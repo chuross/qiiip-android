@@ -24,6 +24,7 @@
                 android:id="@+id/layout_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="160dp"
                 android:padding="16dp"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -33,7 +34,9 @@
                     android:id="@+id/txt_tag_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/white" />
+                    android:layout_marginBottom="16dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="28sp" />
 
                 <Button
                     android:id="@+id/btn_follow_action"
