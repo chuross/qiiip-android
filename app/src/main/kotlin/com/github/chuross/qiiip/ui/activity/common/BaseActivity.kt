@@ -3,6 +3,7 @@ package com.github.chuross.qiiip.ui.activity.common
 import android.os.Bundle
 import com.github.chuross.library.mvp.presenter.ActivityPresenter
 import com.github.chuross.library.mvp.view.activity.PresentationActivity
+import com.github.chuross.library.mvp.view.template.Template
 import com.trello.rxlifecycle.ActivityEvent
 import com.trello.rxlifecycle.RxLifecycle
 import com.trello.rxlifecycle.components.ActivityLifecycleProvider
@@ -13,7 +14,7 @@ import rx.subjects.BehaviorSubject
  * @see
  * https://github.com/trello/RxLifecycle/blob/master/rxlifecycle-components/src/main/java/com/trello/rxlifecycle/components/support/RxAppCompatActivity.java
  */
-abstract class BaseActivity<P : ActivityPresenter<*, *>> : PresentationActivity<P>(), ActivityLifecycleProvider {
+abstract class BaseActivity<P : ActivityPresenter<*>, T : Template> : PresentationActivity<P, T>(), ActivityLifecycleProvider {
 
     private val lifecycle = BehaviorSubject.create<ActivityEvent>()
 

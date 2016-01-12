@@ -5,13 +5,16 @@ import android.os.Bundle
 import com.github.chuross.qiiip.application.Application
 import com.github.chuross.qiiip.domain.user.User
 import com.github.chuross.qiiip.ui.activity.presenter.LoginActivityPresenter
+import com.github.chuross.qiiip.ui.activity.template.LoginActivityTemplate
 import rx.schedulers.Schedulers
 
-class LoginActivity : BaseActivity<LoginActivityPresenter>() {
+class LoginActivity : BaseActivity<LoginActivityPresenter, LoginActivityTemplate>() {
 
     override fun createPresenter(): LoginActivityPresenter = LoginActivityPresenter(this).apply {
         Application.from(this@LoginActivity).component.inject(this)
     }
+
+    override fun createTemplate(): LoginActivityTemplate = LoginActivityTemplate(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

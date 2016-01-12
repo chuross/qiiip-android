@@ -6,14 +6,19 @@ import com.github.chuross.chuross.qiiip.R
 import com.github.chuross.qiiip.application.Application
 import com.github.chuross.qiiip.domain.user.User
 import com.github.chuross.qiiip.ui.activity.presenter.ScreenActivityPresenter
+import com.github.chuross.qiiip.ui.activity.template.ScreenActivityTemplate
 import com.github.chuross.qiiip.ui.fragment.screen.HomeScreenFragment
 import com.github.chuross.qiiip.ui.fragment.screen.ScreenFragment
+import com.github.chuross.qiiip.ui.widget.template.NavigationHeaderTemplate
 import rx.android.schedulers.AndroidSchedulers
 
-class ScreenActivity : BaseActivity<ScreenActivityPresenter>() {
+class ScreenActivity : BaseActivity<ScreenActivityPresenter, ScreenActivityTemplate>() {
 
+    val headerTemplate by lazy { NavigationHeaderTemplate(template.navigation.getHeaderView(0)) }
 
     override fun createPresenter(): ScreenActivityPresenter = ScreenActivityPresenter(this)
+
+    override fun createTemplate(): ScreenActivityTemplate = ScreenActivityTemplate(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,11 +27,11 @@ class ScreenActivity : BaseActivity<ScreenActivityPresenter>() {
         subscriptions.add(Application.from(this).preferences.authenticationChangeEvent
                 .compose(complement<User?>(AndroidSchedulers.mainThread()))
                 .subscribe ({ user ->
-                    presenter.headerTemplate.apply(user)
+                    headerTemplate.apply(user)
                 }, {}))
 
-        presenter.headerTemplate.apply(Application.from(this).preferences.getAuthenticatedUser())
-        presenter.headerTemplate.loginButton.setOnClickListener {
+        headerTemplate.apply(Application.from(this).preferences.getAuthenticatedUser())
+        headerTemplate.loginButton.setOnClickListener {
             presenter.onLoginButtonClicked()
         }
     }

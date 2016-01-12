@@ -2,10 +2,9 @@ package com.github.chuross.qiiip.ui.fragment.presenter
 
 import android.support.v4.app.Fragment
 import com.github.chuross.chuross.qiiip.R
-import com.github.chuross.library.mvp.view.template.Template
 import rx.Observable
 
-abstract class PagerListFragmentPresenter<F : Fragment, T : Template, RESULT>(fragment: F) : RequestFragmentPresenter<F, T, List<RESULT>>(fragment) {
+abstract class PagerListFragmentPresenter<F : Fragment, RESULT>(fragment: F) : RequestFragmentPresenter<F, List<RESULT>>(fragment) {
 
     companion object {
         private val DEFAULT_PAGE = 1

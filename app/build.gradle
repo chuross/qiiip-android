@@ -68,7 +68,7 @@ dependencies {
     // common
     compile "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.ext.kotlinVersion"
     compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'com.github.chuross:mvpframework:1.0.4'
+    compile 'com.github.chuross:mvpframework:1.0.5'
 
     // rx
     compile 'io.reactivex:rxjava:1.0.15'

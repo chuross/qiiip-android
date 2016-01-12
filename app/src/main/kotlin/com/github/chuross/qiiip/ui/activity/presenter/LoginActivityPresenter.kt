@@ -7,16 +7,13 @@ import com.github.chuross.qiiip.domain.user.User
 import com.github.chuross.qiiip.infrastructure.qiita.QiitaV2Api
 import com.github.chuross.qiiip.infrastructure.qiita.request.TokenRequest
 import com.github.chuross.qiiip.ui.activity.LoginActivity
-import com.github.chuross.qiiip.ui.activity.template.LoginActivityTemplate
 import rx.Observable
 import javax.inject.Inject
 
-class LoginActivityPresenter(activity: LoginActivity) : ActivityPresenter<LoginActivity, LoginActivityTemplate>(activity) {
+class LoginActivityPresenter(activity: LoginActivity) : ActivityPresenter<LoginActivity>(activity) {
 
     @Inject
     lateinit var api: QiitaV2Api
-
-    override fun createTemplate(p0: LoginActivity?): LoginActivityTemplate = LoginActivityTemplate(view)
 
     fun request(): Observable<User> {
         val application = Application.from(view)

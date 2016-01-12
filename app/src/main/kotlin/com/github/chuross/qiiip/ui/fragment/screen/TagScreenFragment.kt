@@ -1,13 +1,15 @@
 package com.github.chuross.qiiip.ui.fragment.screen
 
 import android.os.Bundle
+import android.view.ViewGroup
 import com.github.chuross.chuross.qiiip.R
 import com.github.chuross.qiiip.domain.tag.Tag
 import com.github.chuross.qiiip.ui.fragment.BaseFragment
 import com.github.chuross.qiiip.ui.fragment.TagItemListFragment
 import com.github.chuross.qiiip.ui.fragment.presenter.TagScreenFragmentPresenter
+import com.github.chuross.qiiip.ui.fragment.template.TagScreenFragmentTemplate
 
-class TagScreenFragment : BaseFragment<TagScreenFragmentPresenter>(), ScreenFragment {
+class TagScreenFragment : BaseFragment<TagScreenFragmentPresenter, TagScreenFragmentTemplate>(), ScreenFragment {
 
     companion object {
         val ARGUMENT_KEY_TAG = "argument_key_tag"
@@ -23,13 +25,15 @@ class TagScreenFragment : BaseFragment<TagScreenFragmentPresenter>(), ScreenFrag
 
     override fun createPresenter(): TagScreenFragmentPresenter = TagScreenFragmentPresenter(this)
 
+    override fun createTemplate(p0: ViewGroup?, p1: Bundle?): TagScreenFragmentTemplate = TagScreenFragmentTemplate(activity)
+
     override fun onViewCreated(savedInstanceState: Bundle?) {
         super.onViewCreated(savedInstanceState)
 
-        screenActivity.setUpToolbar(presenter.template.toolbar)
-        presenter.template.toolbar.title = presenter.tag.identity.value
+        screenActivity.setUpToolbar(template.toolbar)
+        template.toolbar.title = presenter.tag.identity.value
 
-        presenter.template.apply(presenter.tag)
+        template.apply(presenter.tag)
         childFragmentManager.beginTransaction().replace(R.id.list_container, TagItemListFragment.create(presenter.tag)).commit()
     }
 }
