@@ -22,7 +22,7 @@ class UserScreenFragmentTemplate(context: Context, parent: ViewGroup) : Abstract
     val userThumbnailImage = view.img_user_thumbnail
     override val swipeRefreshLayout = view.layout_swipe_refresh
     override val list = view.list
-    override val messageView = view.status
+    override val stateView = view.status
     var paletteCallback: ((palette: Palette) -> Unit)? = null
 
     override fun apply(user: User) {

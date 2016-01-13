@@ -13,6 +13,6 @@ class ListFragmentTemplate : AbstractTemplate, ListTemplate {
 
     override val swipeRefreshLayout = view.layout_swipe_refresh
     override val list = view.list
-    override val messageView = view.status
+    override val stateView = view.status
 
 }

@@ -17,7 +17,7 @@ abstract class RequestFragment<P : RequestFragmentPresenter<*, R>, T : RequestTe
     override fun onViewCreated(savedInstanceState: Bundle?) {
         super.onViewCreated(savedInstanceState)
 
-        template.messageView.retryCallback = {
+        template.stateView.retryCallback = {
             request(false)
         }
 
@@ -25,11 +25,14 @@ abstract class RequestFragment<P : RequestFragmentPresenter<*, R>, T : RequestTe
     }
 
     protected fun request(initialize: Boolean) {
+        template.stateView.showLoadingView()
+
         subscriptions.add(presenter.request(initialize).compose(complement<R>(Schedulers.from(AsyncTask.THREAD_POOL_EXECUTOR))).subscribe({ result ->
+            template.stateView.hideAll()
             onRequestSuccess(result, initialize)
         }, { error ->
+            template.stateView.showErrorView(error)
             onRequestFailed(error, initialize)
-            template.messageView.showErrorMessage(error)
         }))
     }
 }

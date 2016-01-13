@@ -20,7 +20,7 @@ import rx.subscriptions.CompositeSubscription
  * @see
  * https://github.com/trello/RxLifecycle/blob/master/rxlifecycle-components/src/main/java/com/trello/rxlifecycle/components/support/RxFragment.java
  */
-abstract class BaseFragment<P : SupportFragmentPresenter<*>, T:Template> : SupportPresentationFragment<P, T>(), FragmentLifecycleProvider {
+abstract class BaseFragment<P : SupportFragmentPresenter<*>, T : Template> : SupportPresentationFragment<P, T>(), FragmentLifecycleProvider {
 
     val screenActivity by lazy { activity as ScreenActivity }
     val application by lazy { Application.from(activity) }
@@ -42,6 +42,7 @@ abstract class BaseFragment<P : SupportFragmentPresenter<*>, T:Template> : Suppo
         }
     }
 
+    @Suppress("deprecation")
     override fun onAttach(activity: Activity?) {
         super.onAttach(activity)
         lifecycle.onNext(FragmentEvent.ATTACH)

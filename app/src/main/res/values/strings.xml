@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">qiiip</string>
+    <string name="error_default">通信に失敗しました</string>
+    <string name="error_empty">結果がありませんでした</string>
+    <string name="error_disconnected">通信が不安定です\n時間をおいて再度お試しください</string>
     <string name="user_screen_follow_on">フォローする</string>
     <string name="user_screen_follow_off">フォロー解除</string>
 </resources>
