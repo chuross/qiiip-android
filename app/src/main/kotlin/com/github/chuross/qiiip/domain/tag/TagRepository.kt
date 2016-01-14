@@ -10,9 +10,10 @@ class TagRepository {
     @Inject
     lateinit var api: QiitaV2Api
 
-    fun findAll(page: Int, perPage: Int): Observable<List<Tag>> {
-        return api.getTags(page, perPage)
-                .map { result -> TagConverter.convertToModels(result) }
-    }
+    fun find(identity: TagIdentity): Observable<Tag> = api.getTagById(identity.value)
+            .map { TagConverter.convertToModel(it) }
+
+    fun findAll(page: Int, perPage: Int): Observable<List<Tag>> = api.getTags(page, perPage)
+            .map { result -> TagConverter.convertToModels(result) }
 
 }
