@@ -16,31 +16,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textColor="@android:color/black"
         android:maxLines="2"
         android:ellipsize="end" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/txt_tags"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt_title"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_toStartOf="@+id/txt_user_name"
+        android:layout_alignParentBottom="true"
+        android:textSize="8dp"
+        android:textColor="#9a9a9a"
+        android:singleLine="true" />
 
-        <ImageView
-            android:id="@+id/img_thumbnail"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="8dp" />
-
-        <TextView
-            android:id="@+id/txt_tags"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="8dp"
-            android:textColor="#9a9a9a"
-            android:singleLine="true" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/txt_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:textSize="8dp"
+        android:textColor="#666666"
+        android:singleLine="true" />
 
 </RelativeLayout>
