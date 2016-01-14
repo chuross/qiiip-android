@@ -9,6 +9,7 @@ import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.domain.user.User
 import com.github.chuross.qiiip.domain.user.UserIdentity
 import com.github.chuross.qiiip.infrastructure.android.AndroidUtils
+import com.github.chuross.qiiip.infrastructure.android.ColorUtils
 import com.github.chuross.qiiip.ui.fragment.PagerListFragment
 import com.github.chuross.qiiip.ui.fragment.presenter.UserScreenFragmentPresenter
 import com.github.chuross.qiiip.ui.fragment.template.UserScreenFragmentTemplate
@@ -48,8 +49,8 @@ class UserScreenFragment : PagerListFragment<UserScreenFragmentPresenter, UserSc
         screenActivity.setUpToolbar(template.toolbar)
         template.toolbar.title = user.identity.value
         template.paletteCallback = { palette ->
-            palette.darkVibrantSwatch?.let { darkVibrantSwatch ->
-                statusBarColor = darkVibrantSwatch.rgb
+            palette.vibrantSwatch?.let { swatch ->
+                statusBarColor = ColorUtils.changeLuminanceColor(swatch.rgb, 0.3F)
                 AndroidUtils.setStatusBarColor(activity, statusBarColor!!)
             }
         }
