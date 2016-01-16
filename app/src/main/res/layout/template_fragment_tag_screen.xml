@@ -8,71 +8,51 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/layout_appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:layout_height="wrap_content">
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll"
+            style="@style/TransparentToolbar" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primary"
-            app:contentScrim="@color/primary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:collapsedTitleTextAppearance="@style/CollapsedItemDetailTitle"
-            app:expandedTitleTextAppearance="@style/ExpandedItemDetailTitle">
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
 
-            <LinearLayout
-                android:id="@+id/layout_info"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/img_tag_thumbnail"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/txt_tag_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="140dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_collapseMode="none">
+                android:textColor="@android:color/white"
+                android:textSize="28sp" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/img_tag_thumbnail"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginEnd="8dp" />
-
-                    <TextView
-                        android:id="@+id/txt_tag_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:textSize="28sp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                style="@style/TransparentToolbar" />
-
-        </android.support.design.widget.CollapsingToolbarLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp">
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:background="@android:color/white"
+            app:layout_scrollFlags="scroll|enterAlways">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:orientation="horizontal"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+                android:orientation="horizontal">
 
                 <com.github.chuross.qiiip.ui.widget.CounterTextView
                     android:id="@+id/txt_item_counter"
@@ -95,8 +75,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="16dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
                 android:text="フォローする"
                 android:textColor="@color/primary"
                 style="?android:attr/borderlessButtonStyle" />
