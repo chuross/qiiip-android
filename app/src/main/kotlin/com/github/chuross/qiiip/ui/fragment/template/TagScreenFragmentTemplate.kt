@@ -7,15 +7,15 @@ import com.github.chuross.library.mvp.view.template.ApplicableTemplate
 import com.github.chuross.qiiip.domain.tag.Tag
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
-import kotlinx.android.synthetic.template_fragment_tag_screen.view.img_tag_thumbnail
-import kotlinx.android.synthetic.template_fragment_tag_screen.view.toolbar
-import kotlinx.android.synthetic.template_fragment_tag_screen.view.txt_tag_name
+import kotlinx.android.synthetic.template_fragment_tag_screen.view.*
 
 class TagScreenFragmentTemplate(context: Context) : AbstractTemplate(context, R.layout.template_fragment_tag_screen), ApplicableTemplate<Tag> {
 
     val toolbar = view.toolbar
     val tagNameText = view.txt_tag_name
     val tagThumbnailImage = view.img_tag_thumbnail
+    val itemCounterText = view.txt_item_counter
+    val followersCounterText = view.txt_follower_counter
 
     override fun apply(tag: Tag) {
         tag.metaInfo?.let { metaInfo ->
@@ -25,6 +25,8 @@ class TagScreenFragmentTemplate(context: Context) : AbstractTemplate(context, R.
                     .centerCrop()
                     .transform(CropCircleTransformation())
                     .into(tagThumbnailImage)
+            metaInfo.itemCount?.let { itemCounterText.countText = it.toString() }
+            metaInfo.followersCount?.let { followersCounterText.countText = it.toString() }
         }
         tagNameText.text = tag.identity.value
     }

@@ -12,8 +12,8 @@ class TagMetaConverter {
         fun convertToModel(resource: ResourceTag): TagMetaInfo {
             return TagMetaInfo(
                     resource.iconUrl,
-                    resource.itemsCount ?: 0,
-                    resource.followersCount ?: 0
+                    resource.itemsCount,
+                    resource.followersCount
             )
         }
     }

@@ -4,6 +4,6 @@ import com.github.chuross.qiiip.domain.common.ValueObject
 
 data class TagMetaInfo(
         val iconUrl: String?,
-        val itemCount: Long,
-        val followersCount: Long
+        val itemCount: Long?,
+        val followersCount: Long?
 ) : ValueObject

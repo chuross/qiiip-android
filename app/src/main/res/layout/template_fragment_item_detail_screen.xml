@@ -22,6 +22,7 @@
             app:expandedTitleTextAppearance="@style/ExpandedItemDetailTitle">
 
             <LinearLayout
+                android:id="@+id/layout_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="?attr/actionBarSize"
@@ -110,6 +111,6 @@
         android:clickable="true"
         app:backgroundTint="@color/primary_dark"
         app:layout_anchor="@+id/layout_appbar"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|end" />
 
 </android.support.design.widget.CoordinatorLayout>
