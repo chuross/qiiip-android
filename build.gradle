@@ -4,7 +4,7 @@ ext {
         kotlin: '1.1.1',
         supportLibrary: '25.1.0',
         databinding: '2.3.0',
-        rxjava: '2.0.7',
+        rx: '2.0.1',
         rxbus: '0.1'
     ]
 }

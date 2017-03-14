@@ -1,9 +1,9 @@
 package com.github.chuross.qiiip
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import com.github.chuross.qiiip.ui.BaseActivity
 
-class ScreenActivity: AppCompatActivity() {
+class ScreenActivity: BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
