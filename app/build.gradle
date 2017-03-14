@@ -46,6 +46,8 @@ def v = rootProject.ext.versions
 dependencies {
     // base
     compile "org.jetbrains.kotlin:kotlin-stdlib:$v.kotlin"
+    compile "io.reactivex.rxjava2:rxjava:$v.rxjava"
+    compile "com.github.MFlisar:RxBus2:$v.rxbus"
 
     // base view
     kapt "com.android.databinding:compiler:$v.databinding"

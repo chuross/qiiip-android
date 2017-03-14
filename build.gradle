@@ -3,7 +3,9 @@ ext {
     versions = [
         kotlin: '1.1.1',
         supportLibrary: '25.1.0',
-        databinding: '2.3.0'
+        databinding: '2.3.0',
+        rxjava: '2.0.7',
+        rxbus: '0.1'
     ]
 }
 
@@ -13,12 +15,14 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.1"
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io" }
     }
 }
 
