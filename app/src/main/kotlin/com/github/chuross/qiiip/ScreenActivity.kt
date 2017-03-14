@@ -1,4 +1,4 @@
-package com.github.chuross.qiip;
+package com.github.chuross.qiiip
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
