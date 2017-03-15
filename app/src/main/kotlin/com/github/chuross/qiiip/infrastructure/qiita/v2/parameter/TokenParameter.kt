@@ -1,8 +1,8 @@
-package com.github.chuross.qiiip.infrastructure.qiita.v2.body
+package com.github.chuross.qiiip.infrastructure.qiita.v2.parameter
 
 import com.google.gson.annotations.SerializedName
 
-data class TokenBody(
+data class TokenParameter(
         @SerializedName("client_id")
         val clientId: String,
         @SerializedName("client_secret")

@@ -1,6 +1,6 @@
 package com.github.chuross.qiiip.infrastructure.qiita.v2
 
-import com.github.chuross.qiiip.infrastructure.qiita.v2.body.TokenBody
+import com.github.chuross.qiiip.infrastructure.qiita.v2.parameter.TokenParameter
 import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.Item
 import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.Tag
 import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.Token
@@ -9,8 +9,9 @@ import io.reactivex.Single
 import retrofit2.http.*
 
 interface QiitaV2Api {
+
     @POST("/api/v2/access_tokens")
-    fun login(@Body body: TokenBody): Single<Token>
+    fun login(@Body parameter: TokenParameter): Single<Token>
 
     @GET("/api/v2/authenticated_user")
     fun getAuthenticatedUser(): Single<User>
