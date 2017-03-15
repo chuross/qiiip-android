@@ -46,6 +46,9 @@ def v = rootProject.ext.versions
 dependencies {
     // base
     compile "org.jetbrains.kotlin:kotlin-stdlib:$v.kotlin"
+    compile "org.apache.commons:commons-lang3:$v.commonsLang"
+
+    // rx
     compile "io.reactivex.rxjava2:rxjava:$v.rx"
     compile "io.reactivex.rxjava2:rxandroid:$v.rx"
     compile "com.trello.rxlifecycle2:rxlifecycle:$v.rx"
