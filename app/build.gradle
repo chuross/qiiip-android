@@ -47,6 +47,9 @@ dependencies {
     // base
     compile "org.jetbrains.kotlin:kotlin-stdlib:$v.kotlin"
     compile "org.apache.commons:commons-lang3:$v.commonsLang"
+    compile "com.squareup.retrofit2:retrofit:$v.retrofit"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$v.retrofit"
+    compile "com.squareup.retrofit2:converter-gson:$v.retrofit"
 
     // rx
     compile "io.reactivex.rxjava2:rxjava:$v.rx"

@@ -1,5 +1,7 @@
 package com.github.chuross.qiiip.domain
 
+import java.io.Serializable
+
 interface Entity<I : Identity<*>, E : Entity<I, E>> : Cloneable, Serializable {
 
     val identity: I

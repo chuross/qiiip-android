@@ -3,6 +3,7 @@ ext {
     versions = [
         kotlin: '1.1.1',
         commonsLang: '3.4',
+        retrofit:'2.2.0',
         supportLibrary: '25.1.0',
         databinding: '2.3.0',
         rx: '2.0.1',
