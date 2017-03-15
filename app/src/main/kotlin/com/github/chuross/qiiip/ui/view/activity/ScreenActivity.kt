@@ -1,7 +1,7 @@
-package com.github.chuross.qiiip
+package com.github.chuross.qiiip.ui.view.activity
 
 import android.os.Bundle
-import com.github.chuross.qiiip.ui.BaseActivity
+import com.github.chuross.qiiip.R
 
 class ScreenActivity: BaseActivity() {
 
