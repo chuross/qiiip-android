@@ -1,8 +1,8 @@
 package com.github.chuross.qiiip.domain.item
 
 import com.github.chuross.qiiip.domain.ValueObject
-import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.Tag
-import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.User
+import com.github.chuross.qiiip.domain.tag.Tag
+import com.github.chuross.qiiip.domain.user.User
 import java.util.*
 
 data class ItemMetaInfo(
@@ -12,6 +12,6 @@ data class ItemMetaInfo(
         val body: String?,
         val user: User,
         val tags: List<Tag>,
-        val createdAt: Date,
-        val updatedAt: Date
+        val createdAt: Date?,
+        val updatedAt: Date?
 ) : ValueObject
