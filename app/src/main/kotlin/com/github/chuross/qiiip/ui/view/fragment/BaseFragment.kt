@@ -1,6 +1,8 @@
 package com.github.chuross.qiiip.ui.view.fragment
 
 import android.content.Context
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,8 +11,10 @@ import android.view.ViewGroup
 import com.github.chuross.qiiip.ui.viewmodel.FragmentViewModel
 import com.trello.rxlifecycle2.android.FragmentEvent
 
-class BaseFragment : Fragment() {
+abstract class BaseFragment<BINDING: ViewDataBinding> : Fragment() {
 
+    abstract val layoutResourceId: Int
+    var binding: BINDING? = null
     private var boundViewModel: FragmentViewModel? = null
 
     fun bindViewModel(viewModel: FragmentViewModel) {
@@ -29,7 +33,8 @@ class BaseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         boundViewModel?.notifyLifecycleEvent(FragmentEvent.CREATE_VIEW)
-        return null
+        binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
+        return binding!!.root
     }
 
     override fun onStart() {

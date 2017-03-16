@@ -3,12 +3,13 @@ package com.github.chuross.qiiip.ui.view.activity
 import android.os.Bundle
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.application.event.ScreenChangeEvent
+import com.github.chuross.qiiip.application.screen.ItemListScreen
 import com.github.chuross.qiiip.databinding.ActivityScreenBinding
 import com.github.chuross.qiiip.ui.viewmodel.ScreenActivityViewModel
+import com.michaelflisar.rxbus2.RxBus
 import com.michaelflisar.rxbus2.RxBusBuilder
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
-import io.reactivex.android.schedulers.AndroidSchedulers
 
 class ScreenActivity: BaseActivity<ActivityScreenBinding>() {
 
@@ -24,8 +25,6 @@ class ScreenActivity: BaseActivity<ActivityScreenBinding>() {
             RxBusBuilder.create(ScreenChangeEvent::class.java).build()
                     .bindUntilEvent(it, ActivityEvent.DESTROY)
                     .filter { viewModel?.isDifferentScreen(this@ScreenActivity, it.screen) ?: false }
-                    .subscribeOn(AndroidSchedulers.mainThread())
-                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe { event ->
                         supportFragmentManager.apply {
                             binding?.let {
@@ -37,5 +36,6 @@ class ScreenActivity: BaseActivity<ActivityScreenBinding>() {
                     }
                     .apply { it.disposables.add(this) }
         }
+         RxBus.get().send(ScreenChangeEvent(ItemListScreen()))
     }
 }
