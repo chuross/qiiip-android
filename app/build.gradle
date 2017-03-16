@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.tmiyamon.config'
 
 buildscript {
     def v = rootProject.ext.versions
@@ -9,7 +10,6 @@ buildscript {
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$v.kotlin"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$v.kotlin"
     }
 }
 

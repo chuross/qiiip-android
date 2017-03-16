@@ -14,10 +14,12 @@ ext {
 buildscript {
     repositories {
         jcenter()
+        maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.1"
+        classpath 'gradle.plugin.com.tmiyamon:gradle-config:0.2.1'
     }
 }
 
