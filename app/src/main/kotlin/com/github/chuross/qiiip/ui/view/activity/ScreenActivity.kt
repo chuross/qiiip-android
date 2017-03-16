@@ -28,9 +28,12 @@ class ScreenActivity: BaseActivity<ActivityScreenBinding>() {
                     .subscribe { event ->
                         supportFragmentManager.apply {
                             binding?.let {
-                                beginTransaction()
-                                        .replace(it.screenContainer.id, event.screen.fragment)
-                                        .commitNow()
+                                beginTransaction().apply {
+                                    replace(it.screenContainer.id, event.screen.fragment)
+                                    if (supportFragmentManager.findFragmentById(it.screenContainer.id) != null) {
+                                        addToBackStack(event.screen.identity)
+                                    }
+                                }.commitNow()
                             }
                         }
                     }
