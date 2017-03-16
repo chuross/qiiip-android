@@ -1,12 +1,16 @@
 package com.github.chuross.qiiip.ui.view.activity
 
+import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.github.chuross.qiiip.ui.viewmodel.ActivityViewModel
 import com.trello.rxlifecycle2.android.ActivityEvent
 
-open class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity<BINDING: ViewDataBinding>: AppCompatActivity() {
 
+    abstract val layoutResourceId: Int?
+    var binding: BINDING? = null
     private var boundViewModel: ActivityViewModel? = null
 
     fun bindViewModel(viewModel: ActivityViewModel) {
@@ -15,6 +19,9 @@ open class BaseActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        layoutResourceId?.let {
+            binding = DataBindingUtil.setContentView(this, it)
+        }
         boundViewModel?.notifyLifecycleEvent(ActivityEvent.CREATE)
     }
 
