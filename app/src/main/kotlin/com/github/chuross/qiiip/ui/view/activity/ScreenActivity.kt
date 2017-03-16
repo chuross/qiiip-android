@@ -11,7 +11,7 @@ import com.michaelflisar.rxbus2.RxBusBuilder
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 
-class ScreenActivity: BaseActivity<ActivityScreenBinding>() {
+class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
 
     private var viewModel: ScreenActivityViewModel? = null
     override val layoutResourceId: Int? = R.layout.activity_screen
@@ -20,25 +20,23 @@ class ScreenActivity: BaseActivity<ActivityScreenBinding>() {
         super.onCreate(savedInstanceState)
 
         viewModel = ScreenActivityViewModel(applicationContext)
-        viewModel?.let {
-            bindViewModel(it)
+        viewModel?.let { viewModel ->
+            bindViewModel(viewModel)
             RxBusBuilder.create(ScreenChangeEvent::class.java).build()
-                    .bindUntilEvent(it, ActivityEvent.DESTROY)
-                    .filter { viewModel?.isDifferentScreen(this@ScreenActivity, it.screen) ?: false }
+                    .bindUntilEvent(viewModel, ActivityEvent.DESTROY)
+                    .filter { viewModel.isDifferentScreen(this@ScreenActivity, it.screen) }
                     .subscribe { event ->
-                        supportFragmentManager.apply {
-                            binding?.let {
-                                beginTransaction().apply {
-                                    replace(it.screenContainer.id, event.screen.fragment)
-                                    if (supportFragmentManager.findFragmentById(it.screenContainer.id) != null) {
-                                        addToBackStack(event.screen.identity)
-                                    }
-                                }.commitNow()
-                            }
+                        binding?.screenContainer?.let {
+                            supportFragmentManager.beginTransaction().apply {
+                                replace(it.id, event.screen.fragment)
+                                supportFragmentManager.findFragmentById(it.id)?.let {
+                                    addToBackStack(event.screen.identity)
+                                }
+                            }.commitNow()
                         }
                     }
-                    .apply { it.disposables.add(this) }
+                    .apply { viewModel.disposables.add(this) }
         }
-         RxBus.get().send(ScreenChangeEvent(ItemListScreen()))
+        RxBus.get().send(ScreenChangeEvent(ItemListScreen()))
     }
 }
