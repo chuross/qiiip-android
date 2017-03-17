@@ -2,7 +2,7 @@ package com.github.chuross.qiiip.domain.user
 
 import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.User as Resource
 
-object UserResourceConverter {
+object UserConverter {
 
     fun toModel(resource: Resource): User = User(UserIdentity(resource.id!!)).apply {
         metaInfo = UserMetaInfo(

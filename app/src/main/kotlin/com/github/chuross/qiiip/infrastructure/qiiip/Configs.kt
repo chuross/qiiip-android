@@ -5,8 +5,10 @@ import okhttp3.HttpUrl
 
 object Configs {
 
+    val qiitaApiBase = Settings.qiita.apiUrl
+
     fun getQiitaAuthUrl(state: String): String {
-        return HttpUrl.parse(Settings.qiita.apiUrl).newBuilder()
+        return HttpUrl.parse(qiitaApiBase).newBuilder()
                 .addQueryParameter("scope", "read_qiita write_qiita")
                 .addQueryParameter("state", state)
                 .addQueryParameter("clientId", Settings.qiita.clientId)

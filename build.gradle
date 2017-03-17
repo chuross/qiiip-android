@@ -4,10 +4,12 @@ ext {
         kotlin: '1.1.1',
         commonsLang: '3.4',
         retrofit:'2.2.0',
+        dagger: '2.9',
         supportLibrary: '25.1.0',
         databinding: '2.3.0',
         rx: '2.0.1',
-        rxbus: '0.1'
+        rxbus: '0.1',
+        recyclerViewAdapters: '1.0.4'
     ]
 }
 
@@ -27,6 +29,7 @@ allprojects {
     repositories {
         jcenter()
         maven { url "https://jitpack.io" }
+        maven { url 'http://chuross.github.com/maven-repository/' }
     }
 }
 

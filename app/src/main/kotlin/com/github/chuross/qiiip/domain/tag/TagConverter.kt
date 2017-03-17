@@ -2,7 +2,7 @@ package com.github.chuross.qiiip.domain.tag
 
 import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.Tag as Resource
 
-object TagResourceConverter {
+object TagConverter {
 
     fun toModels(resources: List<Resource>) = resources.map { toModel(it) }
 
