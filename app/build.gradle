@@ -71,6 +71,7 @@ dependencies {
     compile "com.android.support:support-fragment:$v.supportLibrary"
     compile "com.android.support:recyclerview-v7:$v.supportLibrary"
     compile "com.android.support:cardview-v7:$v.supportLibrary"
+    compile "com.android.support:design:$v.supportLibrary"
 
     // view
     compile "com.github.chuross.recyclerview-adapters:recyclerview-adapters:$v.recyclerViewAdapters"
