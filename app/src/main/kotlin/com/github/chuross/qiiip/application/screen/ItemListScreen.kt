@@ -1,7 +1,7 @@
 package com.github.chuross.qiiip.application.screen
 
 import android.support.v4.app.Fragment
-import com.github.chuross.qiiip.ui.view.fragment.ItemListFragment
+import com.github.chuross.qiiip.ui.view.fragment.component.ItemListFragment
 
 class ItemListScreen : Screen {
 

@@ -1,4 +1,4 @@
-package com.github.chuross.qiiip.ui.view.fragment
+package com.github.chuross.qiiip.ui.view.fragment.component
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -6,6 +6,7 @@ import android.view.View
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.databinding.FragmentItemListBinding
 import com.github.chuross.qiiip.ui.adapter.ItemAdapter
+import com.github.chuross.qiiip.ui.view.fragment.BaseFragment
 import com.github.chuross.qiiip.ui.viewmodel.fragment.ItemListFragmentViewModel
 import io.reactivex.BackpressureStrategy
 

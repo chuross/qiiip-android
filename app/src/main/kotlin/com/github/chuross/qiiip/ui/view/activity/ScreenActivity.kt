@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.application.event.ScreenChangeEvent
 import com.github.chuross.qiiip.application.screen.ItemListScreen
+import com.github.chuross.qiiip.application.screen.Screen
 import com.github.chuross.qiiip.databinding.ActivityScreenBinding
 import com.github.chuross.qiiip.ui.viewmodel.activity.ScreenActivityViewModel
 import com.michaelflisar.rxbus2.RxBus
@@ -23,18 +24,21 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
         bindViewModel(viewModel)
         RxBusBuilder.create(ScreenChangeEvent::class.java).build()
                 .bindUntilEvent(viewModel, ActivityEvent.DESTROY)
-                .filter { viewModel.isDifferentScreen(this@ScreenActivity, it.screen) }
-                .subscribe { event ->
-                    binding?.screenContainer?.let {
-                        supportFragmentManager.beginTransaction().apply {
-                            replace(it.id, event.screen.fragment)
-                            supportFragmentManager.findFragmentById(it.id)?.let {
-                                addToBackStack(event.screen.identity)
-                            }
-                        }.commitNow()
-                    }
-                }
+                .filter { viewModel.isDifferentScreen(it.screen) }
+                .subscribe { changeScreen(it.screen) }
                 .apply { viewModel.disposables.add(this) }
         RxBus.get().send(ScreenChangeEvent(ItemListScreen()))
+    }
+
+    private fun changeScreen(screen: Screen) {
+        binding?.screenContainer?.let {
+            supportFragmentManager.beginTransaction().apply {
+                replace(it.id, screen.fragment)
+                supportFragmentManager.findFragmentById(it.id)?.let {
+                    addToBackStack(screen.identity)
+                }
+            }.commitNow()
+            viewModel.currentScreen.set(screen)
+        }
     }
 }
