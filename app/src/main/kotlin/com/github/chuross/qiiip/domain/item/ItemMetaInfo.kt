@@ -8,7 +8,7 @@ import java.util.*
 data class ItemMetaInfo(
         val title: String,
         val url: String,
-        val private: Boolean,
+        val isPrivate: Boolean,
         val body: String?,
         val user: User,
         val tags: List<Tag>,

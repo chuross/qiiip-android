@@ -3,6 +3,8 @@ package com.github.chuross.qiiip.application
 import android.content.Context
 import android.os.AsyncTask
 import com.github.chuross.qiiip.BuildConfig
+import com.jakewharton.picasso.OkHttp3Downloader
+import com.squareup.picasso.Picasso
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -28,5 +30,6 @@ class Application: android.app.Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+        Picasso.setSingletonInstance(Picasso.Builder(this).downloader(OkHttp3Downloader(this)).build())
     }
 }

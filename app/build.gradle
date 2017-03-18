@@ -77,6 +77,11 @@ dependencies {
     compile "com.github.chuross.recyclerview-adapters:recyclerview-adapters:$v.recyclerViewAdapters"
     compile "com.github.chuross.recyclerview-adapters:recyclerview-adapters-rx:$v.recyclerViewAdapters"
 
+    //image
+    compile "com.squareup.picasso:picasso:$v.picasso"
+    compile "jp.wasabeef:picasso-transformations:$v.picassoTransformer"
+    compile "com.jakewharton.picasso:picasso2-okhttp3-downloader:$v.picassoOkhttp3"
+
     // test
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

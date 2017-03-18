@@ -13,7 +13,7 @@ object ItemConverter {
         metaInfo = ItemMetaInfo(
                 title = resource.title ?: "",
                 url = resource.url ?: "",
-                private = resource.private ?: false,
+                isPrivate = resource.private ?: false,
                 body = resource.body,
                 user = resource.user?.let { UserConverter.toModel(it) } ?: User.empty,
                 tags =  resource.tags?.let { TagConverter.toModels(it) } ?: listOf(),

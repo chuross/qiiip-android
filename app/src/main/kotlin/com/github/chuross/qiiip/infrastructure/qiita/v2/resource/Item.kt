@@ -13,6 +13,8 @@ data class Item(
         var renderedBody: String?,
         var user: User?,
         var tags: MutableList<Tag>?,
+        @SerializedName("created_at")
         var createdAt: Date?,
+        @SerializedName("updated_at")
         var updatedAt: Date?
 )

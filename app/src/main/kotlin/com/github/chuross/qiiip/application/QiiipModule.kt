@@ -3,6 +3,7 @@ package com.github.chuross.qiiip.application
 import com.github.chuross.qiiip.BuildConfig
 import com.github.chuross.qiiip.Settings
 import com.github.chuross.qiiip.infrastructure.qiita.v2.QiitaV2Api
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -14,18 +15,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class QiiipModule(private val application: Application) {
 
-    private val client: OkHttpClient get() {
-        return OkHttpClient.Builder().apply {
-           if (!BuildConfig.DEBUG) return@apply
-
-           addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
-        }.build()
-    }
     private val retrofit: Retrofit = Retrofit.Builder()
-            .client(client)
+            .client(OkHttpClient.Builder().apply {
+                if (!BuildConfig.DEBUG) return@apply
+
+                addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
+            }.build())
             .baseUrl(Settings.qiita.apiUrl)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder()
+                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                    .create()))
             .build()
 
     @Provides

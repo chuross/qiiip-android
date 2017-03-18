@@ -10,5 +10,8 @@ class User(identity: UserIdentity) : AbstractEntity<UserIdentity, User>(identity
         }
     }
 
+    val name: String? get() = metaInfo?.name
+    val description: String? get() = metaInfo?.description
+    val profileImageUrl: String? get() = metaInfo?.profileImageUrl
     var metaInfo: UserMetaInfo? = null
 }

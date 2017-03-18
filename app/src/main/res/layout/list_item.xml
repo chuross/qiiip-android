@@ -1,25 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable name="item" type="com.github.chuross.qiiip.domain.item.Item" />
     </data>
 
-    <RelativeLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        app:contentPadding="8dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/title_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{item.metaInfo.title}"
-            tools:text="title" />
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/created_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:textColor="#aaaaaa"
+                android:textSize="10sp"
+                tools:text="yyyy/mm/dd H:i投稿" />
+
+            <ImageView
+                android:id="@+id/user_img"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_below="@id/created_txt"
+                app:imageUrl="@{item.user.profileImageUrl}" />
+
+            <TextView
+                android:id="@+id/title_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/user_img"
+                android:layout_below="@id/created_txt"
+                android:text="@{item.title}"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:lines="2"
+                android:ellipsize="end"
+                tools:text="title" />
+
+            <TextView
+                android:id="@+id/tag_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/user_img"
+                android:layout_below="@id/title_txt"
+                android:textSize="12sp"
+                android:textColor="#666666"
+                android:text="@{item.tagLabel}"
+                tools:text="tagA, tagB" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </layout>
