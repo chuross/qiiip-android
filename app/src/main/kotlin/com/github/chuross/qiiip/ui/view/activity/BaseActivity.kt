@@ -4,7 +4,7 @@ import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.github.chuross.qiiip.ui.viewmodel.ActivityViewModel
+import com.github.chuross.qiiip.ui.viewmodel.activity.ActivityViewModel
 import com.trello.rxlifecycle2.android.ActivityEvent
 
 abstract class BaseActivity<BINDING: ViewDataBinding>: AppCompatActivity() {

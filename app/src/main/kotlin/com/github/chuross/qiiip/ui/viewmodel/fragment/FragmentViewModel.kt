@@ -1,17 +1,20 @@
-package com.github.chuross.qiiip.ui.viewmodel
+package com.github.chuross.qiiip.ui.viewmodel.fragment
 
 import android.content.Context
+import com.github.chuross.qiiip.ui.viewmodel.ViewModel
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.LifecycleTransformer
 import com.trello.rxlifecycle2.RxLifecycle
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.android.RxLifecycleAndroid
 import io.reactivex.Observable
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.BehaviorSubject
 
 abstract class FragmentViewModel(override val context: Context) : ViewModel, LifecycleProvider<FragmentEvent> {
 
     private val lifecycleSubject = BehaviorSubject.create<FragmentEvent>()
+    override val disposables: CompositeDisposable = CompositeDisposable()
 
     override fun lifecycle(): Observable<FragmentEvent> {
         return lifecycleSubject.hide()

@@ -1,5 +1,6 @@
-package com.github.chuross.qiiip.ui.viewmodel
+package com.github.chuross.qiiip.ui.viewmodel.activity
 
+import com.github.chuross.qiiip.ui.viewmodel.ViewModel
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.LifecycleTransformer
 import com.trello.rxlifecycle2.RxLifecycle

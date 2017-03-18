@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.chuross.qiiip.ui.viewmodel.FragmentViewModel
+import com.github.chuross.qiiip.ui.viewmodel.fragment.FragmentViewModel
 import com.trello.rxlifecycle2.android.FragmentEvent
 
 abstract class BaseFragment<BINDING: ViewDataBinding> : Fragment() {

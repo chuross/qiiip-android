@@ -47,11 +47,15 @@ dependencies {
     // base
     compile "org.jetbrains.kotlin:kotlin-stdlib:$v.kotlin"
     compile "org.apache.commons:commons-lang3:$v.commonsLang"
+    compile "com.jakewharton.timber:timber:$v.timber"
+    compile "com.squareup.okhttp3:logging-interceptor:$v.okhttp"
     compile "com.squareup.retrofit2:retrofit:$v.retrofit"
     compile "com.squareup.retrofit2:adapter-rxjava2:$v.retrofit"
     compile "com.squareup.retrofit2:converter-gson:$v.retrofit"
     compile "com.google.dagger:dagger:$v.dagger"
     kapt "com.google.dagger:dagger-compiler:$v.dagger"
+    compile "com.github.k-kagurazaka.rx-property-android:rx-property:$v.rxProperty"
+    compile "com.github.k-kagurazaka.rx-property-android:rx-property-kotlin:$v.rxProperty"
 
     // rx
     compile "io.reactivex.rxjava2:rxjava:$v.rx"
@@ -69,7 +73,8 @@ dependencies {
     compile "com.android.support:cardview-v7:$v.supportLibrary"
 
     // view
-    compile "com.github.chuross:recyclerviewadapters:$v.recyclerViewAdapters"
+    compile "com.github.chuross.recyclerview-adapters:recyclerview-adapters:$v.recyclerViewAdapters"
+    compile "com.github.chuross.recyclerview-adapters:recyclerview-adapters-rx:$v.recyclerViewAdapters"
 
     // test
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {

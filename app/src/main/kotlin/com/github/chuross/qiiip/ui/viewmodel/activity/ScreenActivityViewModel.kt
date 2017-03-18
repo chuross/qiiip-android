@@ -1,4 +1,4 @@
-package com.github.chuross.qiiip.ui.viewmodel
+package com.github.chuross.qiiip.ui.viewmodel.activity
 
 import android.content.Context
 import com.github.chuross.qiiip.application.screen.Screen

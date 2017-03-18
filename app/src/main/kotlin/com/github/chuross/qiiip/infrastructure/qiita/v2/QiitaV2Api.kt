@@ -10,30 +10,30 @@ import retrofit2.http.*
 
 interface QiitaV2Api {
 
-    @POST("/api/v2/access_tokens")
+    @POST("access_tokens")
     fun login(@Body parameter: TokenParameter): Single<Token>
 
-    @GET("/api/v2/authenticated_user")
+    @GET("authenticated_user")
     fun getAuthenticatedUser(): Single<User>
 
-    @GET("api/v2/items/{item_id}")
+    @GET("items/{item_id}")
     fun getItemById(@Path("item_id") itemId: String): Single<Item>
 
-    @GET("api/v2/items")
+    @GET("items")
     fun getItems(@Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
 
-    @GET("api/v2/items")
+    @GET("items")
     fun getItemsByKeyword(@Query("query") query: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
 
-    @GET("api/v2/users/{user_id}/items")
+    @GET("users/{user_id}/items")
     fun getItemsByUserId(@Path("user_id") userId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
 
-    @GET("api/v2/tags/{tag_id}/items")
+    @GET("tags/{tag_id}/items")
     fun getItemsByTagId(@Path("tag_id") tagId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
 
-    @GET("api/v2/tags/{tag_id}")
-    fun getTagById(@Path("tag_id") tagId: String): Single<Tag>
-
-    @GET("api/v2/tags")
+    @GET("tags")
     fun getTags(@Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Tag>>
+
+    @GET("tags/{tag_id}")
+    fun getTagById(@Path("tag_id") tagId: String): Single<Tag>
 }
