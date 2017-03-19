@@ -8,7 +8,4 @@ class ScreenActivityViewModel(override val context: Context) : ActivityViewModel
 
     var currentScreen: RxProperty<Screen> = RxProperty()
 
-    fun isDifferentScreen(screen: Screen): Boolean {
-        return currentScreen.get()?.let { it.identity != screen.identity } ?: true
-    }
 }

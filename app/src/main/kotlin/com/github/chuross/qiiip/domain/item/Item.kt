@@ -10,6 +10,7 @@ class Item(identity: ItemIdentity) : AbstractEntity<ItemIdentity, Item>(identity
     val title: String? get() = metaInfo?.title
     val tags: List<Tag> get() = metaInfo?.tags ?: listOf()
     val tagLabel: String? get() = tags.joinToString(separator = ", ", transform = { it.identity.value })
+    val body: String? get() = metaInfo?.body
     val user: User get() = metaInfo?.user ?: User.empty
     val createdAt: Date? get() = metaInfo?.createdAt
 

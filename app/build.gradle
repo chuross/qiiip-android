@@ -74,8 +74,12 @@ dependencies {
     compile "com.android.support:design:$v.supportLibrary"
 
     // view
+    compile "com.hannesdorfmann.fragmentargs:annotation:$v.fragmentArgs"
+    kapt "com.hannesdorfmann.fragmentargs:processor:$v.fragmentArgs"
     compile "com.github.chuross.recyclerview-adapters:recyclerview-adapters:$v.recyclerViewAdapters"
     compile "com.github.chuross.recyclerview-adapters:recyclerview-adapters-rx:$v.recyclerViewAdapters"
+    compile "me.gujun.android.taggroup:library:$v.tagGroup@aar"
+    compile "com.zzhoujay.richtext:richtext:$v.richText"
 
     //image
     compile "com.squareup.picasso:picasso:$v.picasso"

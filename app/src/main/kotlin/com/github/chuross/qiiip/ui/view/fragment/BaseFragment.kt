@@ -64,6 +64,7 @@ abstract class BaseFragment<BINDING: ViewDataBinding> : Fragment() {
 
     override fun onDestroy() {
         boundViewModel?.notifyLifecycleEvent(FragmentEvent.DESTROY)
+        boundViewModel?.destroy()
         super.onDestroy()
     }
 

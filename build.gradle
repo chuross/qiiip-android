@@ -12,7 +12,10 @@ ext {
         databinding: '2.3.0',
         rx: '2.0.1',
         rxbus: '0.1',
+        fragmentArgs: '3.0.2',
         recyclerViewAdapters: '1.1.0',
+        richText: '2.4.1',
+        tagGroup: '1.4',
         picasso: '2.5.2',
         picassoTransformer: '2.1.1',
         picassoOkhttp3: '1.1.0'

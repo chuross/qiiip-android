@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.application.event.ScreenChangeEvent
+import com.github.chuross.qiiip.application.event.ScreenPopEvent
 import com.github.chuross.qiiip.application.screen.HomeScreen
 import com.github.chuross.qiiip.application.screen.Screen
 import com.github.chuross.qiiip.databinding.ActivityScreenBinding
@@ -27,10 +28,15 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
 
         viewModel = ScreenActivityViewModel(applicationContext)
         bindViewModel(viewModel)
+
         RxBusBuilder.create(ScreenChangeEvent::class.java).build()
                 .bindUntilEvent(viewModel, ActivityEvent.DESTROY)
-                .filter { viewModel.isDifferentScreen(it.screen) }
                 .subscribe { changeScreen(it.screen) }
+                .apply { viewModel.disposables.add(this) }
+
+        RxBusBuilder.create(ScreenPopEvent::class.java).build()
+                .bindUntilEvent(viewModel, ActivityEvent.DESTROY)
+                .subscribe { supportFragmentManager.popBackStack() }
                 .apply { viewModel.disposables.add(this) }
 
         RxBus.get().send(ScreenChangeEvent(HomeScreen()))
@@ -43,7 +49,8 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
                 supportFragmentManager.findFragmentById(it.id)?.let {
                     addToBackStack(screen.identity)
                 }
-            }.commitNow()
+            }.commit()
+            supportFragmentManager.executePendingTransactions()
             viewModel.currentScreen.set(screen)
         }
     }

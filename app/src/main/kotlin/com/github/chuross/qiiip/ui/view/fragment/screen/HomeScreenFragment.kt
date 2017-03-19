@@ -13,11 +13,14 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
     override val layoutResourceId: Int = R.layout.fragment_home_screen
     private lateinit var viewModel: HomeScreenFragmentViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel = HomeScreenFragmentViewModel(context)
+        bindViewModel(viewModel)
+    }
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel = HomeScreenFragmentViewModel(context)
-
         binding?.viewModel = viewModel
         binding?.viewpager?.apply {
             adapter = FragmentPagerAdapter(childFragmentManager, viewModel.tabItems)

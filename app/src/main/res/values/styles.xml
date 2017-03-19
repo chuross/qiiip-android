@@ -19,4 +19,14 @@
         <item name="tabMode">scrollable</item>
     </style>
 
+    <!-- item detail -->
+    <style name="AppTheme.CollapsedItemDetailTitle">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.ExpandedItemDetailTitle">
+        <item name="android:textColor">@android:color/transparent</item>
+        <item name="android:textSize">0dp</item>
+    </style>
+
 </resources>
