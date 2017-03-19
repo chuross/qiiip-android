@@ -12,7 +12,7 @@ import timber.log.Timber
 class ItemListFragmentViewModel(context: Context) : FragmentViewModel(context) {
 
     val items: RxProperty<List<Item>> = RxProperty()
-    var currentPage: RxProperty<Int> = RxProperty(1)
+    var currentPage: RxProperty<Int> = RxProperty(Settings.app.defaultPage)
     var isLoading: RxProperty<Boolean> = RxProperty(false)
     var hasError: RxProperty<Boolean> = RxProperty(false)
     private val itemRepository by lazy { ItemRepository().apply { application.component.inject(this) } }
@@ -23,14 +23,21 @@ class ItemListFragmentViewModel(context: Context) : FragmentViewModel(context) {
                 .apply { disposables.add(this) }
     }
 
-    fun fetchItems() {
-        itemRepository.findAll(currentPage.get()!!, Settings.app.perPage)
+    fun fetchItems() = fetchItems(Settings.app.defaultPage)
+
+    fun fetchNextItems() = fetchItems(currentPage.get()!!.inc())
+
+    private fun fetchItems(page: Int) {
+        isLoading.set(true)
+        itemRepository.findAll(page, Settings.app.perPage)
                 .bindUntilEvent(this, FragmentEvent.DESTROY_VIEW)
                 .subscribeOn(application.serialScheduler)
                 .observeOn(application.mainThreadScheduler)
                 .subscribe({
                     items.set(it)
+                    hasError.set(false)
                     isLoading.set(false)
+                    Timber.d("isLoading:${isLoading.get()}")
                 }, {
                     Timber.e(it)
                     hasError.set(true)
