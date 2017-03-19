@@ -24,13 +24,24 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/user_id_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#666666"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:text="@{item.user.identity.value}"
+                tools:text="fuga" />
+
+            <TextView
                 android:id="@+id/created_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
+                android:layout_toEndOf="@id/user_id_txt"
                 android:textColor="#aaaaaa"
                 android:textSize="10sp"
-                tools:text="yyyy/mm/dd H:i投稿" />
+                tools:text="がyyyy/mm/dd HH:mmに投稿" />
 
             <ImageView
                 android:id="@+id/user_img"
@@ -46,10 +57,11 @@
                 android:layout_height="wrap_content"
                 android:layout_toEndOf="@id/user_img"
                 android:layout_below="@id/created_txt"
+                android:layout_marginBottom="4dp"
                 android:text="@{item.title}"
                 android:textSize="16sp"
                 android:textColor="@android:color/black"
-                android:lines="2"
+                android:maxLines="2"
                 android:ellipsize="end"
                 tools:text="title" />
 

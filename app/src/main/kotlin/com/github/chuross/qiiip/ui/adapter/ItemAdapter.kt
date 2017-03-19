@@ -22,7 +22,7 @@ class ItemAdapter(context: Context, source: Flowable<List<Item>>) : RxItemAdapte
         val item = get(position)
         holder?.binding?.item = item
         item.createdAt?.let {
-            holder?.binding?.createdTxt?.text = DateFormatUtils.format(it, "yyyy/MM/dd HH:mmに投稿")
+            holder?.binding?.createdTxt?.text = DateFormatUtils.format(it, "がyyyy/MM/dd HH:mmに投稿")
         }
     }
 }
