@@ -37,7 +37,6 @@ class ItemListFragmentViewModel(context: Context) : FragmentViewModel(context) {
                     items.set(it)
                     hasError.set(false)
                     isLoading.set(false)
-                    Timber.d("isLoading:${isLoading.get()}")
                 }, {
                     Timber.e(it)
                     hasError.set(true)
