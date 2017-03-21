@@ -8,8 +8,10 @@ import com.github.chuross.qiiip.application.event.ScreenChangeEvent
 import com.github.chuross.qiiip.application.screen.ItemDetailScreen
 import com.github.chuross.qiiip.databinding.FragmentItemListBinding
 import com.github.chuross.qiiip.ui.adapter.ItemAdapter
+import com.github.chuross.qiiip.ui.adapter.LoadingMoreViewItem
 import com.github.chuross.qiiip.ui.view.fragment.BaseFragment
 import com.github.chuross.qiiip.ui.viewmodel.fragment.ItemListFragmentViewModel
+import com.github.chuross.recyclerviewadapters.CompositeRecyclerAdapter
 import com.michaelflisar.rxbus2.RxBus
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
@@ -27,10 +29,19 @@ class ItemListFragment : BaseFragment<FragmentItemListBinding>() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = ItemAdapter(context, viewModel.items.toFlowable(BackpressureStrategy.LATEST))
-        adapter.setOnItemClickListener { viewHolder, index, item ->
+        val adapter = CompositeRecyclerAdapter()
+
+        val itemAdapter = ItemAdapter(context, viewModel.items.toFlowable(BackpressureStrategy.LATEST))
+        itemAdapter.setOnItemClickListener { viewHolder, index, item ->
             RxBus.get().send(ScreenChangeEvent(ItemDetailScreen(item)))
         }
+
+        val loadingAdapter = LoadingMoreViewItem(context, View.OnClickListener{
+            viewModel.fetchNextItems()
+        })
+
+        adapter.add(itemAdapter)
+        adapter.add(loadingAdapter)
 
         binding?.swipeRefreshLayout?.apply {
             setColorSchemeResources(R.color.colorPrimary)
@@ -43,9 +54,7 @@ class ItemListFragment : BaseFragment<FragmentItemListBinding>() {
 
         viewModel.isLoading
                 .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
-                .subscribe({
-                    binding?.swipeRefreshLayout?.isRefreshing = it
-                })
+                .subscribe({ binding?.swipeRefreshLayout?.isRefreshing = it })
                 .apply { viewModel.disposables.add(this) }
 
         if (viewModel.items.get()?.isEmpty() ?: true) viewModel.fetchItems()

@@ -6,6 +6,7 @@ import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.domain.item.ItemRepository
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
+import io.reactivex.functions.Consumer
 import jp.keita.kagurazaka.rxproperty.RxProperty
 import timber.log.Timber
 
@@ -23,18 +24,23 @@ class ItemListFragmentViewModel(context: Context) : FragmentViewModel(context) {
                 .apply { disposables.add(this) }
     }
 
-    fun fetchItems() = fetchItems(Settings.app.defaultPage)
+    fun fetchItems() = fetchItems(Settings.app.defaultPage, Consumer {
+        items.set(it)
+    })
 
-    fun fetchNextItems() = fetchItems(currentPage.get()!!.inc())
+    fun fetchNextItems() = fetchItems(currentPage.get()!!.inc(), Consumer { result ->
+        items.get()?.let { items.set(it.plus(result)) }
+        currentPage.get()?.let { currentPage.set(it.inc()) }
+    })
 
-    private fun fetchItems(page: Int) {
+    private fun fetchItems(page: Int, success: Consumer<List<Item>>) {
         isLoading.set(true)
         itemRepository.findAll(page, Settings.app.perPage)
                 .bindUntilEvent(this, FragmentEvent.DESTROY_VIEW)
                 .subscribeOn(application.serialScheduler)
                 .observeOn(application.mainThreadScheduler)
                 .subscribe({
-                    items.set(it)
+                    success.accept(it)
                     hasError.set(false)
                     isLoading.set(false)
                 }, {
