@@ -1,7 +1,8 @@
-package com.github.chuross.qiiip.ui.viewmodel.fragment
+package com.github.chuross.qiiip.ui.viewmodel.fragment.screen
 
 import android.content.Context
 import com.github.chuross.qiiip.domain.item.Item
+import com.github.chuross.qiiip.ui.viewmodel.fragment.FragmentViewModel
 import org.apache.commons.lang3.time.DateFormatUtils
 
 class ItemDetailScreenFragmentViewModel(context: Context, val item: Item) : FragmentViewModel(context) {

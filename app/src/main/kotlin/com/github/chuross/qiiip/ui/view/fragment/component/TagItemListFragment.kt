@@ -6,23 +6,31 @@ import android.view.View
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.application.screen.ItemDetailScreen
 import com.github.chuross.qiiip.databinding.FragmentItemListBinding
+import com.github.chuross.qiiip.domain.tag.Tag
 import com.github.chuross.qiiip.ui.adapter.ItemAdapter
 import com.github.chuross.qiiip.ui.adapter.LoadingMoreViewItem
 import com.github.chuross.qiiip.ui.view.fragment.BaseFragment
-import com.github.chuross.qiiip.ui.viewmodel.fragment.component.ItemListFragmentViewModel
+import com.github.chuross.qiiip.ui.viewmodel.fragment.component.TagItemListFragmentViewModel
 import com.github.chuross.recyclerviewadapters.CompositeRecyclerAdapter
+import com.hannesdorfmann.fragmentargs.FragmentArgs
+import com.hannesdorfmann.fragmentargs.annotation.Arg
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import io.reactivex.BackpressureStrategy
 
-class ItemListFragment : BaseFragment<FragmentItemListBinding>() {
+@FragmentWithArgs
+class TagItemListFragment : BaseFragment<FragmentItemListBinding>(){
 
     override val layoutResourceId: Int = R.layout.fragment_item_list
-    private lateinit var viewModel: ItemListFragmentViewModel
+    @Arg
+    lateinit var tag: Tag
+    private lateinit var viewModel: TagItemListFragmentViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ItemListFragmentViewModel(context)
+        FragmentArgs.inject(this)
+        viewModel = TagItemListFragmentViewModel(context, tag)
         bindViewModel(viewModel)
     }
 

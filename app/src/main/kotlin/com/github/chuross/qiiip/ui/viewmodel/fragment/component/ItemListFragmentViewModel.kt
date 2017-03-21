@@ -1,9 +1,9 @@
-package com.github.chuross.qiiip.ui.viewmodel.fragment
+package com.github.chuross.qiiip.ui.viewmodel.fragment.component
 
 import android.content.Context
 import com.github.chuross.qiiip.Settings
 import com.github.chuross.qiiip.domain.item.Item
-import com.github.chuross.qiiip.domain.item.ItemRepository
+import com.github.chuross.qiiip.ui.viewmodel.fragment.FragmentViewModel
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import io.reactivex.functions.Consumer
@@ -16,7 +16,6 @@ class ItemListFragmentViewModel(context: Context) : FragmentViewModel(context) {
     var currentPage: RxProperty<Int> = RxProperty(Settings.app.defaultPage)
     var isLoading: RxProperty<Boolean> = RxProperty(false)
     var hasError: RxProperty<Boolean> = RxProperty(false)
-    private val itemRepository by lazy { ItemRepository().apply { application.component.inject(this) } }
 
     init {
         isLoading.filter { it }
@@ -35,7 +34,7 @@ class ItemListFragmentViewModel(context: Context) : FragmentViewModel(context) {
 
     private fun fetchItems(page: Int, success: Consumer<List<Item>>) {
         isLoading.set(true)
-        itemRepository.findAll(page, Settings.app.perPage)
+        application.itemRepository.findAll(page, Settings.app.perPage)
                 .bindUntilEvent(this, FragmentEvent.DESTROY_VIEW)
                 .subscribeOn(application.serialScheduler)
                 .observeOn(application.mainThreadScheduler)

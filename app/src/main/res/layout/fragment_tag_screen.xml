@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewModel" type="com.github.chuross.qiiip.ui.viewmodel.fragment.screen.HomeScreenFragmentViewModel" />
+        <variable name="viewModel" type="com.github.chuross.qiiip.ui.viewmodel.fragment.screen.TagScreenFragmentViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -18,23 +18,32 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="?attr/actionBarSize"
-                android:title="@{viewModel.title}"
-                android:fitsSystemWindows="true"
+                android:layout_height="?attr/actionBarSize"
+                android:title="@{viewModel.tag.identity.value}"
+                app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
                 app:layout_scrollFlags="scroll|enterAlways"
                 style="@style/AppTheme.Toolbar" />
 
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tab"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/AppTheme.TabLayout" />
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_scrollFlags="scroll|enterAlways">
 
+                <TextView
+                    android:id="@+id/txt_tag_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="28sp"
+                    android:text="@{viewModel.tag.identity.value}" />
+            </LinearLayout>
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />

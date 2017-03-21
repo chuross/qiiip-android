@@ -6,7 +6,7 @@ import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.databinding.FragmentHomeScreenBinding
 import com.github.chuross.qiiip.ui.adapter.FragmentPagerAdapter
 import com.github.chuross.qiiip.ui.view.fragment.BaseFragment
-import com.github.chuross.qiiip.ui.viewmodel.fragment.HomeScreenFragmentViewModel
+import com.github.chuross.qiiip.ui.viewmodel.fragment.screen.HomeScreenFragmentViewModel
 
 class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
 

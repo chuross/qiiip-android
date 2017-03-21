@@ -8,12 +8,14 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.chuross.qiiip.application.Application
 import com.github.chuross.qiiip.ui.viewmodel.fragment.FragmentViewModel
 import com.trello.rxlifecycle2.android.FragmentEvent
 
 abstract class BaseFragment<BINDING: ViewDataBinding> : Fragment() {
 
     abstract val layoutResourceId: Int
+    val application: Application get() = Application.from(context)
     var binding: BINDING? = null
     private var boundViewModel: FragmentViewModel? = null
 

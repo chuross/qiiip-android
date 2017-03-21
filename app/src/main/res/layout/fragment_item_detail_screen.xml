@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewModel" type="com.github.chuross.qiiip.ui.viewmodel.fragment.ItemDetailScreenFragmentViewModel" />
+        <variable name="viewModel" type="com.github.chuross.qiiip.ui.viewmodel.fragment.screen.ItemDetailScreenFragmentViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -100,6 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:title="@{viewModel.item.title}"
+                    app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
                     app:layout_collapseMode="pin"
                     style="@style/AppTheme.Toolbar" />
             </android.support.design.widget.CollapsingToolbarLayout>

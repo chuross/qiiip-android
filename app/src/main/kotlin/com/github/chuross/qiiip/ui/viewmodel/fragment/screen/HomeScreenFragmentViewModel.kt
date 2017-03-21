@@ -1,9 +1,10 @@
-package com.github.chuross.qiiip.ui.viewmodel.fragment
+package com.github.chuross.qiiip.ui.viewmodel.fragment.screen
 
 import android.content.Context
 import android.support.v4.app.Fragment
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.ui.view.fragment.component.ItemListFragment
+import com.github.chuross.qiiip.ui.viewmodel.fragment.FragmentViewModel
 
 class HomeScreenFragmentViewModel(context: Context) : FragmentViewModel(context) {
 

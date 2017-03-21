@@ -3,13 +3,13 @@ package com.github.chuross.qiiip.ui.view.activity
 import android.os.Bundle
 import android.view.View
 import com.github.chuross.qiiip.R
+import com.github.chuross.qiiip.application.Application
 import com.github.chuross.qiiip.application.event.ScreenChangeEvent
 import com.github.chuross.qiiip.application.event.ScreenPopEvent
 import com.github.chuross.qiiip.application.screen.HomeScreen
 import com.github.chuross.qiiip.application.screen.Screen
 import com.github.chuross.qiiip.databinding.ActivityScreenBinding
 import com.github.chuross.qiiip.ui.viewmodel.activity.ScreenActivityViewModel
-import com.michaelflisar.rxbus2.RxBus
 import com.michaelflisar.rxbus2.RxBusBuilder
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
@@ -39,7 +39,7 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
                 .subscribe { supportFragmentManager.popBackStack() }
                 .apply { viewModel.disposables.add(this) }
 
-        RxBus.get().send(ScreenChangeEvent(HomeScreen()))
+        Application.from(this).startScreen(HomeScreen())
     }
 
     private fun changeScreen(screen: Screen) {
