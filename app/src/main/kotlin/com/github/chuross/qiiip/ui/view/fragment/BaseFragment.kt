@@ -40,6 +40,7 @@ abstract class BaseFragment<BINDING: ViewDataBinding> : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         boundViewModel?.notifyLifecycleEvent(FragmentEvent.CREATE)
+        boundViewModel?.create()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

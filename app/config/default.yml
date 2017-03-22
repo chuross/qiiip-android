@@ -1,5 +1,4 @@
 app:
-  defaultPage: 1
   perPage: 20
 qiita:
   apiUrl: https://qiita.com/api/v2/

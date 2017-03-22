@@ -10,6 +10,9 @@ interface ViewModel {
     val application: Application get() = Application.from(context)
     val disposables: CompositeDisposable
 
+    fun create() {
+    }
+
     fun destroy() {
         disposables.clear()
     }

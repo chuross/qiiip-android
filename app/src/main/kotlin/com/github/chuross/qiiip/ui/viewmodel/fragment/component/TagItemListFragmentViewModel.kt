@@ -14,9 +14,9 @@ import timber.log.Timber
 class TagItemListFragmentViewModel(context: Context, val tag: Tag) : FragmentViewModel(context) {
 
     val items: RxProperty<List<Item>> = RxProperty()
-    var currentPage: RxProperty<Int> = RxProperty(Settings.app.defaultPage)
-    var isLoading: RxProperty<Boolean> = RxProperty(false)
-    var hasError: RxProperty<Boolean> = RxProperty(false)
+    val currentPage: RxProperty<Int> = RxProperty(1)
+    val isLoading: RxProperty<Boolean> = RxProperty(false)
+    val hasError: RxProperty<Boolean> = RxProperty(false)
 
     init {
         isLoading.filter { it }
@@ -24,7 +24,7 @@ class TagItemListFragmentViewModel(context: Context, val tag: Tag) : FragmentVie
                 .apply { disposables.add(this) }
     }
 
-    fun fetchItems() = fetchItems(Settings.app.defaultPage, Consumer {
+    fun fetchItems() = fetchItems(1, Consumer {
         items.set(it)
     })
 
