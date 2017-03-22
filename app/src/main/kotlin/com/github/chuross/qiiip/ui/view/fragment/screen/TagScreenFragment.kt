@@ -31,10 +31,7 @@ class TagScreenFragment : BaseFragment<FragmentTagScreenBinding>() {
         super.onViewCreated(view, savedInstanceState)
         binding?.viewModel = viewModel
         binding?.toolbar?.setNavigationOnClickListener { application.popScreen() }
-        binding?.container?.let {
-            childFragmentManager.beginTransaction()
-                    .replace(it.id, TagItemListFragmentBuilder(tag).build())
-                    .commitNow()
-        }
+
+        childFragmentManager.renderIfNeeded(binding?.container, TagItemListFragmentBuilder(tag).build())
     }
 }

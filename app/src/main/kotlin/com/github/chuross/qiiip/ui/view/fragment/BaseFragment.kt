@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,14 @@ abstract class BaseFragment<BINDING: ViewDataBinding> : Fragment() {
     val application: Application get() = Application.from(context)
     var binding: BINDING? = null
     private var boundViewModel: FragmentViewModel? = null
+
+    fun FragmentManager.renderIfNeeded(container: ViewGroup?, fragment: Fragment) {
+        container?.let {
+            if (childFragmentManager.findFragmentById(it.id) != null) return
+
+            childFragmentManager.beginTransaction().replace(it.id, fragment).commitNow()
+        }
+    }
 
     fun bindViewModel(viewModel: FragmentViewModel) {
         boundViewModel = viewModel
