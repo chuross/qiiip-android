@@ -1,3 +1,5 @@
+Properties localProperties = new Properties()
+localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 ext {
     versions = [
@@ -19,6 +21,11 @@ ext {
         picasso: '2.5.2',
         picassoTransformer: '2.1.1',
         picassoOkhttp3: '1.1.0'
+    ]
+
+    deployGate = [
+        userName: localProperties.getProperty("deployGate.userName"),
+        token: localProperties.getProperty("deployGate.token")
     ]
 }
 
