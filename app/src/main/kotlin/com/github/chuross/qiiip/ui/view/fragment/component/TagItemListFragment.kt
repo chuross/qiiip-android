@@ -46,6 +46,7 @@ class TagItemListFragment : BaseFragment<FragmentItemListBinding>(){
         val loadingAdapter = LoadingMoreViewItem(context, View.OnClickListener{
             viewModel.fetchNext()
         })
+        loadingAdapter.isVisible = false
 
         adapter.add(itemAdapter)
         adapter.add(loadingAdapter)
@@ -62,9 +63,26 @@ class TagItemListFragment : BaseFragment<FragmentItemListBinding>(){
 
         viewModel.isLoading
                 .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
-                .subscribe({ binding?.swipeRefreshLayout?.isRefreshing = it })
+                .subscribe({
+                    binding?.swipeRefreshLayout?.isRefreshing = it
+                    if (it) binding?.status?.showLoadingView()
+                })
                 .apply { viewModel.disposables.add(this) }
 
-        if (viewModel.fetchedResult.get()?.isEmpty() ?: true) viewModel.fetch()
+        viewModel.fetchedResult
+                .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
+                .subscribe {
+                    binding?.status?.hideAll()
+                    loadingAdapter.isVisible = !it.isEmpty()
+                }.apply { viewModel.disposables.add(this) }
+
+        viewModel.error
+                .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
+                .subscribe { it.second?.let { binding?.status?.showErrorView(it) } }
+                .apply { viewModel.disposables.add(this) }
+
+        if (viewModel.fetchedResult.get()?.isEmpty() ?: true) {
+            viewModel.fetch()
+        }
     }
 }
