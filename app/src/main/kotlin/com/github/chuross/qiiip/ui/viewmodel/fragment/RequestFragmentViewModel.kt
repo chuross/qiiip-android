@@ -12,13 +12,13 @@ abstract class RequestFragmentViewModel<T>(context: Context) : FragmentViewModel
 
     val fetchedResult: RxProperty<T> = RxProperty()
     val isLoading: RxProperty<Boolean> = RxProperty(false)
-    val hasError: RxProperty<Boolean> = RxProperty(false)
+    val error: RxProperty<Pair<Boolean, Throwable?>> = RxProperty()
 
     override fun create() {
         super.create()
         isLoading.filter { it }
                 .bindToLifecycle(this)
-                .subscribe({ hasError.set(false) })
+                .subscribe({ error.set(Pair(false, null)) })
                 .apply { disposables.add(this) }
     }
 
@@ -29,12 +29,12 @@ abstract class RequestFragmentViewModel<T>(context: Context) : FragmentViewModel
                 .observeOn(application.mainThreadScheduler)
                 .subscribe({
                     onSuccess?.invoke(it)
-                    hasError.set(false)
+                    error.set(Pair(false, null))
                     isLoading.set(false)
                 }, {
                     Timber.e(it)
                     onError?.invoke(it)
-                    hasError.set(true)
+                    error.set(Pair(false, it))
                     isLoading.set(false)
                 })
                 .apply { disposables.add(this) }
