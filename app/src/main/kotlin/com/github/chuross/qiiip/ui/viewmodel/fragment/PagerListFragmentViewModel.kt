@@ -6,12 +6,12 @@ import jp.keita.kagurazaka.rxproperty.RxProperty
 
 abstract class PagerListFragmentViewModel<T>(context: Context) : RequestFragmentViewModel<List<T>>(context) {
 
-    val currentPage: RxProperty<Int> = RxProperty(0)
+    val currentPage: RxProperty<Int> = RxProperty(defaultPage)
     val defaultPage: Int get() = 1
     val nextPage: Int get() = currentPage.get()!!.inc()
 
     protected fun fetch(source: Single<List<T>>) = fetch(source, {
-        currentPage.set(0)
+        currentPage.set(defaultPage)
         fetchedResult.set(it)
     }, null)
 
