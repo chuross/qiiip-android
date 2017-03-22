@@ -38,13 +38,13 @@ class TagItemListFragment : BaseFragment<FragmentItemListBinding>(){
         super.onViewCreated(view, savedInstanceState)
         val adapter = CompositeRecyclerAdapter()
 
-        val itemAdapter = ItemAdapter(context, viewModel.items.toFlowable(BackpressureStrategy.LATEST))
+        val itemAdapter = ItemAdapter(context, viewModel.fetchedResult.toFlowable(BackpressureStrategy.LATEST))
         itemAdapter.setOnItemClickListener { _, _, item ->
             application.startScreen(ItemDetailScreen(item))
         }
 
         val loadingAdapter = LoadingMoreViewItem(context, View.OnClickListener{
-            viewModel.fetchNextItems()
+            viewModel.fetchNext()
         })
 
         adapter.add(itemAdapter)
@@ -52,7 +52,7 @@ class TagItemListFragment : BaseFragment<FragmentItemListBinding>(){
 
         binding?.swipeRefreshLayout?.apply {
             setColorSchemeResources(R.color.colorPrimary)
-            setOnRefreshListener { viewModel.fetchItems() }
+            setOnRefreshListener { viewModel.fetch() }
         }
         binding?.list?.apply {
             setHasFixedSize(true)
@@ -65,6 +65,6 @@ class TagItemListFragment : BaseFragment<FragmentItemListBinding>(){
                 .subscribe({ binding?.swipeRefreshLayout?.isRefreshing = it })
                 .apply { viewModel.disposables.add(this) }
 
-        if (viewModel.items.get()?.isEmpty() ?: true) viewModel.fetchItems()
+        if (viewModel.fetchedResult.get()?.isEmpty() ?: true) viewModel.fetch()
     }
 }

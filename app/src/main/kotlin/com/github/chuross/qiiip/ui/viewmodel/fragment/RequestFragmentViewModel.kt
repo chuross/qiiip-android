@@ -22,7 +22,7 @@ abstract class RequestFragmentViewModel<T>(context: Context) : FragmentViewModel
                 .apply { disposables.add(this) }
     }
 
-    fun fetch(source: Single<T>, onSuccess: ((T) -> Unit)?, onError: ((Throwable) -> Unit)?) {
+    protected fun fetch(source: Single<T>, onSuccess: ((T) -> Unit)?, onError: ((Throwable) -> Unit)?) {
         isLoading.set(true)
         source.bindUntilEvent(this, FragmentEvent.DESTROY_VIEW)
                 .subscribeOn(application.serialScheduler)
