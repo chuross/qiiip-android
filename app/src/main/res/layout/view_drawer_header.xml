@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View" />
         <variable name="user" type="com.github.chuross.qiiip.domain.user.User" />
     </data>
 
@@ -16,8 +17,8 @@
 
         <ImageView
             android:id="@+id/profile_img"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="16dp"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_person_white_24dp"
@@ -32,7 +33,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
-            android:text="@{user.name}" />
+            android:text="@{user.identity.value}" />
 
         <Button
             android:id="@+id/login_button"
@@ -42,6 +43,7 @@
             android:layout_centerVertical="true"
             android:text="ログイン"
             android:textColor="@android:color/white"
+            android:visibility="@{user == null ? View.VISIBLE : View.INVISIBLE}"
             style="@style/Base.Widget.AppCompat.Button.Borderless" />
     </RelativeLayout>
 </layout>

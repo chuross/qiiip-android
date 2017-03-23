@@ -6,9 +6,20 @@ import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.Tag
 import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.Token
 import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.User
 import io.reactivex.Single
+import okhttp3.HttpUrl
 import retrofit2.http.*
 
 interface QiitaV2Api {
+
+    companion object {
+        fun getQiitaAuthUrl(apiUrl: String, clientId: String, state: String): String {
+            return HttpUrl.parse("$apiUrl/oauth/authorize").newBuilder()
+                    .addQueryParameter("scope", "read_qiita write_qiita")
+                    .addQueryParameter("state", state)
+                    .addQueryParameter("client_id", clientId)
+                    .toString()
+        }
+    }
 
     @POST("access_tokens")
     fun login(@Body parameter: TokenParameter): Single<Token>

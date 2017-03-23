@@ -8,7 +8,9 @@ import com.github.chuross.qiiip.ui.viewmodel.fragment.PagerListFragmentViewModel
 
 class TagItemListFragmentViewModel(context: Context, val tag: Tag) : PagerListFragmentViewModel<Item>(context) {
 
-    fun fetch() = fetch(application.itemRepository.findAllByTagIdentity(tag.identity, defaultPage, Settings.app.perPage))
+    private val itemRepository get() = application.repositories.itemRepository
 
-    fun fetchNext() = fetchNext(application.itemRepository.findAllByTagIdentity(tag.identity, nextPage, Settings.app.perPage))
+    fun fetch() = fetch(itemRepository.findAllByTagIdentity(tag.identity, defaultPage, Settings.app.perPage))
+
+    fun fetchNext() = fetchNext(itemRepository.findAllByTagIdentity(tag.identity, nextPage, Settings.app.perPage))
 }

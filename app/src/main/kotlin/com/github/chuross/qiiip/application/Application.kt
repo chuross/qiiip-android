@@ -5,8 +5,9 @@ import android.os.AsyncTask
 import com.github.chuross.qiiip.BuildConfig
 import com.github.chuross.qiiip.application.event.ScreenChangeEvent
 import com.github.chuross.qiiip.application.event.ScreenPopEvent
+import com.github.chuross.qiiip.application.preference.AccountPreferences
 import com.github.chuross.qiiip.application.screen.Screen
-import com.github.chuross.qiiip.domain.item.ItemRepository
+import com.github.chuross.qiiip.domain.user.User
 import com.jakewharton.picasso.OkHttp3Downloader
 import com.michaelflisar.rxbus2.RxBus
 import com.squareup.picasso.Picasso
@@ -29,7 +30,10 @@ class Application: android.app.Application() {
                 .qiiipModule(QiiipModule(this))
                 .build()
     }
-    val itemRepository by lazy { ItemRepository().apply { component.inject(this) } }
+    val authorizedUser: User? get() = accountPreferences.user
+    val accountPreferences: AccountPreferences get() = AccountPreferences.get(this)
+    val repositories: Repositories by lazy { Repositories(this) }
+    val useCases: UseCases by lazy { UseCases(this) }
 
     override fun onCreate() {
         super.onCreate()

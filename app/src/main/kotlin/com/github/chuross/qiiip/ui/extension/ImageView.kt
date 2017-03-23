@@ -6,9 +6,11 @@ import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
 @BindingAdapter("imageUrl")
-fun ImageView.loadImage(imageUrl: String) {
-    Picasso.with(context).load(imageUrl).apply {
-        fit()
-        transform(CropCircleTransformation())
-    }.into(this)
+fun ImageView.loadImage(imageUrl: String?) {
+    imageUrl?.let {
+        Picasso.with(context).load(it).apply {
+            fit()
+            transform(CropCircleTransformation())
+        }.into(this)
+    }
 }

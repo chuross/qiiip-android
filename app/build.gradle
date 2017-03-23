@@ -67,8 +67,11 @@ dependencies {
     compile "com.squareup.retrofit2:converter-gson:$v.retrofit"
     compile "com.google.dagger:dagger:$v.dagger"
     kapt "com.google.dagger:dagger-compiler:$v.dagger"
-    compile "com.github.k-kagurazaka.rx-property-android:rx-property:$v.rxProperty"
-    compile "com.github.k-kagurazaka.rx-property-android:rx-property-kotlin:$v.rxProperty"
+
+    // store
+    compile "com.scottyab:secure-preferences-lib:$v.securePref"
+    compile "com.rejasupotaro:kvs-schema:$v.kvsSchema"
+    kapt "com.rejasupotaro:kvs-schema-compiler:$v.kvsSchema"
 
     // rx
     compile "io.reactivex.rxjava2:rxjava:$v.rx"
@@ -77,6 +80,8 @@ dependencies {
     compile "com.trello.rxlifecycle2:rxlifecycle-android:$v.rx"
     compile "com.trello.rxlifecycle2:rxlifecycle-kotlin:$v.rx"
     compile "com.github.MFlisar:RxBus2:$v.rxbus"
+    compile "com.github.k-kagurazaka.rx-property-android:rx-property:$v.rxProperty"
+    compile "com.github.k-kagurazaka.rx-property-android:rx-property-kotlin:$v.rxProperty"
 
     // base view
     kapt "com.android.databinding:compiler:$v.databinding"

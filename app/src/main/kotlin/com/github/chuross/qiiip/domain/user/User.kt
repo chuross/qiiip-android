@@ -6,7 +6,7 @@ class User(identity: UserIdentity) : AbstractEntity<UserIdentity, User>(identity
 
     companion object {
         val empty: User = User(UserIdentity("")).apply {
-            metaInfo = UserMetaInfo("名無し", null, null, null)
+            metaInfo = UserMetaInfo("名無し", null, null)
         }
     }
 
