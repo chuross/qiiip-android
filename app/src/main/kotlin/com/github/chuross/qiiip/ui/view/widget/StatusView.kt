@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import com.github.chuross.qiiip.R
-import com.github.chuross.qiiip.databinding.WidgetStatusErrorBinding
+import com.github.chuross.qiiip.databinding.ViewStatusErrorBinding
 import retrofit2.HttpException
 
 class StatusView : FrameLayout {
 
     private lateinit var loadingView: View
-    private lateinit var errorBinding: WidgetStatusErrorBinding
+    private lateinit var errorBinding: ViewStatusErrorBinding
 
     constructor(context: Context?) : super(context) {
         init(context)
@@ -34,8 +34,8 @@ class StatusView : FrameLayout {
     private fun init(context: Context?) {
         if (context == null) return
 
-        loadingView = LayoutInflater.from(context).inflate(R.layout.widget_status_loading, this, false)
-        val errorView = LayoutInflater.from(context).inflate(R.layout.widget_status_error, this, false)
+        loadingView = LayoutInflater.from(context).inflate(R.layout.view_status_loading, this, false)
+        val errorView = LayoutInflater.from(context).inflate(R.layout.view_status_error, this, false)
         errorBinding = DataBindingUtil.bind(errorView)
 
         addView(loadingView)
