@@ -1,6 +1,7 @@
 package com.github.chuross.qiiip.ui.view.activity
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.application.Application
@@ -42,6 +43,10 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
         Application.from(this).startScreen(HomeScreen())
     }
 
+    override fun onBackPressed() {
+        if (isDrawerOpen()) closeDrawer() else super.onBackPressed()
+    }
+
     private fun changeScreen(screen: Screen) {
         binding?.screenContainer?.let {
             supportFragmentManager.beginTransaction().apply {
@@ -53,5 +58,15 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
             supportFragmentManager.executePendingTransactions()
             viewModel.currentScreen.set(screen)
         }
+    }
+
+    fun isDrawerOpen(): Boolean = binding?.drawerLayout?.isDrawerOpen(Gravity.START) ?: false
+
+    fun openDrawer() {
+        binding?.drawerLayout?.openDrawer(Gravity.START)
+    }
+
+    fun closeDrawer() {
+        binding?.drawerLayout?.closeDrawer(Gravity.START)
     }
 }

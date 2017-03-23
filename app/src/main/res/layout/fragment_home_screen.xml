@@ -22,6 +22,7 @@
                 android:minHeight="?attr/actionBarSize"
                 android:title="@{viewModel.title}"
                 android:fitsSystemWindows="true"
+                app:navigationIcon="@drawable/ic_dehaze_white_24dp"
                 app:layout_scrollFlags="scroll|enterAlways"
                 style="@style/AppTheme.Toolbar" />
 
