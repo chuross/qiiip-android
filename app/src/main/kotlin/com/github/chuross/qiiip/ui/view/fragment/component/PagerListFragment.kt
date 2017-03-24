@@ -44,6 +44,7 @@ abstract class PagerListFragment<VM: PagerListFragmentViewModel<ITEM>, ITEM> : B
         adapter.add(itemAdapter)
         adapter.add(loadingAdapter)
 
+        binding?.viewModel = viewModel
         binding?.swipeRefreshLayout?.apply {
             setColorSchemeResources(R.color.colorPrimary)
             setOnRefreshListener { viewModel.fetch() }
@@ -60,14 +61,6 @@ abstract class PagerListFragment<VM: PagerListFragmentViewModel<ITEM>, ITEM> : B
                     binding?.status?.hideAll()
                     loadingAdapter.isVisible = !it.isEmpty()
                 }.apply { viewModel.disposables.add(this) }
-
-        viewModel.isLoading
-                .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
-                .subscribe({
-                    binding?.swipeRefreshLayout?.isRefreshing = it
-                    if (it) binding?.status?.showLoadingView()
-                })
-                .apply { viewModel.disposables.add(this) }
 
         viewModel.error
                 .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
