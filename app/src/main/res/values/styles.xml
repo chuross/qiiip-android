@@ -15,7 +15,7 @@
 
     <style name="AppTheme.TabLayout">
         <item name="tabSelectedTextColor">@android:color/white</item>
-        <item name="tabTextColor">#acacac</item>
+        <item name="tabTextColor">#ececec</item>
         <item name="tabMode">scrollable</item>
     </style>
 

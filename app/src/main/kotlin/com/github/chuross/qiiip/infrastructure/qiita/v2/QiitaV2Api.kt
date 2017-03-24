@@ -45,6 +45,9 @@ interface QiitaV2Api {
     @GET("tags")
     fun getTags(@Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Tag>>
 
+    @GET("users/{user_id}/following_tags")
+    fun getTagsByUserId(@Path("user_id") userId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Tag>>
+
     @GET("tags/{tag_id}")
     fun getTagById(@Path("tag_id") tagId: String): Single<Tag>
 }

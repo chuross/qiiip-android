@@ -28,7 +28,8 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
         }
         binding?.viewpager?.apply {
             adapter = FragmentPagerAdapter(childFragmentManager, viewModel.tabItems)
-            binding?.tab?.setupWithViewPager(this)
+            binding?.tab?.let { it.setupWithViewPager(this) }
+            setCurrentItem(viewModel.defaultTabIndex, false)
         }
     }
 }

@@ -4,7 +4,6 @@ import com.github.chuross.qiiip.domain.tag.TagIdentity
 import com.github.chuross.qiiip.infrastructure.qiita.v2.QiitaV2Api
 import io.reactivex.Single
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class ItemRepository {
 
@@ -25,5 +24,10 @@ class ItemRepository {
 
     fun findAllByTagIdentity(tagIdentity: TagIdentity, page: Int, perPage: Int): Single<List<Item>> {
         return api.getItemsByTagId(tagIdentity.value, page, perPage).map { ItemConverter.toModels(it) }
+    }
+
+    fun findAllByTagIdentities(tagIdentities: List<TagIdentity>, page: Int, perPage: Int): Single<List<Item>> {
+        return api.getItemsByKeyword(tagIdentities.joinToString(separator = " OR ", transform = { "tag:${it.value}" }), page, perPage)
+                .map { ItemConverter.toModels(it) }
     }
 }

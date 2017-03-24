@@ -20,7 +20,6 @@ import com.github.chuross.qiiip.ui.viewmodel.activity.ScreenActivityViewModel
 import com.michaelflisar.rxbus2.RxBusBuilder
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
-import timber.log.Timber
 
 
 class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
@@ -40,7 +39,6 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
         val headerBinding = ViewDrawerHeaderBinding.bind(binding?.navigation?.getHeaderView(0))
         headerBinding.user = viewModel.application.authorizedUser
         headerBinding.loginButton.setOnClickListener {
-            Timber.i("authUrl: ${QiitaV2Api.getQiitaAuthUrl(Settings.qiita.apiUrl, Settings.qiita.clientId, "")}")
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(QiitaV2Api.getQiitaAuthUrl(Settings.qiita.apiUrl, Settings.qiita.clientId, ""))))
         }
 
