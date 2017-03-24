@@ -23,23 +23,6 @@
                 app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
                 app:layout_scrollFlags="scroll|enterAlways"
                 style="@style/AppTheme.Toolbar" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_scrollFlags="scroll|enterAlways">
-
-                <TextView
-                    android:id="@+id/txt_tag_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@android:color/white"
-                    android:textSize="28sp"
-                    android:text="@{viewModel.tag.identity.value}" />
-            </LinearLayout>
         </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
