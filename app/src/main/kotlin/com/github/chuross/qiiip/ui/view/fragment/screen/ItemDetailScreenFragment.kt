@@ -2,6 +2,7 @@ package com.github.chuross.qiiip.ui.view.fragment.screen
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewTreeObserver
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.application.screen.TagScreen
 import com.github.chuross.qiiip.databinding.FragmentItemDetailScreenBinding
@@ -38,6 +39,18 @@ class ItemDetailScreenFragment : BaseFragment<FragmentItemDetailScreenBinding>()
                 application.startScreen(TagScreen(item.tags.first { it.identity.value == tagName }))
             }
         }
+        binding?.appbar?.viewTreeObserver?.let {
+            it.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    it.removeOnGlobalLayoutListener(this)
+                    binding?.headerPadding?.let {
+                        it.layoutParams.height = binding?.appbar?.height ?: 0
+                        it.requestLayout()
+                    }
+                }
+            })
+        }
+
         viewModel.item.body?.let { RichText.fromMarkdown(it).into(binding?.bodyTxt) }
     }
 }

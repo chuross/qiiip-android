@@ -20,6 +20,7 @@ ext {
         recyclerViewAdapters: '1.1.0',
         richText: '2.4.1',
         tagGroup: '1.4',
+        smoothAppBar: '25.1.0.1',
         picasso: '2.5.2',
         picassoTransformer: '2.1.1',
         picassoOkhttp3: '1.1.0'

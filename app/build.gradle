@@ -98,6 +98,7 @@ dependencies {
     compile "com.github.chuross.recyclerview-adapters:recyclerview-adapters-rx:$v.recyclerViewAdapters"
     compile "me.gujun.android.taggroup:library:$v.tagGroup@aar"
     compile "com.zzhoujay.richtext:richtext:$v.richText"
+    compile "me.henrytao:smooth-app-bar-layout:$v.smoothAppBar"
 
     //image
     compile "com.squareup.picasso:picasso:$v.picasso"
