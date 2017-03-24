@@ -1,6 +1,7 @@
 package com.github.chuross.qiiip.domain.item
 
 import com.github.chuross.qiiip.domain.tag.TagIdentity
+import com.github.chuross.qiiip.domain.user.UserIdentity
 import com.github.chuross.qiiip.infrastructure.qiita.v2.QiitaV2Api
 import io.reactivex.Single
 import javax.inject.Inject
@@ -20,6 +21,10 @@ class ItemRepository {
 
     fun findAllByKeyword(query: String, page: Int, perPage: Int): Single<List<Item>> {
         return api.getItemsByKeyword(query, page, perPage).map { ItemConverter.toModels(it) }
+    }
+
+    fun getStocksByUserIdentity(userIdentity: UserIdentity, page: Int, perPage: Int): Single<List<Item>> {
+        return api.getStocksByUserId(userIdentity.value, page, perPage).map { ItemConverter.toModels(it) }
     }
 
     fun findAllByTagIdentity(tagIdentity: TagIdentity, page: Int, perPage: Int): Single<List<Item>> {

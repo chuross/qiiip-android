@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.ui.view.fragment.component.FeedListFragment
 import com.github.chuross.qiiip.ui.view.fragment.component.ItemListFragment
+import com.github.chuross.qiiip.ui.view.fragment.component.StockItemListFragment
 import com.github.chuross.qiiip.ui.viewmodel.fragment.FragmentViewModel
 
 class HomeScreenFragmentViewModel(context: Context) : FragmentViewModel(context) {
@@ -14,7 +15,8 @@ class HomeScreenFragmentViewModel(context: Context) : FragmentViewModel(context)
     val tabItems: List<Pair<String, (() -> Fragment)>> = if (application.isAuthorized) {
         listOf(
                 Pair("全ての投稿", { ItemListFragment() }),
-                Pair("フィード", { FeedListFragment() })
+                Pair("フィード", { FeedListFragment() }),
+                Pair("ストック", { StockItemListFragment() })
         )
     } else {
         listOf(
