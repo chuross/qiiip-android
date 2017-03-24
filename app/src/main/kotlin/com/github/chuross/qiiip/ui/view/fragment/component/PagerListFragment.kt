@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.github.chuross.qiiip.R
-import com.github.chuross.qiiip.databinding.FragmentItemListBinding
+import com.github.chuross.qiiip.databinding.FragmentListBinding
 import com.github.chuross.qiiip.ui.adapter.LoadingMoreViewItem
 import com.github.chuross.qiiip.ui.view.fragment.BaseFragment
 import com.github.chuross.qiiip.ui.viewmodel.fragment.PagerListFragmentViewModel
@@ -14,9 +14,9 @@ import com.github.chuross.recyclerviewadapters.CompositeRecyclerAdapter
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 
-abstract class PagerListFragment<VM: PagerListFragmentViewModel<ITEM>, ITEM> : BaseFragment<FragmentItemListBinding>() {
+abstract class PagerListFragment<VM: PagerListFragmentViewModel<ITEM>, ITEM> : BaseFragment<FragmentListBinding>() {
 
-    override val layoutResourceId: Int = R.layout.fragment_item_list
+    override val layoutResourceId: Int = R.layout.fragment_list
     lateinit var viewModel: VM
     lateinit var itemAdapter: BaseItemAdapter<ITEM, *>
 
