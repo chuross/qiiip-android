@@ -1,5 +1,5 @@
 app:
-  perPage: 20
+  perPage: 40
   salt: 'ifis+kf_kcsif*$dksad%isad@kfd#,fd=oodsf)fd&sd!'
 qiita:
   apiUrl: https://qiita.com/api/v2

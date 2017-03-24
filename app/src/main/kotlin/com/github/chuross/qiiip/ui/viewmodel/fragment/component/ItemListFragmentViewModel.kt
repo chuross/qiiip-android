@@ -9,7 +9,7 @@ class ItemListFragmentViewModel(context: Context) : PagerListFragmentViewModel<I
 
     private val itemRepository get() = application.repositories.itemRepository
 
-    fun fetch() = fetch(itemRepository.findAll(defaultPage, Settings.app.perPage))
+    override fun fetch() = fetch(itemRepository.findAll(defaultPage, Settings.app.perPage))
 
-    fun fetchNext() = fetchNext(itemRepository.findAll(nextPage, Settings.app.perPage))
+    override fun fetchNext() = fetchNext(itemRepository.findAll(nextPage, Settings.app.perPage))
 }

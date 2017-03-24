@@ -10,7 +10,7 @@ class TagItemListFragmentViewModel(context: Context, val tag: Tag) : PagerListFr
 
     private val itemRepository get() = application.repositories.itemRepository
 
-    fun fetch() = fetch(itemRepository.findAllByTagIdentity(tag.identity, defaultPage, Settings.app.perPage))
+    override fun fetch() = fetch(itemRepository.findAllByTagIdentity(tag.identity, defaultPage, Settings.app.perPage))
 
-    fun fetchNext() = fetchNext(itemRepository.findAllByTagIdentity(tag.identity, nextPage, Settings.app.perPage))
+    override fun fetchNext() = fetchNext(itemRepository.findAllByTagIdentity(tag.identity, nextPage, Settings.app.perPage))
 }

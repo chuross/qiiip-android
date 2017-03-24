@@ -10,6 +10,10 @@ abstract class PagerListFragmentViewModel<T>(context: Context) : RequestFragment
     val defaultPage: Int get() = 1
     val nextPage: Int get() = currentPage.get()!!.inc()
 
+    abstract fun fetch()
+
+    abstract fun fetchNext()
+
     protected fun fetch(source: Single<List<T>>) = fetch(source, {
         currentPage.set(defaultPage)
         fetchedResult.set(it)
