@@ -67,6 +67,7 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
     private fun changeScreen(screen: Screen) {
         binding?.screenContainer?.let {
             supportFragmentManager.beginTransaction().apply {
+                setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                 replace(it.id, screen.fragment)
                 supportFragmentManager.findFragmentById(it.id)?.let {
                     addToBackStack(screen.identity)
