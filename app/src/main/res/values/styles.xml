@@ -17,6 +17,7 @@
         <item name="tabSelectedTextColor">@android:color/white</item>
         <item name="tabTextColor">#ececec</item>
         <item name="tabMode">scrollable</item>
+        <item name="tabIndicatorColor">#ffeb3b</item>
     </style>
 
     <!-- item detail -->
