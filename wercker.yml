@@ -1,4 +1,4 @@
-box: gfx2015/android:latest
+box: wasabeef/android
 build:
   steps:
     - script:
@@ -6,6 +6,12 @@ build:
       code: |
         echo y | android update sdk --no-ui --all --filter build-tools-25.0.2,android-25,android-21
         echo y | android update sdk --no-ui --all --filter extra-android-m2repository,extra-google-m2repository
+    - script:
+      name: write local.properties
+      code: |
         echo deploygate.userName=$DEPLOYGATE_USER_NAME > local.properties
         echo deploygate.token=$DEPLOYGATE_TOKEN >> local.properties
+    - script:
+      name: upload deploygate
+      code: |
         ./gradlew uploadDeployGateDebug
