@@ -1,4 +1,4 @@
-box: beevelop/android
+box: jacekmarchwicki/android:java8-r25
 build:
   steps:
     - script:
