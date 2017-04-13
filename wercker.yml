@@ -1,4 +1,4 @@
-box: wasabeef/android
+box: beevelop/android
 build:
   steps:
     - script:
@@ -14,4 +14,4 @@ build:
     - script:
       name: upload deploygate
       code: |
-        ./gradlew uploadDeployGateDebug
+        ./gradlew uploadDeployGateDebug --stacktrace
