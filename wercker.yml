@@ -4,8 +4,7 @@ build:
     - script:
       name: install components
       code: |
-        echo y | android update sdk --no-ui --all --filter build-tools-25.0.2,android-25,android-21
-        echo y | android update sdk --no-ui --all --filter extra-android-m2repository,extra-google-m2repository
+        echo y | android update sdk --no-ui --all --filter build-tools-25.0.2,android-25,android-21,extra-android-m2repository,extra-google-m2repository
     - script:
       name: write local.properties
       code: |
