@@ -5,12 +5,15 @@ import android.widget.ImageView
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
-@BindingAdapter("imageUrl")
-fun ImageView.loadImage(imageUrl: String?) {
-    imageUrl?.let {
-        Picasso.with(context).load(it).apply {
-            fit()
-            transform(CropCircleTransformation())
-        }.into(this)
-    }
+@BindingAdapter(value = *arrayOf("imageUrl", "imageType"), requireAll = false)
+fun ImageView.loadImage(imageUrl: String?, imageType: String?) {
+    Picasso.with(context).load(imageUrl).apply {
+        fit()
+        imageType?.let {
+            when (it) {
+                "circle" -> transform(CropCircleTransformation())
+                else -> Unit
+            }
+        }
+    }.into(this)
 }
