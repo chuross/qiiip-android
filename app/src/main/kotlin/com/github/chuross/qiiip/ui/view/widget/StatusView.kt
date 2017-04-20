@@ -12,6 +12,7 @@ import retrofit2.HttpException
 
 class StatusView : FrameLayout {
 
+    var retryListener: (() -> Unit)? = null
     private lateinit var loadingView: View
     private lateinit var errorBinding: ViewStatusErrorBinding
 
@@ -37,6 +38,7 @@ class StatusView : FrameLayout {
         loadingView = LayoutInflater.from(context).inflate(R.layout.view_status_loading, this, false)
         val errorView = LayoutInflater.from(context).inflate(R.layout.view_status_error, this, false)
         errorBinding = DataBindingUtil.bind(errorView)
+        errorBinding.retryBtn.setOnClickListener { retryListener?.invoke() }
 
         addView(loadingView)
         addView(errorView)

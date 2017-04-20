@@ -12,7 +12,7 @@ import io.reactivex.BackpressureStrategy
 class ItemListFragment : PagerListFragment<ItemListFragmentViewModel, Item>() {
 
     override fun onCreateItemAdapter(): BaseItemAdapter<Item, *> {
-        return ItemAdapter(context, viewModel.fetchedResult.toFlowable(BackpressureStrategy.LATEST)).apply {
+        return ItemAdapter(context, viewModel.success.toFlowable(BackpressureStrategy.LATEST)).apply {
             setOnItemClickListener { _, _, item ->
                 application.startScreen(ItemDetailScreen(item))
             }

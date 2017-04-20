@@ -21,9 +21,9 @@ class QiiipModule(private val application: Application) {
             .create()
     private val retrofit: Retrofit = Retrofit.Builder()
             .client(OkHttpClient.Builder().apply {
-                if (!BuildConfig.DEBUG) return@apply
-
-                addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
+                if (BuildConfig.DEBUG) {
+                    addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
+                }
                 addInterceptor { it.proceed(it.request().newBuilder().apply {
                     application.accountPreferences.token?.let {
                         if (it.isNotBlank()) header("Authorization", "Bearer $it")

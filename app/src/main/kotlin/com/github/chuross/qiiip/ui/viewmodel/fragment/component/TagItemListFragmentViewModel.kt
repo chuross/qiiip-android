@@ -5,12 +5,11 @@ import com.github.chuross.qiiip.Settings
 import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.domain.tag.Tag
 import com.github.chuross.qiiip.ui.viewmodel.fragment.PagerListFragmentViewModel
+import com.github.chuross.qiiip.usecase.RxUseCase
 
 class TagItemListFragmentViewModel(context: Context, val tag: Tag) : PagerListFragmentViewModel<Item>(context) {
 
-    private val itemRepository get() = application.repositories.itemRepository
-
-    override fun fetch() = fetch(itemRepository.findAllByTagIdentity(tag.identity, defaultPage, Settings.app.perPage))
-
-    override fun fetchNext() = fetchNext(itemRepository.findAllByTagIdentity(tag.identity, nextPage, Settings.app.perPage))
+    override fun useCase(): RxUseCase<List<Item>> {
+        return application.useCases.getItemsByTagId(tag.identity, currentPageValue, Settings.app.perPage)
+    }
 }

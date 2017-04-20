@@ -1,26 +1,57 @@
 package com.github.chuross.qiiip.ui.viewmodel.fragment
 
 import android.content.Context
-import io.reactivex.Single
+import com.github.chuross.qiiip.usecase.RxUseCase
+import com.trello.rxlifecycle2.android.FragmentEvent
+import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import jp.keita.kagurazaka.rxproperty.RxProperty
+import jp.keita.kagurazaka.rxproperty.toRxProperty
 
-abstract class PagerListFragmentViewModel<T>(context: Context) : RequestFragmentViewModel<List<T>>(context) {
+typealias Result<T> = Pair<T?, Throwable?>
 
+abstract class PagerListFragmentViewModel<T>(context: Context) : FragmentViewModel(context) {
+
+    val success: RxProperty<List<T>> = RxProperty()
+    val fail: RxProperty<Throwable> = RxProperty()
+    val isInitialFetchFailed: RxProperty<Boolean> = fail.map { success.get()?.isEmpty() ?: true }.toRxProperty()
+    val isLoading: RxProperty<Boolean> = RxProperty(false)
+    val defaultPage: Int = 1
     val currentPage: RxProperty<Int> = RxProperty(defaultPage)
-    val defaultPage: Int get() = 1
+    val currentPageValue: Int get() = currentPage.get() ?: defaultPage
     val nextPage: Int get() = currentPage.get()!!.inc()
+    private val composedUseCase: RxUseCase<List<T>> get() = useCase().compose {
+        it.bindUntilEvent(this, FragmentEvent.DESTROY_VIEW)
+                .doFinally { isLoading.set(false) }
+                .subscribeOn(application.serialScheduler)
+                .observeOn(application.mainThreadScheduler)
+    }
 
-    abstract fun fetch()
+    abstract fun useCase(): RxUseCase<List<T>>
 
-    abstract fun fetchNext()
-
-    protected fun fetch(source: Single<List<T>>) = fetch(source, {
+    fun fetch() {
+        isLoading.set(true)
         currentPage.set(defaultPage)
-        fetchedResult.set(it)
-    }, null)
+        success.set(listOf())
 
-    protected fun fetchNext(source: Single<List<T>>) = fetch(source, {
-        currentPage.set(currentPage.get()!!.inc())
-        fetchedResult.set(fetchedResult.get()!!.plus(it))
-    }, null)
+        composedUseCase.apply {
+            disposables.add(this)
+        }.exec({
+            success.set(it)
+        }, {
+            fail.set(it)
+        })
+    }
+
+    fun fetchNext() {
+        isLoading.set(true)
+
+        composedUseCase.apply {
+            disposables.add(this)
+        }.exec({
+            val list = success.get() ?: listOf()
+            success.set(list.plus(it))
+        }, {
+            fail.set(it)
+        })
+    }
 }

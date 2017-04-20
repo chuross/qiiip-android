@@ -12,11 +12,17 @@ class LoginActivityViewModel(override val context: Context, val uri: Uri?) : Act
 
     fun login() {
         uri?.getQueryParameter("code")?.let {
-            application.useCases.authorizeAccount(it).exec()
-                    .bindToLifecycle(this@LoginActivityViewModel)
-                    .subscribeOn(application.serialScheduler)
-                    .observeOn(application.mainThreadScheduler)
-                    .subscribe({ isLoginSuccess.set(true) }, { error.set(it) })
+            application.useCases.authorizeAccount(it).compose {
+                it.bindToLifecycle(this@LoginActivityViewModel)
+                        .subscribeOn(application.serialScheduler)
+                        .observeOn(application.mainThreadScheduler)
+            }.apply {
+                disposables.add(this)
+            }.exec({
+                isLoginSuccess.set(true)
+            }, {
+                error.set(it)
+            })
         } ?: error.set(IllegalArgumentException())
     }
 }

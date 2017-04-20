@@ -33,7 +33,6 @@ class Application: android.app.Application() {
     val isAuthorized: Boolean get() = accountPreferences.hasUser() && accountPreferences.hasToken()
     val authorizedUser: User? get() = if (accountPreferences.hasToken()) accountPreferences.user else null
     val accountPreferences: AccountPreferences get() = AccountPreferences.get(this)
-    val repositories: Repositories by lazy { Repositories(this) }
     val useCases: UseCases by lazy { UseCases(this) }
 
     override fun onCreate() {

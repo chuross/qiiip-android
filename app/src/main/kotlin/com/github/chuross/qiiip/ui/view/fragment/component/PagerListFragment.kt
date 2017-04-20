@@ -28,6 +28,8 @@ abstract class PagerListFragment<VM: PagerListFragmentViewModel<ITEM>, ITEM> : B
         super.onCreate(savedInstanceState)
         viewModel = onCreateViewModel(context)
         bindViewModel(viewModel)
+
+        viewModel.fetch()
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -54,21 +56,26 @@ abstract class PagerListFragment<VM: PagerListFragmentViewModel<ITEM>, ITEM> : B
             layoutManager = LinearLayoutManager(context)
             setAdapter(adapter)
         }
+        binding?.status?.retryListener = { viewModel.fetch() }
 
-        viewModel.fetchedResult
+        viewModel.isLoading
+                .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
+                .filter { it }
+                .subscribe {
+                    binding?.status?.showLoadingView()
+                }.apply { viewModel.disposables.add(this) }
+
+        viewModel.success
                 .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
                 .subscribe {
                     binding?.status?.hideAll()
                     loadingAdapter.isVisible = !it.isEmpty()
                 }.apply { viewModel.disposables.add(this) }
 
-        viewModel.error
+        viewModel.fail
+                .filter { viewModel.isInitialFetchFailed.get()!! }
                 .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
-                .subscribe { it.second?.let { binding?.status?.showErrorView(it) } }
+                .subscribe { binding?.status?.showErrorView(it) }
                 .apply { viewModel.disposables.add(this) }
-
-        if (viewModel.fetchedResult.get()?.isEmpty() ?: true) {
-            viewModel.fetch()
-        }
     }
 }

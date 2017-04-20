@@ -1,8 +1,6 @@
 package com.github.chuross.qiiip.usecase
 
-import io.reactivex.Single
+interface UseCase<out T> {
 
-interface UseCase<T> {
-
-    fun exec() : Single<T>
+    fun exec(success: ((T) -> Unit), fail: ((Throwable) -> Unit)? = null)
 }

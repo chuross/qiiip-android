@@ -9,22 +9,22 @@ import com.github.chuross.qiiip.infrastructure.qiita.v2.parameter.TokenParameter
 import io.reactivex.Single
 import javax.inject.Inject
 
-class AuthorizeAccount(private val code: String) : UseCase<User> {
-
+class AuthorizeAccount(private val code: String) : BaseRxUseCase<User>() {
     @Inject
     lateinit var application: Application
+
     @Inject
     lateinit var api: QiitaV2Api
 
-    override fun exec(): Single<User> {
+    override fun source(): Single<User> {
         return api.login(TokenParameter(Settings.qiita.clientId, Settings.qiita.clientSecret, code))
-            .filter { it.value?.isNotBlank() ?: false }
-            .map { application.accountPreferences.token = it.value }
-            .flatMapSingle { api.getAuthenticatedUser() }
-            .map {
-                UserConverter.toModel(it).apply {
-                    application.accountPreferences.user = this
-                }
-            }.doOnError { application.accountPreferences.removeToken() }
+                .filter { it.value?.isNotBlank() ?: false }
+                .map { application.accountPreferences.token = it.value }
+                .flatMapSingle { api.getAuthenticatedUser() }
+                .map {
+                    UserConverter.toModel(it).apply {
+                        application.accountPreferences.user = this
+                    }
+                }.doOnError { application.accountPreferences.removeToken() }
     }
 }
