@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.Settings
 import com.github.chuross.qiiip.application.Application
@@ -29,9 +28,6 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // ステータスバー透過用処理
-        findViewById(android.R.id.content).systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 
         viewModel = ScreenActivityViewModel(applicationContext)
         bindViewModel(viewModel)
