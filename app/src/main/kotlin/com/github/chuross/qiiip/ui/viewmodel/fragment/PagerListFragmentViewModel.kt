@@ -4,16 +4,15 @@ import android.content.Context
 import com.github.chuross.qiiip.usecase.RxUseCase
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
+import io.reactivex.subjects.PublishSubject
 import jp.keita.kagurazaka.rxproperty.RxProperty
-import jp.keita.kagurazaka.rxproperty.toRxProperty
 
 typealias Result<T> = Pair<T?, Throwable?>
 
 abstract class PagerListFragmentViewModel<T>(context: Context) : FragmentViewModel(context) {
 
-    val success: RxProperty<List<T>> = RxProperty()
-    val fail: RxProperty<Throwable> = RxProperty()
-    val isInitialFetchFailed: RxProperty<Boolean> = fail.map { success.get()?.isEmpty() ?: true }.toRxProperty()
+    val list: RxProperty<List<T>> = RxProperty()
+    val fail: PublishSubject<Throwable> = PublishSubject.create()
     val isLoading: RxProperty<Boolean> = RxProperty(false)
     val defaultPage: Int = 1
     val currentPage: RxProperty<Int> = RxProperty(defaultPage)
@@ -31,15 +30,15 @@ abstract class PagerListFragmentViewModel<T>(context: Context) : FragmentViewMod
     fun fetch() {
         isLoading.set(true)
         currentPage.set(defaultPage)
-        success.set(listOf())
+        list.set(listOf())
 
         composedUseCase.apply {
             disposables.add(this)
         }.exec({
-            success.set(it)
+            list.set(it)
             currentPage.set(currentPageValue.inc())
         }, {
-            fail.set(it)
+            fail.onNext(it)
         })
     }
 
@@ -49,11 +48,11 @@ abstract class PagerListFragmentViewModel<T>(context: Context) : FragmentViewMod
         composedUseCase.apply {
             disposables.add(this)
         }.exec({
-            val list = success.get() ?: listOf()
-            success.set(list.plus(it))
+            val list = list.get() ?: listOf()
+            this.list.set(list.plus(it))
             currentPage.set(currentPageValue.inc())
         }, {
-            fail.set(it)
+            fail.onNext(it)
         })
     }
 }
