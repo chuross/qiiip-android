@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="org.apache.commons.lang3.time.DateFormatUtils" />
         <variable name="item" type="com.github.chuross.qiiip.domain.item.Item" />
     </data>
 
@@ -41,7 +42,7 @@
                 android:layout_toEndOf="@id/user_id_txt"
                 android:textColor="#aaaaaa"
                 android:textSize="10sp"
-                tools:text="がyyyy/mm/dd HH:mmに投稿" />
+                tools:text='@{DateFormatUtils.format(item.createdAt, "がyyyy/mm/dd HH:mmに投稿")}' />
 
             <ImageView
                 android:id="@+id/user_img"
