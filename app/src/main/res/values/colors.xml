@@ -5,4 +5,5 @@
     <color name="colorAccent">@color/colorPrimary</color>
     <color name="border">#dcdcdc</color>
     <color name="bg">#ededed</color>
+    <color name="disabledStackButton">#dedede</color>
 </resources>

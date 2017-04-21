@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="org.apache.commons.lang3.time.DateFormatUtils" />
         <variable name="viewModel" type="com.github.chuross.qiiip.ui.viewmodel.fragment.screen.ItemDetailScreenFragmentViewModel" />
     </data>
 
@@ -30,7 +31,10 @@
                     android:id="@+id/body_txt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="16dp" />
+                    android:paddingTop="32dp"
+                    android:paddingBottom="16dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp" />
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
 
@@ -115,7 +119,7 @@
                             android:layout_gravity="center_vertical"
                             android:textSize="12sp"
                             android:textColor="#eeeeee"
-                            android:text="@{viewModel.createdAtText}" />
+                            android:text='@{DateFormatUtils.format(viewModel.item.createdAt, "yyyy/MM/dd HH:mmに投稿")}' />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -129,5 +133,16 @@
                     style="@style/AppTheme.Toolbar" />
             </android.support.design.widget.CollapsingToolbarLayout>
         </me.henrytao.smoothappbarlayout.SmoothAppBarLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/stock_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@{viewModel.isStoked.value ? @drawable/ic_favorite_black_24dp : @drawable/ic_favorite_border_black_24dp}"
+            android:tint="@{viewModel.isStoked.value ? @android:color/white : @android:color/black}"
+            android:backgroundTint='@{viewModel.isStoked.value ? @color/colorPrimaryDark : @color/disabledStackButton}'
+            app:layout_anchor="@id/appbar"
+            app:layout_anchorGravity="bottom|end" />
     </android.support.design.widget.CoordinatorLayout>
 </layout>

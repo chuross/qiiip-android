@@ -1,17 +1,23 @@
 package com.github.chuross.qiiip.application
 
 import com.github.chuross.qiiip.domain.item.ItemRepository
+import com.github.chuross.qiiip.domain.item.StockService
 import com.github.chuross.qiiip.domain.tag.TagRepository
 import com.github.chuross.qiiip.infrastructure.qiita.v2.QiitaV2Api
 import dagger.Module
 import dagger.Provides
 
 @Module
-class RepositoryModule {
+class DomainModule {
 
     @Provides
     fun provideItemRepository(api: QiitaV2Api): ItemRepository {
         return ItemRepository().apply { this.api = api }
+    }
+
+    @Provides
+    fun provideStockService(api: QiitaV2Api): StockService {
+        return StockService().apply { this.api = api }
     }
 
     @Provides

@@ -5,6 +5,7 @@ import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.Item
 import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.Tag
 import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.Token
 import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.User
+import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.HttpUrl
 import retrofit2.http.*
@@ -53,4 +54,13 @@ interface QiitaV2Api {
 
     @GET("tags/{tag_id}")
     fun getTagById(@Path("tag_id") tagId: String): Single<Tag>
+
+    @GET("items/{item_id}/stock")
+    fun isStockItem(@Path("item_id") itemId: String): Observable<Unit?>
+
+    @PUT("items/{item_id}/stock")
+    fun addStockItem(@Path("item_id") itemId: String): Observable<Unit?>
+
+    @DELETE("items/{item_id}/stock")
+    fun removeStockItem(@Path("item_id") itemId: String): Observable<Unit?>
 }

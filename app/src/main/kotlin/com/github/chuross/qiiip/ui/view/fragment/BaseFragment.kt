@@ -13,12 +13,14 @@ import com.github.chuross.qiiip.application.Application
 import com.github.chuross.qiiip.ui.viewmodel.fragment.FragmentViewModel
 import com.trello.rxlifecycle2.android.FragmentEvent
 
-abstract class BaseFragment<BINDING: ViewDataBinding> : Fragment() {
+abstract class BaseFragment<B: ViewDataBinding, VM: FragmentViewModel> : Fragment() {
 
     abstract val layoutResourceId: Int
     val application: Application get() = Application.from(context)
-    var binding: BINDING? = null
-    private var boundViewModel: FragmentViewModel? = null
+    lateinit var binding: B
+    lateinit var viewModel: VM
+
+    abstract fun onCreateViewModel(context: Context): VM
 
     fun FragmentManager.renderIfNeeded(container: ViewGroup?, fragment: Fragment) {
         container?.let {
@@ -28,60 +30,52 @@ abstract class BaseFragment<BINDING: ViewDataBinding> : Fragment() {
         }
     }
 
-    fun bindViewModel(viewModel: FragmentViewModel) {
-        boundViewModel = viewModel
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        boundViewModel?.notifyLifecycleEvent(FragmentEvent.ATTACH)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        boundViewModel?.notifyLifecycleEvent(FragmentEvent.CREATE)
-        boundViewModel?.create()
+        viewModel = onCreateViewModel(context)
+        viewModel.notifyLifecycleEvent(FragmentEvent.CREATE)
+        viewModel.create()
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        boundViewModel?.notifyLifecycleEvent(FragmentEvent.CREATE_VIEW)
+        viewModel.notifyLifecycleEvent(FragmentEvent.CREATE_VIEW)
         binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
-        return binding!!.root
+        return binding.root
     }
 
     override fun onStart() {
         super.onStart()
-        boundViewModel?.notifyLifecycleEvent(FragmentEvent.START)
+        viewModel.notifyLifecycleEvent(FragmentEvent.START)
     }
 
     override fun onResume() {
         super.onResume()
-        boundViewModel?.notifyLifecycleEvent(FragmentEvent.RESUME)
+        viewModel.notifyLifecycleEvent(FragmentEvent.RESUME)
     }
 
     override fun onPause() {
-        boundViewModel?.notifyLifecycleEvent(FragmentEvent.PAUSE)
+        viewModel.notifyLifecycleEvent(FragmentEvent.PAUSE)
         super.onPause()
     }
 
     override fun onStop() {
-        boundViewModel?.notifyLifecycleEvent(FragmentEvent.STOP)
+        viewModel.notifyLifecycleEvent(FragmentEvent.STOP)
         super.onStop()
     }
 
     override fun onDestroyView() {
-        boundViewModel?.notifyLifecycleEvent(FragmentEvent.DESTROY_VIEW)
+        viewModel.notifyLifecycleEvent(FragmentEvent.DESTROY_VIEW)
         super.onDestroyView()
     }
 
     override fun onDestroy() {
-        boundViewModel?.notifyLifecycleEvent(FragmentEvent.DESTROY)
-        boundViewModel?.destroy()
+        viewModel.notifyLifecycleEvent(FragmentEvent.DESTROY)
+        viewModel.destroy()
         super.onDestroy()
     }
 
     override fun onDetach() {
-        boundViewModel?.notifyLifecycleEvent(FragmentEvent.DETACH)
+        viewModel.notifyLifecycleEvent(FragmentEvent.DETACH)
         super.onDetach()
     }
 }

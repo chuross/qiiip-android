@@ -1,5 +1,6 @@
 package com.github.chuross.qiiip.ui.view.fragment.screen
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.github.chuross.qiiip.R
@@ -13,25 +14,26 @@ import com.hannesdorfmann.fragmentargs.annotation.Arg
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs
 
 @FragmentWithArgs
-class TagScreenFragment : BaseFragment<FragmentTagScreenBinding>() {
+class TagScreenFragment : BaseFragment<FragmentTagScreenBinding, TagScreenFragmentViewModel>() {
 
     override val layoutResourceId: Int = R.layout.fragment_tag_screen
     @Arg
     lateinit var tag: Tag
-    private lateinit var viewModel: TagScreenFragmentViewModel
+
+    override fun onCreateViewModel(context: Context): TagScreenFragmentViewModel {
+        return TagScreenFragmentViewModel(context, tag)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         FragmentArgs.inject(this)
-        viewModel = TagScreenFragmentViewModel(context, tag)
-        bindViewModel(viewModel)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.viewModel = viewModel
-        binding?.toolbar?.setNavigationOnClickListener { application.popScreen() }
+        binding.viewModel = viewModel
+        binding.toolbar?.setNavigationOnClickListener { application.popScreen() }
 
-        childFragmentManager.renderIfNeeded(binding?.container, TagItemListFragmentBuilder(tag).build())
+        childFragmentManager.renderIfNeeded(binding.container, TagItemListFragmentBuilder(tag).build())
     }
 }

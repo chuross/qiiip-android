@@ -1,15 +1,10 @@
 package com.github.chuross.qiiip.application
 
 import android.content.Context
+import com.github.chuross.qiiip.domain.item.ItemIdentity
 import com.github.chuross.qiiip.domain.tag.TagIdentity
 import com.github.chuross.qiiip.usecase.AuthorizeAccount
-import com.github.chuross.qiiip.usecase.item.GetFeedItems
-import com.github.chuross.qiiip.usecase.item.GetItems
-import com.github.chuross.qiiip.usecase.item.GetItemsByTagId
-import com.github.chuross.qiiip.usecase.item.GetStokeItems
-import io.reactivex.Single
-
-typealias UseCaseTransformer<T> = (Single<T>) -> Single<T>
+import com.github.chuross.qiiip.usecase.item.*
 
 class UseCases(val context: Context) {
 
@@ -23,6 +18,12 @@ class UseCases(val context: Context) {
     fun getItemsByTagId(tagIdentity: TagIdentity, page: Int, perPage: Int) = GetItemsByTagId(tagIdentity, page, perPage).apply { component.inject(this) }
 
     fun getMyStockItems(page: Int, perPage: Int) = GetStokeItems(page, perPage).apply { component.inject(this) }
+
+    fun isStockItem(itemIdentity: ItemIdentity) = IsStockItem(itemIdentity).apply { component.inject(this) }
+
+    fun addStockItem(itemIdentity: ItemIdentity) = AddStockItem(itemIdentity).apply { component.inject(this) }
+
+    fun removeStockItem(itemIdentity: ItemIdentity) = RemoveStockItem(itemIdentity).apply { component.inject(this) }
 
     fun getFeedItems(page: Int, perPage: Int) = GetFeedItems(page, perPage).apply { component.inject(this) }
 }

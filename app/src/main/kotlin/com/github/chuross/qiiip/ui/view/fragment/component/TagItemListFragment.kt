@@ -24,15 +24,15 @@ class TagItemListFragment : PagerListFragment<TagItemListFragmentViewModel, Item
         super.onCreate(savedInstanceState)
     }
 
+    override fun onCreateViewModel(context: Context): TagItemListFragmentViewModel {
+        return TagItemListFragmentViewModel(context, tag)
+    }
+
     override fun onCreateItemAdapter(): BaseItemAdapter<Item, *> {
         return ItemAdapter(context, viewModel.success.toFlowable(BackpressureStrategy.LATEST)).apply {
             setOnItemClickListener { _, _, item ->
                 application.startScreen(ItemDetailScreen(item))
             }
         }
-    }
-
-    override fun onCreateViewModel(context: Context): TagItemListFragmentViewModel {
-        return TagItemListFragmentViewModel(context, tag)
     }
 }
