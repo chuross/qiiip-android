@@ -12,7 +12,7 @@ class HomeScreenFragmentViewModel(context: Context) : FragmentViewModel(context)
 
     val title: String get() = context.getString(R.string.app_name)
     val defaultTabIndex: Int get() = if (application.isAuthorized) 1 else 0
-    val tabItems: List<Pair<String, (() -> Fragment)>> = if (application.isAuthorized) {
+    val tabItems: List<Pair<String, (() -> Fragment)>> get() =  if (application.isAuthorized) {
         listOf(
                 Pair("全ての投稿", { ItemListFragment() }),
                 Pair("フィード", { FeedListFragment() }),
