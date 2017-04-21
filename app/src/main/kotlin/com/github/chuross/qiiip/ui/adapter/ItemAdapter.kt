@@ -18,7 +18,6 @@ class ItemAdapter(context: Context, source: Flowable<List<Item>>) : RxItemAdapte
     }
 
     override fun onBindViewHolder(holder: BindingViewHolder<ListItemBinding>?, position: Int) {
-        val item = get(position)
-        holder?.binding?.item = item
+        holder?.binding?.item = get(position)
     }
 }
