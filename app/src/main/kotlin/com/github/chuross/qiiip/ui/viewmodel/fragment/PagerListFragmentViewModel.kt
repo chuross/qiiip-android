@@ -21,9 +21,9 @@ abstract class PagerListFragmentViewModel<T>(context: Context) : FragmentViewMod
     val nextPage: Int get() = currentPage.get()!!.inc()
     private val composedUseCase: RxUseCase<List<T>> get() = useCase().compose {
         it.bindUntilEvent(this, FragmentEvent.DESTROY_VIEW)
-                .doFinally { isLoading.set(false) }
                 .subscribeOn(application.serialScheduler)
                 .observeOn(application.mainThreadScheduler)
+                .doFinally { isLoading.set(false) }
     }
 
     abstract fun useCase(): RxUseCase<List<T>>
@@ -37,6 +37,7 @@ abstract class PagerListFragmentViewModel<T>(context: Context) : FragmentViewMod
             disposables.add(this)
         }.exec({
             success.set(it)
+            currentPage.set(currentPageValue.inc())
         }, {
             fail.set(it)
         })

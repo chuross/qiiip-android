@@ -53,9 +53,8 @@ abstract class PagerListFragment<VM: PagerListFragmentViewModel<ITEM>, ITEM> : B
 
         viewModel.isLoading
                 .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
-                .filter { it }
                 .subscribe {
-                    binding.status.showLoadingView()
+                    if (it) binding.status.showLoadingView() else binding.status.hideAll()
                 }.apply { viewModel.disposables.add(this) }
 
         viewModel.success
