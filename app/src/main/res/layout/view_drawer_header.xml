@@ -22,7 +22,8 @@
             android:layout_marginEnd="16dp"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_person_white_24dp"
-            app:imageUrl="@{user.profileImageUrl}" />
+            app:imageUrl="@{user.profileImageUrl}"
+            app:imageType='@{"circle"}' />
 
         <TextView
             android:id="@+id/name_txt"
