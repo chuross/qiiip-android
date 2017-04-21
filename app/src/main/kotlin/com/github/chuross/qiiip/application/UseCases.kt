@@ -17,6 +17,8 @@ class UseCases(val context: Context) {
 
     fun getItemsByTagId(tagIdentity: TagIdentity, page: Int, perPage: Int) = GetItemsByTagId(tagIdentity, page, perPage).apply { component.inject(this) }
 
+    fun getMyItems(page: Int, perPage: Int) = GetMyItems(page, perPage).apply { component.inject(this) }
+
     fun getMyStockItems(page: Int, perPage: Int) = GetStokeItems(page, perPage).apply { component.inject(this) }
 
     fun isStockItem(itemIdentity: ItemIdentity) = IsStockItem(itemIdentity).apply { component.inject(this) }

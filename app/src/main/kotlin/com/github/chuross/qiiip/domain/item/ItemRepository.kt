@@ -23,8 +23,8 @@ class ItemRepository {
         return api.getItemsByKeyword(query, page, perPage).map { ItemConverter.toModels(it) }
     }
 
-    fun getStocksByUserIdentity(userIdentity: UserIdentity, page: Int, perPage: Int): Single<List<Item>> {
-        return api.getStocksByUserId(userIdentity.value, page, perPage).map { ItemConverter.toModels(it) }
+    fun findAllByUserIdentity(userIdentity: UserIdentity, page: Int, perPage: Int): Single<List<Item>> {
+        return api.getItemsByUserId(userIdentity.value, page, perPage).map { ItemConverter.toModels(it) }
     }
 
     fun findAllByTagIdentity(tagIdentity: TagIdentity, page: Int, perPage: Int): Single<List<Item>> {
@@ -34,5 +34,9 @@ class ItemRepository {
     fun findAllByTagIdentities(tagIdentities: List<TagIdentity>, page: Int, perPage: Int): Single<List<Item>> {
         return api.getItemsByKeyword(tagIdentities.joinToString(separator = " OR ", transform = { "tag:${it.value}" }), page, perPage)
                 .map { ItemConverter.toModels(it) }
+    }
+
+    fun getStocksByUserIdentity(userIdentity: UserIdentity, page: Int, perPage: Int): Single<List<Item>> {
+        return api.getStocksByUserId(userIdentity.value, page, perPage).map { ItemConverter.toModels(it) }
     }
 }

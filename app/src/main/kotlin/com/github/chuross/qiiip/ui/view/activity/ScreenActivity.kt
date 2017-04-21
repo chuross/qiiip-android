@@ -11,6 +11,7 @@ import com.github.chuross.qiiip.application.event.AuthenticationChangeEvent
 import com.github.chuross.qiiip.application.event.ScreenChangeEvent
 import com.github.chuross.qiiip.application.event.ScreenPopEvent
 import com.github.chuross.qiiip.application.screen.HomeScreen
+import com.github.chuross.qiiip.application.screen.MyItemListScreen
 import com.github.chuross.qiiip.application.screen.Screen
 import com.github.chuross.qiiip.databinding.ActivityScreenBinding
 import com.github.chuross.qiiip.databinding.ViewDrawerHeaderBinding
@@ -36,6 +37,14 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
         headerBinding.user = viewModel.application.authorizedUser
         headerBinding.loginButton.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(QiitaV2Api.getQiitaAuthUrl(Settings.qiita.apiUrl, Settings.qiita.clientId, ""))))
+        }
+
+        binding?.navigation?.setNavigationItemSelectedListener {
+            closeDrawer()
+            when (it.itemId) {
+                R.id.menu_my_items -> Application.from(this).startScreen(MyItemListScreen()).let { true }
+                else -> false
+            }
         }
 
         RxBusBuilder.create(ScreenChangeEvent::class.java).build()

@@ -50,6 +50,7 @@ abstract class PagerListFragmentViewModel<T>(context: Context) : FragmentViewMod
         }.exec({
             val list = success.get() ?: listOf()
             success.set(list.plus(it))
+            currentPage.set(currentPageValue.inc())
         }, {
             fail.set(it)
         })

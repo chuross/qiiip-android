@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group
-        android:id="@+id/menu_main"
-        android:checkableBehavior="single">
+    <group android:id="@+id/menu_main">
 
         <item
             android:id="@+id/menu_home"
@@ -11,9 +9,14 @@
             android:title="ホーム" />
     </group>
 
-    <group
-        android:id="@+id/menu_other"
-        android:checkableBehavior="single">
+    <group android:id="@+id/menu_me">
+
+        <item
+            android:id="@+id/menu_my_items"
+            android:title="投稿した記事一覧" />
+    </group>
+
+    <group android:id="@+id/menu_other">
 
         <item android:title="このアプリについて" />
         <item android:title="設定" />
