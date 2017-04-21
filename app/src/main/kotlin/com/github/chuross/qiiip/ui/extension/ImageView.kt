@@ -7,6 +7,8 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
 @BindingAdapter(value = *arrayOf("imageUrl", "imageType"), requireAll = false)
 fun ImageView.loadImage(imageUrl: String?, imageType: String?) {
+    if (imageUrl == null) return
+
     Picasso.with(context).load(imageUrl).apply {
         fit()
         imageType?.let {
