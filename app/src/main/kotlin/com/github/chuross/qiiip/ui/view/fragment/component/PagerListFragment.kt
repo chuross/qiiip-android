@@ -65,7 +65,7 @@ abstract class PagerListFragment<VM: PagerListFragmentViewModel<ITEM>, ITEM> : B
                 }.apply { viewModel.disposables.add(this) }
 
         viewModel.fail
-                .filter { viewModel.currentPageValue == viewModel.defaultPage }
+                .filter { viewModel.currentPageValue <= viewModel.defaultPage }
                 .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
                 .subscribe { binding.status.showErrorView(it) }
                 .apply { viewModel.disposables.add(this) }

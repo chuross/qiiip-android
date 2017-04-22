@@ -19,12 +19,13 @@
         <item name="tabIndicatorColor">#ffeb3b</item>
     </style>
 
-    <!-- item detail -->
-    <style name="AppTheme.CollapsedItemDetailTitle">
+    <style name="AppTheme.CollapsingToolbar" />
+
+    <style name="AppTheme.CollapsingToolbar.Collapsed">
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="AppTheme.ExpandedItemDetailTitle">
+    <style name="AppTheme.CollapsingToolbar.Expanded">
         <item name="android:textColor">@android:color/transparent</item>
         <item name="android:textSize">0dp</item>
     </style>

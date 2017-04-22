@@ -7,7 +7,6 @@ import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.application.screen.TagScreen
 import com.github.chuross.qiiip.databinding.FragmentItemDetailScreenBinding
 import com.github.chuross.qiiip.domain.item.Item
-import com.github.chuross.qiiip.ui.extension.bindPaddingView
 import com.github.chuross.qiiip.ui.view.fragment.BaseFragment
 import com.github.chuross.qiiip.ui.viewmodel.fragment.screen.ItemDetailScreenFragmentViewModel
 import com.hannesdorfmann.fragmentargs.FragmentArgs
@@ -41,7 +40,6 @@ class ItemDetailScreenFragment : BaseFragment<FragmentItemDetailScreenBinding, I
                 application.startScreen(TagScreen(item.tags.first { it.identity.value == tagName }))
             }
         }
-        binding.appbar.bindPaddingView(binding.headerPadding)
         binding.stockBtn.setOnClickListener {
             viewModel.toggleStock()
         }

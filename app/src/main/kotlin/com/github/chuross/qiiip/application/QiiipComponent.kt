@@ -21,7 +21,7 @@ interface QiiipComponent {
 
     fun inject(useCase: GetItemsByTagId)
 
-    fun inject(useCase: GetMyItems)
+    fun inject(useCase: GetUserItems)
 
     fun inject(useCase: GetStokeItems)
 

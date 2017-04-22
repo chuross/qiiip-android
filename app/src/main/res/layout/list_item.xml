@@ -18,7 +18,8 @@
         android:layout_marginRight="8dp"
         android:foreground="?android:attr/selectableItemBackground"
         android:clickable="true"
-        app:contentPadding="8dp">
+        app:contentPadding="8dp"
+        app:cardElevation="1dp">
 
         <RelativeLayout
             android:layout_width="match_parent"

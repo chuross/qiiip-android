@@ -3,6 +3,8 @@ package com.github.chuross.qiiip.application
 import android.content.Context
 import com.github.chuross.qiiip.domain.item.ItemIdentity
 import com.github.chuross.qiiip.domain.tag.TagIdentity
+import com.github.chuross.qiiip.domain.user.User
+import com.github.chuross.qiiip.domain.user.UserIdentity
 import com.github.chuross.qiiip.usecase.AuthorizeAccount
 import com.github.chuross.qiiip.usecase.item.*
 
@@ -17,7 +19,7 @@ class UseCases(val context: Context) {
 
     fun getItemsByTagId(tagIdentity: TagIdentity, page: Int, perPage: Int) = GetItemsByTagId(tagIdentity, page, perPage).apply { component.inject(this) }
 
-    fun getMyItems(page: Int, perPage: Int) = GetMyItems(page, perPage).apply { component.inject(this) }
+    fun getUserItems(userIdentity: UserIdentity, page: Int, perPage: Int) = GetUserItems(userIdentity, page, perPage).apply { component.inject(this) }
 
     fun getMyStockItems(page: Int, perPage: Int) = GetStokeItems(page, perPage).apply { component.inject(this) }
 
