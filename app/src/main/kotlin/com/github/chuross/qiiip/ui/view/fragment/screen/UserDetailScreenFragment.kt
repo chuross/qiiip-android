@@ -33,6 +33,7 @@ class UserDetailScreenFragment : BaseFragment<FragmentUserDetailBinding, SimpleF
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.toolbar.setNavigationOnClickListener { application.popScreen() }
         binding.user = user
 
         childFragmentManager.renderIfNeeded(binding.container, UserItemListFragmentBuilder(user).build())
