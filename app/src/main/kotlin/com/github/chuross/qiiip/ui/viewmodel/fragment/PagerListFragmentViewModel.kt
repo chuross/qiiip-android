@@ -7,8 +7,6 @@ import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import io.reactivex.subjects.PublishSubject
 import jp.keita.kagurazaka.rxproperty.RxProperty
 
-typealias Result<T> = Pair<T?, Throwable?>
-
 abstract class PagerListFragmentViewModel<T>(context: Context) : FragmentViewModel(context) {
 
     val list: RxProperty<List<T>> = RxProperty()
