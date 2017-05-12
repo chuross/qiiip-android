@@ -43,7 +43,7 @@
                 android:layout_toEndOf="@id/user_id_txt"
                 android:textColor="#aaaaaa"
                 android:textSize="10sp"
-                android:text='@{DateFormatUtils.format(item.createdAt, "がyyyy/MM/dd HH:mmに投稿")}'
+                android:text="@{DateFormatUtils.format(item.createdAt, `がyyyy/MM/dd HH:mmに投稿`)}"
                 tools:text='がyyyy/MM/dd HH:mmに投稿' />
 
             <ImageView
@@ -53,7 +53,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_below="@id/created_txt"
                 app:imageUrl="@{item.user.profileImageUrl}"
-                app:imageType='@{"circle"}' />
+                app:imageType="@{`circle`}" />
 
             <TextView
                 android:id="@+id/title_txt"

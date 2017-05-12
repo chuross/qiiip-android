@@ -44,7 +44,7 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        app:imageType='@{"circle"}'
+                        app:imageType="@{`circle`}"
                         app:imageUrl="@{user.profileImageUrl}" />
 
                     <TextView

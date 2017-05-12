@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.application.screen.TagScreen
+import com.github.chuross.qiiip.application.screen.UserDetailScreen
 import com.github.chuross.qiiip.databinding.FragmentItemDetailScreenBinding
 import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.ui.view.fragment.BaseFragment
@@ -39,6 +40,9 @@ class ItemDetailScreenFragment : BaseFragment<FragmentItemDetailScreenBinding, I
             setOnTagClickListener { tagName ->
                 application.startScreen(TagScreen(item.tags.first { it.identity.value == tagName }))
             }
+        }
+        binding.userLayout.setOnClickListener {
+            application.startScreen(UserDetailScreen(viewModel.item.user))
         }
         binding.stockBtn.setOnClickListener {
             viewModel.toggleStock()
