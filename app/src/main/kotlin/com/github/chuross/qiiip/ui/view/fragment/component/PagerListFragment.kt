@@ -13,7 +13,7 @@ import com.github.chuross.recyclerviewadapters.CompositeRecyclerAdapter
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 
-abstract class PagerListFragment<VM: PagerListFragmentViewModel<ITEM>, ITEM> : BaseFragment<FragmentListBinding, VM>() {
+abstract class PagerListFragment<VM : PagerListFragmentViewModel<ITEM>, ITEM> : BaseFragment<FragmentListBinding, VM>() {
 
     override val layoutResourceId: Int = R.layout.fragment_list
     lateinit var itemAdapter: BaseItemAdapter<ITEM, *>
@@ -31,7 +31,7 @@ abstract class PagerListFragment<VM: PagerListFragmentViewModel<ITEM>, ITEM> : B
 
         itemAdapter = onCreateItemAdapter()
 
-        val loadingAdapter = LoadingMoreViewItem(context, View.OnClickListener{
+        val loadingAdapter = LoadingMoreViewItem(context, View.OnClickListener {
             viewModel.fetchNext()
         })
         loadingAdapter.isVisible = false
@@ -53,8 +53,9 @@ abstract class PagerListFragment<VM: PagerListFragmentViewModel<ITEM>, ITEM> : B
 
         viewModel.isLoading
                 .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
+                .filter { it }
                 .subscribe {
-                    if (it) binding.status.showLoadingView() else binding.status.hideAll()
+                    binding.status.showLoadingView()
                 }.apply { viewModel.disposables.add(this) }
 
         viewModel.list

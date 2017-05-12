@@ -4,13 +4,13 @@ import android.content.Context
 import com.github.chuross.qiiip.usecase.RxUseCase
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
-import io.reactivex.subjects.PublishSubject
+import io.reactivex.subjects.BehaviorSubject
 import jp.keita.kagurazaka.rxproperty.RxProperty
 
 abstract class PagerListFragmentViewModel<T>(context: Context) : FragmentViewModel(context) {
 
     val list: RxProperty<List<T>> = RxProperty()
-    val fail: PublishSubject<Throwable> = PublishSubject.create()
+    val fail: BehaviorSubject<Throwable> = BehaviorSubject.create()
     val isLoading: RxProperty<Boolean> = RxProperty(false)
     val defaultPage: Int = 1
     val currentPage: RxProperty<Int> = RxProperty(defaultPage)

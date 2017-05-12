@@ -1,7 +1,6 @@
 package com.github.chuross.qiiip.ui.view.widget
 
 import android.content.Context
-import android.databinding.DataBindingUtil
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -36,12 +35,11 @@ class StatusView : FrameLayout {
         if (context == null) return
 
         loadingView = LayoutInflater.from(context).inflate(R.layout.view_status_loading, this, false)
-        val errorView = LayoutInflater.from(context).inflate(R.layout.view_status_error, this, false)
-        errorBinding = DataBindingUtil.bind(errorView)
+        errorBinding = ViewStatusErrorBinding.inflate(LayoutInflater.from(context), this, false)
         errorBinding.retryBtn.setOnClickListener { retryListener?.invoke() }
 
         addView(loadingView)
-        addView(errorView)
+        addView(errorBinding.root)
         hideAll()
     }
 
