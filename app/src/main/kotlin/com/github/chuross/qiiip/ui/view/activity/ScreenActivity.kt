@@ -33,7 +33,7 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
         viewModel = ScreenActivityViewModel(applicationContext)
         bindViewModel(viewModel)
 
-        val headerBinding = ViewDrawerHeaderBinding.bind(binding?.navigation?.getHeaderView(0))
+        val headerBinding = ViewDrawerHeaderBinding.bind(binding?.navigation?.getHeaderView(0)!!)
         headerBinding.user = viewModel.application.authorizedUser
         headerBinding.loginButton.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(QiitaV2Api.getQiitaAuthUrl(Settings.qiita.apiUrl, Settings.qiita.clientId, ""))))

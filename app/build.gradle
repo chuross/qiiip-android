@@ -7,21 +7,21 @@ apply plugin: 'deploygate'
 buildscript {
     def v = rootProject.ext.versions
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$v.kotlin"
-        classpath 'com.deploygate:gradle:1.1.0'
+        classpath 'com.deploygate:gradle:1.1.5'
     }
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.github.chuross.qiiip"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -58,56 +58,56 @@ deploygate {
 def v = rootProject.ext.versions
 dependencies {
     // base
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$v.kotlin"
-    compile "org.apache.commons:commons-lang3:$v.commonsLang"
-    compile "com.jakewharton.timber:timber:$v.timber"
-    compile "com.squareup.okhttp3:logging-interceptor:$v.okhttp"
-    compile "com.squareup.retrofit2:retrofit:$v.retrofit"
-    compile "com.squareup.retrofit2:adapter-rxjava2:$v.retrofit"
-    compile "com.squareup.retrofit2:converter-gson:$v.retrofit"
-    compile "com.google.dagger:dagger:$v.dagger"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$v.kotlin"
+    implementation "org.apache.commons:commons-lang3:$v.commonsLang"
+    implementation "com.jakewharton.timber:timber:$v.timber"
+    implementation "com.squareup.okhttp3:logging-interceptor:$v.okhttp"
+    implementation "com.squareup.retrofit2:retrofit:$v.retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$v.retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$v.retrofit"
+    implementation "com.google.dagger:dagger:$v.dagger"
     kapt "com.google.dagger:dagger-compiler:$v.dagger"
 
     // store
-    compile "com.scottyab:secure-preferences-lib:$v.securePref"
-    compile "com.rejasupotaro:kvs-schema:$v.kvsSchema"
+    implementation "com.scottyab:secure-preferences-lib:$v.securePref"
+    implementation "com.rejasupotaro:kvs-schema:$v.kvsSchema"
     kapt "com.rejasupotaro:kvs-schema-compiler:$v.kvsSchema"
 
     // rx
-    compile "io.reactivex.rxjava2:rxjava:$v.rx"
-    compile "io.reactivex.rxjava2:rxandroid:$v.rx"
-    compile "com.trello.rxlifecycle2:rxlifecycle:$v.rx"
-    compile "com.trello.rxlifecycle2:rxlifecycle-android:$v.rx"
-    compile "com.trello.rxlifecycle2:rxlifecycle-kotlin:$v.rx"
-    compile "com.github.MFlisar:RxBus2:$v.rxbus"
-    compile "com.github.k-kagurazaka.rx-property-android:rx-property:$v.rxProperty"
-    compile "com.github.k-kagurazaka.rx-property-android:rx-property-kotlin:$v.rxProperty"
+    implementation "io.reactivex.rxjava2:rxjava:$v.rx"
+    implementation "io.reactivex.rxjava2:rxandroid:$v.rx"
+    implementation "com.trello.rxlifecycle2:rxlifecycle:$v.rx"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-android:$v.rx"
+    implementation "com.trello.rxlifecycle2:rxlifecycle-kotlin:$v.rx"
+    implementation "com.github.MFlisar:RxBus2:$v.rxbus"
+    implementation "com.github.k-kagurazaka.rx-property-android:rx-property:$v.rxProperty"
+    implementation "com.github.k-kagurazaka.rx-property-android:rx-property-kotlin:$v.rxProperty"
 
     // base view
     kapt "com.android.databinding:compiler:$v.databinding"
-    compile "com.android.support:appcompat-v7:$v.supportLibrary"
-    compile "com.android.support:support-fragment:$v.supportLibrary"
-    compile "com.android.support:recyclerview-v7:$v.supportLibrary"
-    compile "com.android.support:cardview-v7:$v.supportLibrary"
-    compile "com.android.support:design:$v.supportLibrary"
+    implementation "com.android.support:appcompat-v7:$v.supportLibrary"
+    implementation "com.android.support:support-fragment:$v.supportLibrary"
+    implementation "com.android.support:recyclerview-v7:$v.supportLibrary"
+    implementation "com.android.support:cardview-v7:$v.supportLibrary"
+    implementation "com.android.support:design:$v.supportLibrary"
 
     // view
-    compile "com.hannesdorfmann.fragmentargs:annotation:$v.fragmentArgs"
+    implementation "com.hannesdorfmann.fragmentargs:annotation:$v.fragmentArgs"
     kapt "com.hannesdorfmann.fragmentargs:processor:$v.fragmentArgs"
-    compile "com.github.chuross.recyclerview-adapters:recyclerview-adapters:$v.recyclerViewAdapters"
-    compile "com.github.chuross.recyclerview-adapters:recyclerview-adapters-rx:$v.recyclerViewAdapters"
-    compile "me.gujun.android.taggroup:library:$v.tagGroup@aar"
-    compile "com.zzhoujay.richtext:richtext:$v.richText"
+    implementation "com.github.chuross.recyclerview-adapters:recyclerview-adapters:$v.recyclerViewAdapters"
+    implementation "com.github.chuross.recyclerview-adapters:recyclerview-adapters-rx:$v.recyclerViewAdapters"
+    implementation "me.gujun.android.taggroup:library:$v.tagGroup@aar"
+    implementation "com.zzhoujay.richtext:richtext:$v.richText"
 
     //image
-    compile "com.squareup.picasso:picasso:$v.picasso"
-    compile "jp.wasabeef:picasso-transformations:$v.picassoTransformer"
-    compile "com.jakewharton.picasso:picasso2-okhttp3-downloader:$v.picassoOkhttp3"
+    implementation "com.squareup.picasso:picasso:$v.picasso"
+    implementation "jp.wasabeef:picasso-transformations:$v.picassoTransformer"
+    implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:$v.picassoOkhttp3"
 
     // test
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.google.code.findbugs', module: 'jsr305'
     })
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }

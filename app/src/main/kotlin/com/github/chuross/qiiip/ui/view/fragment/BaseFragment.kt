@@ -13,7 +13,7 @@ import com.github.chuross.qiiip.application.Application
 import com.github.chuross.qiiip.ui.viewmodel.fragment.FragmentViewModel
 import com.trello.rxlifecycle2.android.FragmentEvent
 
-abstract class BaseFragment<B: ViewDataBinding, VM: FragmentViewModel> : Fragment() {
+abstract class BaseFragment<B : ViewDataBinding, VM : FragmentViewModel> : Fragment() {
 
     abstract val layoutResourceId: Int
     val application: Application get() = Application.from(context)
@@ -37,7 +37,7 @@ abstract class BaseFragment<B: ViewDataBinding, VM: FragmentViewModel> : Fragmen
         viewModel.create()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         viewModel.notifyLifecycleEvent(FragmentEvent.CREATE_VIEW)
         binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
         return binding.root
