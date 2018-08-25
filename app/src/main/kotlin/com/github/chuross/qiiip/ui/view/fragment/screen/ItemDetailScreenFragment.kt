@@ -42,7 +42,7 @@ class ItemDetailScreenFragment : BaseFragment<FragmentItemDetailScreenBinding, I
             }
         }
         binding.userLayout.setOnClickListener {
-            screenActivity.router.userDetail(viewModel.item.user).launch()
+            screenActivity.router.userDetail(viewModel.item.user).addSharedElement(binding.profileImg).launch()
         }
         binding.stockBtn.setOnClickListener {
             viewModel.toggleStock()

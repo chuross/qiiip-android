@@ -1,6 +1,6 @@
 package com.github.chuross.qiiip.ui.transition
 
-import androidx.transition.ChangeClipBounds
+import androidx.transition.ChangeBounds
 import androidx.transition.ChangeImageTransform
 import androidx.transition.ChangeTransform
 import androidx.transition.TransitionSet
@@ -11,7 +11,7 @@ class SimpleImageTransitionFactory : TransitionFactory {
     override fun create(): Any {
         return TransitionSet().also {
             it.ordering = TransitionSet.ORDERING_TOGETHER
-            it.addTransition(ChangeClipBounds())
+            it.addTransition(ChangeBounds())
             it.addTransition(ChangeTransform())
             it.addTransition(ChangeImageTransform())
         }

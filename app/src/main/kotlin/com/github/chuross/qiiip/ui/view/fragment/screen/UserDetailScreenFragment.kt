@@ -37,6 +37,9 @@ class UserDetailScreenFragment : BaseFragment<FragmentUserDetailBinding, SimpleF
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        MoriBinder.bindElement(this, R.id.profile_img)
+
         binding.toolbar.setNavigationOnClickListener { screenActivity.router.pop() }
         binding.user = user
         binding.executePendingBindings()

@@ -79,6 +79,7 @@
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_marginEnd="4dp"
+                                android:transitionName="profile_image"
                                 app:imageType="@{`circle`}"
                                 app:imageUrl="@{viewModel.item.user.profileImageUrl}" />
 
