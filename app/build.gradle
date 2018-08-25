@@ -67,6 +67,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$v.retrofit"
     implementation "com.google.dagger:dagger:$v.dagger"
     kapt "com.google.dagger:dagger-compiler:$v.dagger"
+    implementation "androidx.lifecycle:lifecycle-extensions:$v.androidxArch"
 
     // store
     implementation "com.scottyab:secure-preferences-lib:$v.securePref"
