@@ -1,8 +1,8 @@
 package com.github.chuross.qiiip.ui.view.fragment.component
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.databinding.FragmentListBinding
 import com.github.chuross.qiiip.ui.adapter.LoadingMoreViewItem
@@ -25,13 +25,13 @@ abstract class PagerListFragment<VM : PagerListFragmentViewModel<ITEM>, ITEM> : 
         viewModel.fetch()
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = CompositeRecyclerAdapter()
 
         itemAdapter = onCreateItemAdapter()
 
-        val loadingAdapter = LoadingMoreViewItem(context, View.OnClickListener {
+        val loadingAdapter = LoadingMoreViewItem(requireContext(), View.OnClickListener {
             viewModel.fetchNext()
         })
         loadingAdapter.isVisible = false
@@ -40,11 +40,13 @@ abstract class PagerListFragment<VM : PagerListFragmentViewModel<ITEM>, ITEM> : 
         adapter.add(loadingAdapter)
 
         binding.viewModel = viewModel
-        binding.swipeRefreshLayout?.apply {
+        binding.executePendingBindings()
+
+        binding.swipeRefreshLayout.apply {
             setColorSchemeResources(R.color.colorPrimary)
             setOnRefreshListener { viewModel.fetch() }
         }
-        binding.list?.apply {
+        binding.list.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             setAdapter(adapter)

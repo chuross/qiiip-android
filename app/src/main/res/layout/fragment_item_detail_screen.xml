@@ -1,40 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <import type="org.apache.commons.lang3.time.DateFormatUtils" />
-        <variable name="viewModel" type="com.github.chuross.qiiip.ui.viewmodel.fragment.screen.ItemDetailScreenFragmentViewModel" />
+
+        <variable
+            name="viewModel"
+            type="com.github.chuross.qiiip.ui.viewmodel.fragment.screen.ItemDetailScreenFragmentViewModel" />
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:contentScrim="@color/colorPrimary"
                 app:collapsedTitleTextAppearance="@style/AppTheme.CollapsingToolbar.Collapsed"
+                app:contentScrim="@color/colorPrimary"
                 app:expandedTitleTextAppearance="@style/AppTheme.CollapsingToolbar.Expanded"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="?attr/actionBarSize"
+                    android:orientation="vertical"
+                    android:paddingBottom="16dp"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    android:paddingBottom="16dp"
-                    android:orientation="vertical"
+                    android:paddingTop="?attr/actionBarSize"
                     app:layout_collapseMode="parallax">
 
                     <TextView
@@ -42,17 +45,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
-                        android:textSize="25sp"
+                        android:text="@{viewModel.item.title}"
                         android:textColor="@android:color/white"
-                        android:text="@{viewModel.item.title}" />
+                        android:textSize="25sp" />
 
                     <me.gujun.android.taggroup.TagGroup
                         android:id="@+id/tag_group"
+                        style="@style/TagGroup.Large"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        style="@style/TagGroup.Large" />
+                        android:layout_marginTop="8dp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -63,53 +66,53 @@
                             android:id="@+id/user_layout"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
                             android:layout_marginEnd="16dp"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
+                            android:layout_marginTop="4dp"
+                            android:background="?selectableItemBackground"
                             android:clickable="true"
                             android:focusable="true"
-                            android:background="?selectableItemBackground">
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
                             <ImageView
-                                android:id="@+id/img_user_thumbnail"
+                                android:id="@+id/profile_img"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_marginEnd="4dp"
-                                app:imageUrl="@{viewModel.item.user.profileImageUrl}"
-                                app:imageType="@{`circle`}" />
+                                app:imageType="@{`circle`}"
+                                app:imageUrl="@{viewModel.item.user.profileImageUrl}" />
 
                             <TextView
                                 android:id="@+id/txt_user_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text="@{viewModel.item.user.identity.value}"
                                 android:textColor="@android:color/white"
-                                android:textSize="12sp"
-                                android:text="@{viewModel.item.user.identity.value}" />
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:textSize="12sp"
+                            android:text="@{DateFormatUtils.format(viewModel.item.createdAt, `yyyy/MM/dd HH:mmに投稿`)}"
                             android:textColor="#eeeeee"
-                            android:text="@{DateFormatUtils.format(viewModel.item.createdAt, `yyyy/MM/dd HH:mmに投稿`)}" />
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
 
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
+                    style="@style/AppTheme.Toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:title="@{viewModel.item.title}"
-                    app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
                     app:layout_collapseMode="pin"
-                    style="@style/AppTheme.Toolbar" />
-            </android.support.design.widget.CollapsingToolbarLayout>
-        </android.support.design.widget.AppBarLayout>
+                    app:navigationIcon="@drawable/ic_arrow_back_white_24dp" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -118,21 +121,21 @@
                 android:id="@+id/body_txt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="32dp"
                 android:paddingBottom="16dp"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp" />
-        </android.support.v4.widget.NestedScrollView>
+                android:paddingRight="16dp"
+                android:paddingTop="32dp" />
+        </androidx.core.widget.NestedScrollView>
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/stock_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:backgroundTint="@{viewModel.isStoked.value ? @color/colorPrimaryDark : @color/disabledStackButton}"
             android:src="@{viewModel.isStoked.value ? @drawable/ic_favorite_black_24dp : @drawable/ic_favorite_border_black_24dp}"
             android:tint="@{viewModel.isStoked.value ? @android:color/white : @android:color/black}"
-            android:backgroundTint="@{viewModel.isStoked.value ? @color/colorPrimaryDark : @color/disabledStackButton}"
             app:layout_anchor="@id/appbar"
             app:layout_anchorGravity="bottom|end" />
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

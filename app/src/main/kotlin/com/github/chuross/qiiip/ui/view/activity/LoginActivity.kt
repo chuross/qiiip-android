@@ -1,8 +1,8 @@
 package com.github.chuross.qiiip.ui.view.activity
 
-import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.widget.Toast
+import androidx.databinding.ViewDataBinding
 import com.github.chuross.qiiip.application.event.AuthenticationChangeEvent
 import com.github.chuross.qiiip.ui.viewmodel.activity.LoginActivityViewModel
 import com.michaelflisar.rxbus2.RxBus

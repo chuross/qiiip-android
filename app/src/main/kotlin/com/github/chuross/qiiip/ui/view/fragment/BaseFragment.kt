@@ -1,22 +1,24 @@
 package com.github.chuross.qiiip.ui.view.fragment
 
 import android.content.Context
-import android.databinding.DataBindingUtil
-import android.databinding.ViewDataBinding
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.github.chuross.qiiip.application.Application
+import com.github.chuross.qiiip.ui.view.activity.ScreenActivity
 import com.github.chuross.qiiip.ui.viewmodel.fragment.FragmentViewModel
 import com.trello.rxlifecycle2.android.FragmentEvent
 
 abstract class BaseFragment<B : ViewDataBinding, VM : FragmentViewModel> : Fragment() {
 
     abstract val layoutResourceId: Int
-    val application: Application get() = Application.from(context)
+    val application: Application get() = Application.from(requireContext())
+    val screenActivity: ScreenActivity get() = activity as ScreenActivity
     lateinit var binding: B
     lateinit var viewModel: VM
 
@@ -32,7 +34,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : FragmentViewModel> : Fragm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = onCreateViewModel(context)
+        viewModel = onCreateViewModel(requireContext())
         viewModel.notifyLifecycleEvent(FragmentEvent.CREATE)
         viewModel.create()
     }

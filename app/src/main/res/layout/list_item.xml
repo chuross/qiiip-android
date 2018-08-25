@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="org.apache.commons.lang3.time.DateFormatUtils" />
-        <variable name="item" type="com.github.chuross.qiiip.domain.item.Item" />
+
+        <variable
+            name="item"
+            type="com.github.chuross.qiiip.domain.item.Item" />
     </data>
 
-    <android.support.v7.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_marginTop="4dp"
         android:clickable="true"
-        app:contentPadding="8dp"
-        app:cardElevation="1dp">
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardElevation="1dp"
+        app:contentPadding="8dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,10 +32,10 @@
                 android:id="@+id/user_id_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@{item.user.identity.value}"
                 android:textColor="#666666"
                 android:textSize="10sp"
                 android:textStyle="bold"
-                android:text="@{item.user.identity.value}"
                 tools:text="fuga" />
 
             <TextView
@@ -41,44 +44,44 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:layout_toEndOf="@id/user_id_txt"
+                android:text="@{DateFormatUtils.format(item.createdAt, `がyyyy/MM/dd HH:mmに投稿`)}"
                 android:textColor="#aaaaaa"
                 android:textSize="10sp"
-                android:text="@{DateFormatUtils.format(item.createdAt, `がyyyy/MM/dd HH:mmに投稿`)}"
                 tools:text='がyyyy/MM/dd HH:mmに投稿' />
 
             <ImageView
                 android:id="@+id/user_img"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="8dp"
                 android:layout_below="@id/created_txt"
-                app:imageUrl="@{item.user.profileImageUrl}"
-                app:imageType="@{`circle`}" />
+                android:layout_marginEnd="8dp"
+                app:imageType="@{`circle`}"
+                app:imageUrl="@{item.user.profileImageUrl}" />
 
             <TextView
                 android:id="@+id/title_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/user_img"
                 android:layout_below="@id/created_txt"
                 android:layout_marginBottom="4dp"
-                android:text="@{item.title}"
-                android:textSize="16sp"
-                android:textColor="@android:color/black"
-                android:maxLines="2"
+                android:layout_toEndOf="@id/user_img"
                 android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{item.title}"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
                 tools:text="title" />
 
             <TextView
                 android:id="@+id/tag_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/user_img"
                 android:layout_below="@id/title_txt"
-                android:textSize="12sp"
-                android:textColor="#666666"
+                android:layout_toEndOf="@id/user_img"
                 android:text="@{item.tagLabel}"
+                android:textColor="#666666"
+                android:textSize="12sp"
                 tools:text="tagA, tagB" />
         </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

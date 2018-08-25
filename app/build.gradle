@@ -16,12 +16,12 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.2"
     defaultConfig {
         applicationId "com.github.chuross.qiiip"
         minSdkVersion 21
-        targetSdkVersion 26
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -71,7 +71,9 @@ dependencies {
     // store
     implementation "com.scottyab:secure-preferences-lib:$v.securePref"
     implementation "com.rejasupotaro:kvs-schema:$v.kvsSchema"
-    kapt "com.rejasupotaro:kvs-schema-compiler:$v.kvsSchema"
+    kapt("com.rejasupotaro:kvs-schema-compiler:$v.kvsSchema") {
+        exclude group: 'com.google.android', module: 'android'
+    }
 
     // rx
     implementation "io.reactivex.rxjava2:rxjava:$v.rx"
@@ -85,15 +87,15 @@ dependencies {
 
     // base view
     kapt "com.android.databinding:compiler:$v.databinding"
-    implementation "com.android.support:appcompat-v7:$v.supportLibrary"
-    implementation "com.android.support:support-fragment:$v.supportLibrary"
-    implementation "com.android.support:recyclerview-v7:$v.supportLibrary"
-    implementation "com.android.support:cardview-v7:$v.supportLibrary"
-    implementation "com.android.support:design:$v.supportLibrary"
+    implementation "androidx.appcompat:appcompat:$v.androidxCore"
+    implementation "androidx.fragment:fragment:$v.androidxCore"
+    implementation "androidx.recyclerview:recyclerview:$v.androidxCore"
+    implementation "androidx.cardview:cardview:$v.androidxCore"
+    implementation "com.google.android.material:material:$v.androidxCore"
 
     // view
-    implementation "com.hannesdorfmann.fragmentargs:annotation:$v.fragmentArgs"
-    kapt "com.hannesdorfmann.fragmentargs:processor:$v.fragmentArgs"
+    implementation 'com.github.chuross.mori-router:annotation:feature~androidx-SNAPSHOT'
+    kapt 'com.github.chuross.mori-router:compiler:feature~androidx-SNAPSHOT'
     implementation "com.github.chuross.recyclerview-adapters:recyclerview-adapters:$v.recyclerViewAdapters"
     implementation "com.github.chuross.recyclerview-adapters:recyclerview-adapters-rx:$v.recyclerViewAdapters"
     implementation "me.gujun.android.taggroup:library:$v.tagGroup@aar"
