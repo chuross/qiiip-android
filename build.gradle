@@ -16,7 +16,7 @@ ext {
             rx                  : '2.0.1',
             rxbus               : '0.1',
             rxProperty          : '3.1.0',
-            fragmentArgs        : '3.0.2',
+            moriRouter          : '1.0.1',
             recyclerViewAdapters: '3.0.1',
             richText            : '2.4.1',
             tagGroup            : '1.4',

@@ -94,8 +94,8 @@ dependencies {
     implementation "com.google.android.material:material:$v.androidxCore"
 
     // view
-    implementation 'com.github.chuross.mori-router:annotation:feature~androidx-SNAPSHOT'
-    kapt 'com.github.chuross.mori-router:compiler:feature~androidx-SNAPSHOT'
+    implementation "com.github.chuross.mori-router:annotation:$v.moriRouter"
+    kapt "com.github.chuross.mori-router:compiler:$v.moriRouter"
     implementation "com.github.chuross.recyclerview-adapters:recyclerview-adapters:$v.recyclerViewAdapters"
     implementation "com.github.chuross.recyclerview-adapters:recyclerview-adapters-rx:$v.recyclerViewAdapters"
     implementation "me.gujun.android.taggroup:library:$v.tagGroup@aar"
