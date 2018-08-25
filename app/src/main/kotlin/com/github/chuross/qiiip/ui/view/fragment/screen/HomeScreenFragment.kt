@@ -3,6 +3,7 @@ package com.github.chuross.qiiip.ui.view.fragment.screen
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import com.github.chuross.morirouter.annotation.RouterPath
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.application.event.AuthenticationChangeEvent
 import com.github.chuross.qiiip.databinding.FragmentHomeScreenBinding
@@ -14,6 +15,7 @@ import com.michaelflisar.rxbus2.RxBusBuilder
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 
+@RouterPath(name = "home")
 class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding, HomeScreenFragmentViewModel>() {
 
     override val layoutResourceId: Int = R.layout.fragment_home_screen
@@ -22,9 +24,11 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding, HomeScreenFra
         return HomeScreenFragmentViewModel(context)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
+        binding.executePendingBindings()
+
         binding.toolbar.setNavigationOnClickListener {
             (activity as? ScreenActivity)?.let(ScreenActivity::openDrawer)
         }

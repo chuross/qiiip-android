@@ -3,32 +3,32 @@ localProperties.load(project.rootProject.file('local.properties').newDataInputSt
 
 ext {
     versions = [
-        kotlin: '1.2.50',
-        commonsLang: '3.4',
-        timber: '4.5.1',
-        okhttp: '3.6.0',
-        retrofit:'2.2.0',
-        dagger: '2.9',
-        securePref: '0.1.4',
-        kvsSchema: '5.0.1',
-        supportLibrary: '26.1.0',
-        databinding: '3.1.3',
-        rx: '2.0.1',
-        rxbus: '0.1',
-        rxProperty: '3.1.0',
-        fragmentArgs: '3.0.2',
-        recyclerViewAdapters: '1.1.0',
-        richText: '2.4.1',
-        tagGroup: '1.4',
-        smoothAppBar: '25.1.0.1',
-        picasso: '2.5.2',
-        picassoTransformer: '2.1.1',
-        picassoOkhttp3: '1.1.0'
+            kotlin              : '1.2.61',
+            commonsLang         : '3.4',
+            timber              : '4.5.1',
+            okhttp              : '3.6.0',
+            retrofit            : '2.2.0',
+            dagger              : '2.9',
+            securePref          : '0.1.4',
+            kvsSchema           : '5.0.1',
+            androidxCore        : '1.0.0-rc01',
+            databinding         : '3.1.4',
+            rx                  : '2.0.1',
+            rxbus               : '0.1',
+            rxProperty          : '3.1.0',
+            moriRouter          : '1.0.1',
+            recyclerViewAdapters: '3.0.1',
+            richText            : '2.4.1',
+            tagGroup            : '1.4',
+            smoothAppBar        : '25.1.0.1',
+            picasso             : '2.5.2',
+            picassoTransformer  : '2.1.1',
+            picassoOkhttp3      : '1.1.0'
     ]
 
     deployGate = [
-        userName: localProperties.getProperty("deployGate.userName"),
-        token: localProperties.getProperty("deployGate.token")
+            userName: localProperties.getProperty("deployGate.userName"),
+            token   : localProperties.getProperty("deployGate.token")
     ]
 }
 
@@ -39,7 +39,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.3'
+        classpath 'com.android.tools.build:gradle:3.2.0-rc02'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.61'
         classpath 'gradle.plugin.com.tmiyamon:gradle-config:0.2.1'
     }

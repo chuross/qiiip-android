@@ -1,43 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="viewModel" type="com.github.chuross.qiiip.ui.viewmodel.fragment.screen.HomeScreenFragmentViewModel" />
+
+        <variable
+            name="viewModel"
+            type="com.github.chuross.qiiip.ui.viewmodel.fragment.screen.HomeScreenFragmentViewModel" />
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
+                style="@style/AppTheme.Toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
                 android:minHeight="?attr/actionBarSize"
                 android:title="@{viewModel.title}"
-                android:fitsSystemWindows="true"
-                app:navigationIcon="@drawable/ic_dehaze_white_24dp"
                 app:layout_scrollFlags="scroll|enterAlways"
-                style="@style/AppTheme.Toolbar" />
+                app:navigationIcon="@drawable/ic_dehaze_white_24dp" />
 
-            <android.support.design.widget.TabLayout
+            <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab"
+                style="@style/AppTheme.TabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/AppTheme.TabLayout" />
+                android:layout_height="wrap_content" />
 
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

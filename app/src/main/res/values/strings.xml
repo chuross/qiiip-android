@@ -3,4 +3,7 @@
 
     <!-- values -->
     <string name="error_default">取得に失敗しました</string>
+
+    <!-- transition -->
+    <string name="transition_profile_image">transition_profile_image</string>
 </resources>

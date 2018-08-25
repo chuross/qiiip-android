@@ -1,11 +1,11 @@
 package com.github.chuross.qiiip.ui.extension
 
-import android.databinding.BindingAdapter
 import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 
-@BindingAdapter(value = *arrayOf("imageUrl", "imageType"), requireAll = false)
+@BindingAdapter(value = ["imageUrl", "imageType"], requireAll = false)
 fun ImageView.loadImage(imageUrl: String?, imageType: String?) {
     if (imageUrl == null) return
 
