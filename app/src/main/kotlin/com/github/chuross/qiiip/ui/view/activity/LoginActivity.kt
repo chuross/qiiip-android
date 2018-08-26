@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import com.github.chuross.qiiip.application.event.AuthenticationChangeEvent
 import com.github.chuross.qiiip.ui.viewmodel.activity.LoginActivityViewModel
+import com.github.chuross.qiiip.ui.viewmodel.activity.LoginActivityViewModelBuilder
 import com.michaelflisar.rxbus2.RxBus
 import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import timber.log.Timber
@@ -20,22 +21,22 @@ class LoginActivity : BaseActivity<ViewDataBinding>() {
 
         Timber.d("uri: ${intent.data}")
 
-        viewModel = LoginActivityViewModel(applicationContext, intent?.data)
-        bindViewModel(viewModel)
+        viewModel = LoginActivityViewModelBuilder(applicationContext).uri(intent?.data).build(this)
 
         viewModel.isLoginSuccess
-                .bindToLifecycle(viewModel)
+                .bindToLifecycle(this)
                 .subscribe {
                     Toast.makeText(applicationContext, "ログイン完了しました", Toast.LENGTH_LONG).show()
                     RxBus.get().send(AuthenticationChangeEvent(true))
                     finish()
-                }.apply { viewModel.disposables.add(this) }
+                }.also { viewModel.disposables.add(it) }
+
         viewModel.error
-                .bindToLifecycle(viewModel)
+                .bindToLifecycle(this)
                 .subscribe {
                     Toast.makeText(applicationContext, "ログイン失敗しました", Toast.LENGTH_LONG).show()
                     finish()
-                }.apply { viewModel.disposables.add(this) }
+                }.also { viewModel.disposables.add(it) }
 
         viewModel.login()
     }
