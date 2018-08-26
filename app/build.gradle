@@ -68,6 +68,8 @@ dependencies {
     implementation "com.google.dagger:dagger:$v.dagger"
     kapt "com.google.dagger:dagger-compiler:$v.dagger"
     implementation "androidx.lifecycle:lifecycle-extensions:$v.androidxArch"
+    implementation "com.github.chuross.viewmodelargs:annotation:$v.viewModelArgs"
+    kapt "com.github.chuross.viewmodelargs:compiler:$v.viewModelArgs"
 
     // store
     implementation "com.scottyab:secure-preferences-lib:$v.securePref"
