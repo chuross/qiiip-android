@@ -1,6 +1,8 @@
 package com.github.chuross.qiiip.ui.viewmodel.activity
 
-import android.content.Context
+import com.github.chuross.qiiip.ui.viewmodel.BaseViewModel
+import com.github.chuross.viewmodelargs.annotation.ViewModelWithArgs
 
-class ScreenActivityViewModel(override val context: Context) : ActivityViewModel() {
+@ViewModelWithArgs
+class ScreenActivityViewModel : BaseViewModel() {
 }

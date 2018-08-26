@@ -19,7 +19,7 @@ class LoginActivityViewModel : BaseViewModel() {
 
     val isLoginSuccess: RxProperty<Boolean> = RxProperty()
     val error: RxProperty<Throwable> = RxProperty()
-    private val application: Application get() = context.applicationContext as Application
+    private val application: Application get() = Application.from(context)
 
     fun login() {
         uri?.getQueryParameter("code")?.let {

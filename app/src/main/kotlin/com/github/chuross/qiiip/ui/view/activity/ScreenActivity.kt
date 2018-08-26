@@ -16,6 +16,7 @@ import com.github.chuross.qiiip.databinding.ActivityScreenBinding
 import com.github.chuross.qiiip.databinding.ViewDrawerHeaderBinding
 import com.github.chuross.qiiip.infrastructure.qiita.v2.QiitaV2Api
 import com.github.chuross.qiiip.ui.viewmodel.activity.ScreenActivityViewModel
+import com.github.chuross.qiiip.ui.viewmodel.activity.ScreenActivityViewModelBuilder
 import com.michaelflisar.rxbus2.RxBusBuilder
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
@@ -36,11 +37,10 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ScreenActivityViewModel(applicationContext)
-        bindViewModel(viewModel)
+        viewModel = ScreenActivityViewModelBuilder().build(this)
 
         val headerBinding = ViewDrawerHeaderBinding.bind(binding?.navigation?.getHeaderView(0)!!)
-        headerBinding.user = viewModel.application.authorizedUser
+        headerBinding.user = qiiipApplication.authorizedUser
         headerBinding.loginButton.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(QiitaV2Api.getQiitaAuthUrl(Settings.qiita.apiUrl, Settings.qiita.clientId, ""))))
         }
@@ -57,13 +57,13 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
         }
 
         RxBusBuilder.create(ScreenPopEvent::class.java).build()
-                .bindUntilEvent(viewModel, ActivityEvent.DESTROY)
+                .bindUntilEvent(this, ActivityEvent.DESTROY)
                 .subscribe { supportFragmentManager.popBackStack() }
                 .apply { viewModel.disposables.add(this) }
 
         RxBusBuilder.create(AuthenticationChangeEvent::class.java).build()
-                .bindUntilEvent(viewModel, ActivityEvent.DESTROY)
-                .subscribe { headerBinding.user = viewModel.application.authorizedUser }
+                .bindUntilEvent(this, ActivityEvent.DESTROY)
+                .subscribe { headerBinding.user = qiiipApplication.authorizedUser }
                 .apply { viewModel.disposables.add(this) }
 
         router.home().launch()

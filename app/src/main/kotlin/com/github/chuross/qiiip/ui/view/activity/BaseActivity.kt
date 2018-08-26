@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.github.chuross.qiiip.application.Application
 import com.github.chuross.qiiip.ui.viewmodel.activity.ActivityViewModel
 import com.trello.rxlifecycle2.LifecycleProvider
 import com.trello.rxlifecycle2.LifecycleTransformer
@@ -17,6 +18,7 @@ abstract class BaseActivity<BINDING : ViewDataBinding> : AppCompatActivity(), Li
 
     abstract val layoutResourceId: Int?
     var binding: BINDING? = null
+    val qiiipApplication: Application get() = Application.from(this)
     private var boundViewModel: ActivityViewModel? = null
     private val lifecycleSubject = BehaviorSubject.create<ActivityEvent>()
 
