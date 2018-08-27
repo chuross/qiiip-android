@@ -8,7 +8,6 @@ import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.application.event.AuthenticationChangeEvent
 import com.github.chuross.qiiip.databinding.FragmentHomeScreenBinding
 import com.github.chuross.qiiip.ui.adapter.FragmentPagerAdapter
-import com.github.chuross.qiiip.ui.view.activity.ScreenActivity
 import com.github.chuross.qiiip.ui.view.fragment.BaseFragment
 import com.github.chuross.qiiip.ui.view.fragment.component.FeedListFragment
 import com.github.chuross.qiiip.ui.view.fragment.component.ItemListFragment
@@ -49,7 +48,7 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
         binding.executePendingBindings()
 
         binding.toolbar.setNavigationOnClickListener {
-            (activity as? ScreenActivity)?.let(ScreenActivity::openDrawer)
+            screenActivity.openDrawer()
         }
 
         RxBusBuilder.create(AuthenticationChangeEvent::class.java).build()

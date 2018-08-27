@@ -16,9 +16,10 @@ import com.github.chuross.qiiip.ui.viewmodel.fragment.screen.TagScreenFragmentVi
 @RouterPath(name = "tag")
 class TagScreenFragment : BaseFragment<FragmentTagScreenBinding>() {
 
-    override val layoutResourceId: Int = R.layout.fragment_tag_screen
     @Argument
     lateinit var tag: Tag
+
+    override val layoutResourceId: Int = R.layout.fragment_tag_screen
     private lateinit var viewModel: TagScreenFragmentViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
