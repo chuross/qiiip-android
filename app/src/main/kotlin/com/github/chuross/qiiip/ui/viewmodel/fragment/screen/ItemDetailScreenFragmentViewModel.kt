@@ -26,7 +26,7 @@ class ItemDetailScreenFragmentViewModel : AndroidViewModel() {
     init {
         qiiipApplication.useCases.isStockItem(item.identity)
                 .compose(transformer)
-                .apply { disposables.add(this) }
+                .also { disposables.add(it) }
                 .exec({ isStoked.set(true) })
     }
 
@@ -38,12 +38,12 @@ class ItemDetailScreenFragmentViewModel : AndroidViewModel() {
         if (isStoked.get() ?: false) {
             qiiipApplication.useCases.removeStockItem(item.identity)
                     .compose(transformer)
-                    .apply { disposables.add(this) }
+                    .also { disposables.add(it) }
                     .exec({ isStoked.set(false) })
         } else {
             qiiipApplication.useCases.addStockItem(item.identity)
                     .compose(transformer)
-                    .apply { disposables.add(this) }
+                    .also { disposables.add(it) }
                     .exec({ isStoked.set(true) })
         }
     }

@@ -22,8 +22,8 @@ class AuthorizeAccount(private val code: String) : BaseRxUseCase<User>() {
                 .map { application.accountPreferences.token = it.value }
                 .flatMapSingle { api.getAuthenticatedUser() }
                 .map {
-                    UserConverter.toModel(it).apply {
-                        application.accountPreferences.user = this
+                    UserConverter.toModel(it).also {
+                        application.accountPreferences.user = it
                     }
                 }.doOnError { application.accountPreferences.removeToken() }
     }

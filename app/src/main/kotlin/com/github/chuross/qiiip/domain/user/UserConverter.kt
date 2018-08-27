@@ -4,8 +4,8 @@ import com.github.chuross.qiiip.infrastructure.qiita.v2.resource.User as Resourc
 
 object UserConverter {
 
-    fun toModel(resource: Resource): User = User(UserIdentity(resource.id!!)).apply {
-        metaInfo = UserMetaInfo(
+    fun toModel(resource: Resource): User = User(UserIdentity(resource.id!!)).also {
+        it.metaInfo = UserMetaInfo(
                 name = resource.name ?: "名無し",
                 description = resource.description,
                 profileImageUrl = resource.profileImageUrl

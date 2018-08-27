@@ -26,8 +26,8 @@ class LoginActivityViewModel : BaseViewModel() {
             application.useCases.authorizeAccount(it).compose {
                 it.subscribeOn(application.serialScheduler)
                         .observeOn(application.mainThreadScheduler)
-            }.apply {
-                disposables.add(this)
+            }.also {
+                disposables.add(it)
             }.exec({
                 isLoginSuccess.set(true)
             }, {

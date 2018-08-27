@@ -61,10 +61,10 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
     }
 
     private fun rebuildTabs() {
-        binding.viewpager.apply {
-            adapter = FragmentPagerAdapter(childFragmentManager, tabItems)
-            binding.tab.setupWithViewPager(this)
-            setCurrentItem(viewModel.defaultTabIndex, false)
+        binding.viewpager.also {
+            it.adapter = FragmentPagerAdapter(childFragmentManager, tabItems)
+            binding.tab.setupWithViewPager(it)
+            it.setCurrentItem(viewModel.defaultTabIndex, false)
         }
     }
 }

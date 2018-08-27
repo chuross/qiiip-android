@@ -28,8 +28,8 @@ abstract class PagerListFragmentViewModel<T> : AndroidViewModel() {
         currentPage.set(defaultPage)
         list.set(listOf())
 
-        composedUseCase.apply {
-            disposables.add(this)
+        composedUseCase.also {
+            disposables.add(it)
         }.exec({
             list.set(it)
             currentPage.set(currentPageValue.inc())
@@ -41,8 +41,8 @@ abstract class PagerListFragmentViewModel<T> : AndroidViewModel() {
     fun fetchNext() {
         isLoading.set(true)
 
-        composedUseCase.apply {
-            disposables.add(this)
+        composedUseCase.also {
+            disposables.add(it)
         }.exec({
             val list = list.get() ?: listOf()
             this.list.set(list.plus(it))

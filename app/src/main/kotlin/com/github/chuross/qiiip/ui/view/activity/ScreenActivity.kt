@@ -59,12 +59,12 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
         RxBusBuilder.create(ScreenPopEvent::class.java).build()
                 .bindUntilEvent(this, ActivityEvent.DESTROY)
                 .subscribe { supportFragmentManager.popBackStack() }
-                .apply { viewModel.disposables.add(this) }
+                .also { viewModel.disposables.add(it) }
 
         RxBusBuilder.create(AuthenticationChangeEvent::class.java).build()
                 .bindUntilEvent(this, ActivityEvent.DESTROY)
                 .subscribe { headerBinding.user = qiiipApplication.authorizedUser }
-                .apply { viewModel.disposables.add(this) }
+                .also { viewModel.disposables.add(it) }
 
         router.home().launch()
     }

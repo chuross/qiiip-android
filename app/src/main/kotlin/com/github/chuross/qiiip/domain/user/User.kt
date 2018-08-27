@@ -5,8 +5,8 @@ import com.github.chuross.qiiip.domain.AbstractEntity
 class User(identity: UserIdentity) : AbstractEntity<UserIdentity, User>(identity) {
 
     companion object {
-        val empty: User = User(UserIdentity("")).apply {
-            metaInfo = UserMetaInfo("名無し", null, null)
+        val empty: User = User(UserIdentity("")).also {
+            it.metaInfo = UserMetaInfo("名無し", null, null)
         }
     }
 

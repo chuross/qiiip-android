@@ -9,11 +9,11 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation
 fun ImageView.loadImage(imageUrl: String?, imageType: String?) {
     if (imageUrl == null) return
 
-    Picasso.with(context).load(imageUrl).apply {
-        fit()
+    Picasso.with(context).load(imageUrl).also { request ->
+        request.fit()
         imageType?.let {
             when (it) {
-                "circle" -> transform(CropCircleTransformation())
+                "circle" -> request.transform(CropCircleTransformation())
                 else -> Unit
             }
         }

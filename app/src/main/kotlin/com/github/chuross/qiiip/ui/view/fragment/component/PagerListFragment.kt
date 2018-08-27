@@ -46,14 +46,14 @@ abstract class PagerListFragment<VM : PagerListFragmentViewModel<ITEM>, ITEM> : 
         binding.viewModel = viewModel
         binding.executePendingBindings()
 
-        binding.swipeRefreshLayout.apply {
-            setColorSchemeResources(R.color.colorPrimary)
-            setOnRefreshListener { viewModel.fetch() }
+        binding.swipeRefreshLayout.also {
+            it.setColorSchemeResources(R.color.colorPrimary)
+            it.setOnRefreshListener { viewModel.fetch() }
         }
-        binding.list.apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(context)
-            setAdapter(adapter)
+        binding.list.also {
+            it.setHasFixedSize(true)
+            it.layoutManager = LinearLayoutManager(context)
+            it.adapter = adapter
         }
         binding.status.retryListener = { viewModel.fetch() }
 
@@ -62,19 +62,19 @@ abstract class PagerListFragment<VM : PagerListFragmentViewModel<ITEM>, ITEM> : 
                 .filter { it }
                 .subscribe {
                     binding.status.showLoadingView()
-                }.apply { viewModel.disposables.add(this) }
+                }.also { viewModel.disposables.add(it) }
 
         viewModel.list
                 .bindUntilEvent(this, FragmentEvent.DESTROY_VIEW)
                 .subscribe {
                     binding.status.hideAll()
                     loadingAdapter.isVisible = !it.isEmpty()
-                }.apply { viewModel.disposables.add(this) }
+                }.also { viewModel.disposables.add(it) }
 
         viewModel.fail
                 .filter { viewModel.currentPageValue <= viewModel.defaultPage }
                 .bindUntilEvent(this, FragmentEvent.DESTROY_VIEW)
                 .subscribe { binding.status.showErrorView(it) }
-                .apply { viewModel.disposables.add(this) }
+                .also { viewModel.disposables.add(it) }
     }
 }

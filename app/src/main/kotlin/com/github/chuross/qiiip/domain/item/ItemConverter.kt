@@ -9,14 +9,14 @@ object ItemConverter {
 
     fun toModels(resources: List<Resource>): List<Item> = resources.map { toModel(it) }
 
-    fun toModel(resource: Resource): Item = Item(ItemIdentity(resource.id!!)).apply {
-        metaInfo = ItemMetaInfo(
+    fun toModel(resource: Resource): Item = Item(ItemIdentity(resource.id!!)).also {
+        it.metaInfo = ItemMetaInfo(
                 title = resource.title ?: "",
                 url = resource.url ?: "",
                 isPrivate = resource.private ?: false,
                 body = resource.body,
                 user = resource.user?.let { UserConverter.toModel(it) } ?: User.empty,
-                tags =  resource.tags?.let { TagConverter.toModels(it) } ?: listOf(),
+                tags = resource.tags?.let { TagConverter.toModels(it) } ?: listOf(),
                 createdAt = resource.createdAt,
                 updatedAt = resource.updatedAt
         )

@@ -34,9 +34,9 @@ class ItemDetailScreenFragment : BaseFragment<FragmentItemDetailScreenBinding>()
         binding.executePendingBindings()
 
         binding.toolbar.setNavigationOnClickListener { screenActivity.router.pop() }
-        binding.tagGroup.apply {
-            setTags(item.tags.map { it.identity.value })
-            setOnTagClickListener { tagName ->
+        binding.tagGroup.also {
+            it.setTags(item.tags.map { it.identity.value })
+            it.setOnTagClickListener { tagName ->
                 screenActivity.router.tag(item.tags.first { it.identity.value == tagName }).launch()
             }
         }

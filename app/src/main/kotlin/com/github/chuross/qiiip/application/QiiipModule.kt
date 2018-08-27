@@ -20,15 +20,17 @@ class QiiipModule(private val application: Application) {
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
             .create()
     private val retrofit: Retrofit = Retrofit.Builder()
-            .client(OkHttpClient.Builder().apply {
+            .client(OkHttpClient.Builder().also {
                 if (BuildConfig.DEBUG) {
-                    addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
+                    it.addInterceptor(HttpLoggingInterceptor().also { it.level = HttpLoggingInterceptor.Level.BASIC })
                 }
-                addInterceptor { it.proceed(it.request().newBuilder().apply {
-                    application.accountPreferences.token?.let {
-                        if (it.isNotBlank()) header("Authorization", "Bearer $it")
-                    }
-                }.build()) }
+                it.addInterceptor {
+                    it.proceed(it.request().newBuilder().also { builder ->
+                        application.accountPreferences.token?.let {
+                            if (it.isNotBlank()) builder.header("Authorization", "Bearer $it")
+                        }
+                    }.build())
+                }
             }.build())
             .baseUrl("${Settings.qiita.apiUrl}/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

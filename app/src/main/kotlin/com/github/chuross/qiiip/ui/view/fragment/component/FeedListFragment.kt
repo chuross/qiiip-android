@@ -14,8 +14,8 @@ class FeedListFragment : PagerListFragment<FeedListFragmentViewModel, Item>() {
     }
 
     override fun onCreateItemAdapter(): BaseItemAdapter<Item, *> {
-        return ItemAdapter(requireContext(), viewModel.list.toFlowable(BackpressureStrategy.LATEST)).apply {
-            setOnItemClickListener { _, _, item ->
+        return ItemAdapter(requireContext(), viewModel.list.toFlowable(BackpressureStrategy.LATEST)).also {
+            it.setOnItemClickListener { _, _, item ->
                 screenActivity.router.itemDetail(item).launch()
             }
         }

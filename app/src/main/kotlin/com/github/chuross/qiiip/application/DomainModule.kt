@@ -12,16 +12,16 @@ class DomainModule {
 
     @Provides
     fun provideItemRepository(api: QiitaV2Api): ItemRepository {
-        return ItemRepository().apply { this.api = api }
+        return ItemRepository().also { it.api = api }
     }
 
     @Provides
     fun provideStockService(api: QiitaV2Api): StockService {
-        return StockService().apply { this.api = api }
+        return StockService().also { it.api = api }
     }
 
     @Provides
     fun provideTagRepository(api: QiitaV2Api): TagRepository {
-        return TagRepository().apply { this.api = api }
+        return TagRepository().also { it.api = api }
     }
 }
