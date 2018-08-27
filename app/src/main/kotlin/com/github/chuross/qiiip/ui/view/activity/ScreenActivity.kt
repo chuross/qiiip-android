@@ -15,8 +15,8 @@ import com.github.chuross.qiiip.application.event.ScreenPopEvent
 import com.github.chuross.qiiip.databinding.ActivityScreenBinding
 import com.github.chuross.qiiip.databinding.ViewDrawerHeaderBinding
 import com.github.chuross.qiiip.infrastructure.qiita.v2.QiitaV2Api
-import com.github.chuross.qiiip.ui.viewmodel.activity.ScreenActivityViewModel
-import com.github.chuross.qiiip.ui.viewmodel.activity.ScreenActivityViewModelBuilder
+import com.github.chuross.qiiip.ui.viewmodel.SimpleViewModel
+import com.github.chuross.qiiip.ui.viewmodel.SimpleViewModelBuilder
 import com.michaelflisar.rxbus2.RxBusBuilder
 import com.trello.rxlifecycle2.android.ActivityEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
@@ -32,12 +32,12 @@ class ScreenActivity : BaseActivity<ActivityScreenBinding>() {
         MoriRouter(supportFragmentManager, option)
     }
     override val layoutResourceId: Int? = R.layout.activity_screen
-    private lateinit var viewModel: ScreenActivityViewModel
+    private lateinit var viewModel: SimpleViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ScreenActivityViewModelBuilder().build(this)
+        viewModel = SimpleViewModelBuilder().build(this)
 
         val headerBinding = ViewDrawerHeaderBinding.bind(binding?.navigation?.getHeaderView(0)!!)
         headerBinding.user = qiiipApplication.authorizedUser

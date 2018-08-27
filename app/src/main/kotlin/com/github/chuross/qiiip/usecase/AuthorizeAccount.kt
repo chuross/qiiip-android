@@ -19,7 +19,7 @@ class AuthorizeAccount(private val code: String) : BaseRxUseCase<User>() {
     override fun source(): Single<User> {
         return api.login(TokenParameter(Settings.qiita.clientId, Settings.qiita.clientSecret, code))
                 .filter { it.value?.isNotBlank() ?: false }
-                .map { application.accountPreferences.token = it.value }
+                .doOnSuccess { application.accountPreferences.token = it.value }
                 .flatMapSingle { api.getAuthenticatedUser() }
                 .map {
                     UserConverter.toModel(it).also {
