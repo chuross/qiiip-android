@@ -9,13 +9,13 @@ import com.github.chuross.morirouter.annotation.RouterPath
 import com.github.chuross.qiiip.R
 import com.github.chuross.qiiip.databinding.FragmentUserDetailBinding
 import com.github.chuross.qiiip.domain.user.User
-import com.github.chuross.qiiip.ui.transition.SimpleImageTransitionFactory
+import com.github.chuross.qiiip.ui.transition.ArcMotionImageTransitionFactory
 import com.github.chuross.qiiip.ui.view.fragment.BaseFragment
 
 @RouterPath(
         name = "user_detail",
-        sharedEnterTransitionFactory = SimpleImageTransitionFactory::class,
-        sharedExitTransitionFactory = SimpleImageTransitionFactory::class
+        sharedEnterTransitionFactory = ArcMotionImageTransitionFactory::class,
+        sharedExitTransitionFactory = ArcMotionImageTransitionFactory::class
 )
 class UserDetailScreenFragment : BaseFragment<FragmentUserDetailBinding>() {
 

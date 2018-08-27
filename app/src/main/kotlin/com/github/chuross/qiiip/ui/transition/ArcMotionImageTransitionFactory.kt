@@ -3,7 +3,7 @@ package com.github.chuross.qiiip.ui.transition
 import androidx.transition.*
 import com.github.chuross.morirouter.core.TransitionFactory
 
-class SimpleImageTransitionFactory : TransitionFactory {
+class ArcMotionImageTransitionFactory : TransitionFactory {
 
     override fun create(): Any {
         return TransitionSet().also {
