@@ -27,13 +27,13 @@ class HomeScreenFragment : BaseFragment<FragmentHomeScreenBinding>() {
     private val tabItems: List<Pair<String, (() -> Fragment)>>
         get() = if (qiiipApplication.isAuthorized) {
             listOf(
-                    Pair("全ての投稿", { ItemListFragment() }),
-                    Pair("フィード", { FeedListFragment() }),
-                    Pair("ストック", { StockItemListFragment() })
+                    "全ての投稿" to { ItemListFragment() },
+                    "フィード" to { FeedListFragment() },
+                    "ストック" to { StockItemListFragment() }
             )
         } else {
             listOf(
-                    Pair("全ての投稿", { ItemListFragment() })
+                    "全ての投稿" to { ItemListFragment() }
             )
         }
 
