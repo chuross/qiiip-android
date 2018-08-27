@@ -5,10 +5,16 @@ import com.github.chuross.qiiip.Settings
 import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.ui.viewmodel.fragment.PagerListFragmentViewModel
 import com.github.chuross.qiiip.usecase.RxUseCase
+import com.github.chuross.viewmodelargs.annotation.Argument
+import com.github.chuross.viewmodelargs.annotation.ViewModelWithArgs
 
-class StockItemListFragmentViewModel(context: Context) : PagerListFragmentViewModel<Item>(context) {
+@ViewModelWithArgs
+class StockItemListFragmentViewModel : PagerListFragmentViewModel<Item>() {
+
+    @Argument
+    override lateinit var context: Context
 
     override fun useCase(): RxUseCase<List<Item>> {
-        return application.useCases.getMyStockItems(currentPageValue, Settings.app.perPage)
+        return qiiipApplication.useCases.getMyStockItems(currentPageValue, Settings.app.perPage)
     }
 }

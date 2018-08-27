@@ -13,15 +13,19 @@ import com.github.chuross.recyclerviewadapters.CompositeRecyclerAdapter
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 
-abstract class PagerListFragment<VM : PagerListFragmentViewModel<ITEM>, ITEM> : BaseFragment<FragmentListBinding, VM>() {
+abstract class PagerListFragment<VM : PagerListFragmentViewModel<ITEM>, ITEM> : BaseFragment<FragmentListBinding>() {
 
     override val layoutResourceId: Int = R.layout.fragment_list
     lateinit var itemAdapter: BaseItemAdapter<ITEM, *>
+    lateinit var viewModel: VM
+
+    abstract fun onCreateViewModel(): VM
 
     abstract fun onCreateItemAdapter(): BaseItemAdapter<ITEM, *>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = onCreateViewModel()
         viewModel.fetch()
     }
 
@@ -54,14 +58,14 @@ abstract class PagerListFragment<VM : PagerListFragmentViewModel<ITEM>, ITEM> : 
         binding.status.retryListener = { viewModel.fetch() }
 
         viewModel.isLoading
-                .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
+                .bindUntilEvent(this, FragmentEvent.DESTROY_VIEW)
                 .filter { it }
                 .subscribe {
                     binding.status.showLoadingView()
                 }.apply { viewModel.disposables.add(this) }
 
         viewModel.list
-                .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
+                .bindUntilEvent(this, FragmentEvent.DESTROY_VIEW)
                 .subscribe {
                     binding.status.hideAll()
                     loadingAdapter.isVisible = !it.isEmpty()
@@ -69,7 +73,7 @@ abstract class PagerListFragment<VM : PagerListFragmentViewModel<ITEM>, ITEM> : 
 
         viewModel.fail
                 .filter { viewModel.currentPageValue <= viewModel.defaultPage }
-                .bindUntilEvent(viewModel, FragmentEvent.DESTROY_VIEW)
+                .bindUntilEvent(this, FragmentEvent.DESTROY_VIEW)
                 .subscribe { binding.status.showErrorView(it) }
                 .apply { viewModel.disposables.add(this) }
     }

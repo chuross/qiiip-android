@@ -1,27 +1,17 @@
 package com.github.chuross.qiiip.ui.viewmodel.fragment.screen
 
 import android.content.Context
-import androidx.fragment.app.Fragment
 import com.github.chuross.qiiip.R
-import com.github.chuross.qiiip.ui.view.fragment.component.FeedListFragment
-import com.github.chuross.qiiip.ui.view.fragment.component.ItemListFragment
-import com.github.chuross.qiiip.ui.view.fragment.component.StockItemListFragment
-import com.github.chuross.qiiip.ui.viewmodel.fragment.FragmentViewModel
+import com.github.chuross.qiiip.ui.viewmodel.AndroidViewModel
+import com.github.chuross.viewmodelargs.annotation.Argument
+import com.github.chuross.viewmodelargs.annotation.ViewModelWithArgs
 
-class HomeScreenFragmentViewModel(context: Context) : FragmentViewModel(context) {
+@ViewModelWithArgs
+class HomeScreenFragmentViewModel : AndroidViewModel() {
+
+    @Argument
+    override lateinit var context: Context
 
     val title: String get() = context.getString(R.string.app_name)
-    val defaultTabIndex: Int get() = if (application.isAuthorized) 1 else 0
-    val tabItems: List<Pair<String, (() -> Fragment)>>
-        get() = if (application.isAuthorized) {
-            listOf(
-                    Pair("全ての投稿", { ItemListFragment() }),
-                    Pair("フィード", { FeedListFragment() }),
-                    Pair("ストック", { StockItemListFragment() })
-            )
-        } else {
-            listOf(
-                    Pair("全ての投稿", { ItemListFragment() })
-            )
-        }
+    val defaultTabIndex: Int get() = if (qiiipApplication.isAuthorized) 1 else 0
 }

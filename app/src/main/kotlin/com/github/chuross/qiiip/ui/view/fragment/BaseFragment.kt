@@ -1,6 +1,5 @@
 package com.github.chuross.qiiip.ui.view.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,18 +10,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.github.chuross.qiiip.application.Application
 import com.github.chuross.qiiip.ui.view.activity.ScreenActivity
-import com.github.chuross.qiiip.ui.viewmodel.fragment.FragmentViewModel
+import com.trello.rxlifecycle2.LifecycleProvider
+import com.trello.rxlifecycle2.LifecycleTransformer
+import com.trello.rxlifecycle2.RxLifecycle
 import com.trello.rxlifecycle2.android.FragmentEvent
+import com.trello.rxlifecycle2.android.RxLifecycleAndroid
+import io.reactivex.Observable
+import io.reactivex.subjects.BehaviorSubject
 
-abstract class BaseFragment<B : ViewDataBinding, VM : FragmentViewModel> : Fragment() {
+abstract class BaseFragment<B : ViewDataBinding> : Fragment(), LifecycleProvider<FragmentEvent> {
 
     abstract val layoutResourceId: Int
-    val application: Application get() = Application.from(requireContext())
+    val qiiipApplication: Application get() = Application.from(requireContext())
     val screenActivity: ScreenActivity get() = activity as ScreenActivity
+    private val lifecycleSubject = BehaviorSubject.create<FragmentEvent>()
     lateinit var binding: B
-    lateinit var viewModel: VM
-
-    abstract fun onCreateViewModel(context: Context): VM
 
     fun FragmentManager.renderIfNeeded(container: ViewGroup?, fragment: Fragment) {
         container?.let {
@@ -34,50 +36,60 @@ abstract class BaseFragment<B : ViewDataBinding, VM : FragmentViewModel> : Fragm
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = onCreateViewModel(requireContext())
-        viewModel.notifyLifecycleEvent(FragmentEvent.CREATE)
-        viewModel.create()
+        lifecycleSubject.onNext(FragmentEvent.CREATE)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        viewModel.notifyLifecycleEvent(FragmentEvent.CREATE_VIEW)
-        binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
-        return binding.root
+        lifecycleSubject.onNext(FragmentEvent.CREATE_VIEW)
+        return DataBindingUtil.inflate<B>(inflater, layoutResourceId, container, false).also {
+            binding = it
+        }.root
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.notifyLifecycleEvent(FragmentEvent.START)
+        lifecycleSubject.onNext(FragmentEvent.START)
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.notifyLifecycleEvent(FragmentEvent.RESUME)
+        lifecycleSubject.onNext(FragmentEvent.RESUME)
     }
 
     override fun onPause() {
-        viewModel.notifyLifecycleEvent(FragmentEvent.PAUSE)
+        lifecycleSubject.onNext(FragmentEvent.PAUSE)
         super.onPause()
     }
 
     override fun onStop() {
-        viewModel.notifyLifecycleEvent(FragmentEvent.STOP)
+        lifecycleSubject.onNext(FragmentEvent.STOP)
         super.onStop()
     }
 
     override fun onDestroyView() {
-        viewModel.notifyLifecycleEvent(FragmentEvent.DESTROY_VIEW)
+        lifecycleSubject.onNext(FragmentEvent.DESTROY_VIEW)
         super.onDestroyView()
     }
 
     override fun onDestroy() {
-        viewModel.notifyLifecycleEvent(FragmentEvent.DESTROY)
-        viewModel.destroy()
+        lifecycleSubject.onNext(FragmentEvent.DESTROY)
         super.onDestroy()
     }
 
     override fun onDetach() {
-        viewModel.notifyLifecycleEvent(FragmentEvent.DETACH)
+        lifecycleSubject.onNext(FragmentEvent.DETACH)
         super.onDetach()
+    }
+
+    override fun lifecycle(): Observable<FragmentEvent> {
+        return lifecycleSubject.hide()
+    }
+
+    override fun <T : Any?> bindToLifecycle(): LifecycleTransformer<T> {
+        return RxLifecycleAndroid.bindFragment(lifecycleSubject)
+    }
+
+    override fun <T : Any?> bindUntilEvent(event: FragmentEvent): LifecycleTransformer<T> {
+        return RxLifecycle.bindUntilEvent(lifecycleSubject, event)
     }
 }

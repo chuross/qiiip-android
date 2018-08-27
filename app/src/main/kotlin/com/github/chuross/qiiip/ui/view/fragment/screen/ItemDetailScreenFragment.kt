@@ -1,6 +1,5 @@
 package com.github.chuross.qiiip.ui.view.fragment.screen
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.github.chuross.morirouter.MoriBinder
@@ -11,22 +10,22 @@ import com.github.chuross.qiiip.databinding.FragmentItemDetailScreenBinding
 import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.ui.view.fragment.BaseFragment
 import com.github.chuross.qiiip.ui.viewmodel.fragment.screen.ItemDetailScreenFragmentViewModel
+import com.github.chuross.qiiip.ui.viewmodel.fragment.screen.ItemDetailScreenFragmentViewModelBuilder
 import com.zzhoujay.richtext.RichText
 
 @RouterPath(name = "item_detail")
-class ItemDetailScreenFragment : BaseFragment<FragmentItemDetailScreenBinding, ItemDetailScreenFragmentViewModel>() {
+class ItemDetailScreenFragment : BaseFragment<FragmentItemDetailScreenBinding>() {
 
     @Argument
     lateinit var item: Item
     override val layoutResourceId: Int = R.layout.fragment_item_detail_screen
-
-    override fun onCreateViewModel(context: Context): ItemDetailScreenFragmentViewModel {
-        return ItemDetailScreenFragmentViewModel(context, item)
-    }
+    private lateinit var viewModel: ItemDetailScreenFragmentViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         MoriBinder.bind(this)
         super.onCreate(savedInstanceState)
+
+        viewModel = ItemDetailScreenFragmentViewModelBuilder(requireContext(), item).build(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

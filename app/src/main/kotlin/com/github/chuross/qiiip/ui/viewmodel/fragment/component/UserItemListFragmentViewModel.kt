@@ -6,10 +6,19 @@ import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.domain.user.User
 import com.github.chuross.qiiip.ui.viewmodel.fragment.PagerListFragmentViewModel
 import com.github.chuross.qiiip.usecase.RxUseCase
+import com.github.chuross.viewmodelargs.annotation.Argument
+import com.github.chuross.viewmodelargs.annotation.ViewModelWithArgs
 
-class UserItemListFragmentViewModel(context: Context, val user: User) : PagerListFragmentViewModel<Item>(context) {
+@ViewModelWithArgs
+class UserItemListFragmentViewModel : PagerListFragmentViewModel<Item>() {
+
+    @Argument
+    override lateinit var context: Context
+
+    @Argument
+    lateinit var user: User
 
     override fun useCase(): RxUseCase<List<Item>> {
-        return application.useCases.getUserItems(user.identity, currentPageValue, Settings.app.perPage)
+        return qiiipApplication.useCases.getUserItems(user.identity, currentPageValue, Settings.app.perPage)
     }
 }

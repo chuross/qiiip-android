@@ -1,6 +1,5 @@
 package com.github.chuross.qiiip.ui.view.fragment.component
 
-import android.content.Context
 import android.os.Bundle
 import com.github.chuross.morirouter.MoriBinder
 import com.github.chuross.morirouter.annotation.Argument
@@ -9,6 +8,7 @@ import com.github.chuross.qiiip.domain.item.Item
 import com.github.chuross.qiiip.domain.tag.Tag
 import com.github.chuross.qiiip.ui.adapter.ItemAdapter
 import com.github.chuross.qiiip.ui.viewmodel.fragment.component.TagItemListFragmentViewModel
+import com.github.chuross.qiiip.ui.viewmodel.fragment.component.TagItemListFragmentViewModelBuilder
 import com.github.chuross.recyclerviewadapters.BaseItemAdapter
 import io.reactivex.BackpressureStrategy
 
@@ -23,8 +23,8 @@ class TagItemListFragment : PagerListFragment<TagItemListFragmentViewModel, Item
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateViewModel(context: Context): TagItemListFragmentViewModel {
-        return TagItemListFragmentViewModel(context, tag)
+    override fun onCreateViewModel(): TagItemListFragmentViewModel {
+        return TagItemListFragmentViewModelBuilder(requireContext(), tag).build(this)
     }
 
     override fun onCreateItemAdapter(): BaseItemAdapter<Item, *> {

@@ -1,13 +1,11 @@
 package com.github.chuross.qiiip.ui.viewmodel.fragment
 
-import android.content.Context
+import com.github.chuross.qiiip.ui.viewmodel.AndroidViewModel
 import com.github.chuross.qiiip.usecase.RxUseCase
-import com.trello.rxlifecycle2.android.FragmentEvent
-import com.trello.rxlifecycle2.kotlin.bindUntilEvent
 import io.reactivex.subjects.BehaviorSubject
 import jp.keita.kagurazaka.rxproperty.RxProperty
 
-abstract class PagerListFragmentViewModel<T>(context: Context) : FragmentViewModel(context) {
+abstract class PagerListFragmentViewModel<T> : AndroidViewModel() {
 
     val list: RxProperty<List<T>> = RxProperty()
     val fail: BehaviorSubject<Throwable> = BehaviorSubject.create()
@@ -16,12 +14,12 @@ abstract class PagerListFragmentViewModel<T>(context: Context) : FragmentViewMod
     val currentPage: RxProperty<Int> = RxProperty(defaultPage)
     val currentPageValue: Int get() = currentPage.get() ?: defaultPage
     val nextPage: Int get() = currentPage.get()!!.inc()
-    private val composedUseCase: RxUseCase<List<T>> get() = useCase().compose {
-        it.bindUntilEvent(this, FragmentEvent.DESTROY_VIEW)
-                .subscribeOn(application.threadPoolScheduler)
-                .observeOn(application.mainThreadScheduler)
-                .doFinally { isLoading.set(false) }
-    }
+    private val composedUseCase: RxUseCase<List<T>>
+        get() = useCase().compose {
+            it.subscribeOn(qiiipApplication.threadPoolScheduler)
+                    .observeOn(qiiipApplication.mainThreadScheduler)
+                    .doFinally { isLoading.set(false) }
+        }
 
     abstract fun useCase(): RxUseCase<List<T>>
 

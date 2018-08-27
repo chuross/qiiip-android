@@ -1,6 +1,5 @@
 package com.github.chuross.qiiip.ui.view.fragment.screen
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.github.chuross.morirouter.MoriBinder
@@ -12,14 +11,13 @@ import com.github.chuross.qiiip.databinding.FragmentUserDetailBinding
 import com.github.chuross.qiiip.domain.user.User
 import com.github.chuross.qiiip.ui.transition.SimpleImageTransitionFactory
 import com.github.chuross.qiiip.ui.view.fragment.BaseFragment
-import com.github.chuross.qiiip.ui.viewmodel.SimpleFragmentViewModel
 
 @RouterPath(
         name = "user_detail",
         sharedEnterTransitionFactory = SimpleImageTransitionFactory::class,
         sharedExitTransitionFactory = SimpleImageTransitionFactory::class
 )
-class UserDetailScreenFragment : BaseFragment<FragmentUserDetailBinding, SimpleFragmentViewModel>() {
+class UserDetailScreenFragment : BaseFragment<FragmentUserDetailBinding>() {
 
     @Argument
     lateinit var user: User
@@ -29,10 +27,6 @@ class UserDetailScreenFragment : BaseFragment<FragmentUserDetailBinding, SimpleF
     override fun onCreate(savedInstanceState: Bundle?) {
         MoriBinder.bind(this)
         super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateViewModel(context: Context): SimpleFragmentViewModel {
-        return SimpleFragmentViewModel(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
